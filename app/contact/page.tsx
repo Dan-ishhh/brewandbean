@@ -7,6 +7,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, Phone, Mail, Coffee, Clock, Menu, X, Send, MessageCircle } from "lucide-react"
 import Link from "next/link"
+import { CartButton } from "@/components/cart/cart-button"
+import { CartSidebar } from "@/components/cart/cart-sidebar"
 
 export default function ContactPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -63,9 +65,7 @@ export default function ContactPage() {
             </div>
 
             <div className="flex items-center gap-4">
-              <Button className="hidden sm:block bg-orange-500 hover:bg-orange-600 text-white rounded-full px-6 shadow-lg hover:shadow-xl transition-all">
-                Order Online
-              </Button>
+              <CartButton />
 
               {/* Mobile Menu Button */}
               <button
@@ -113,9 +113,7 @@ export default function ContactPage() {
                 >
                   Contact
                 </Link>
-                <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full mt-4 shadow-lg">
-                  Order Online
-                </Button>
+                <CartButton />
               </div>
             </div>
           )}
@@ -395,6 +393,7 @@ export default function ContactPage() {
           </div>
         </div>
       </footer>
+      <CartSidebar />
     </div>
   )
 }

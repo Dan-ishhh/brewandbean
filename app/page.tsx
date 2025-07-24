@@ -5,6 +5,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Coffee, Wifi, Star, Menu, X, ArrowRight, Heart } from "lucide-react"
 import Link from "next/link"
+import { CartButton } from "@/components/cart/cart-button"
+import { CartSidebar } from "@/components/cart/cart-sidebar"
+import { AddToCartButton } from "@/components/cart/add-to-cart-button"
 
 export default function HomePage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -41,9 +44,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex items-center gap-4">
-              <Button className="hidden sm:block bg-orange-500 hover:bg-orange-600 text-white rounded-full px-6 shadow-lg hover:shadow-xl transition-all">
-                Order Online
-              </Button>
+              <CartButton />
 
               {/* Mobile Menu Button */}
               <button
@@ -91,9 +92,7 @@ export default function HomePage() {
                 >
                   Contact
                 </Link>
-                <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full mt-4 shadow-lg">
-                  Order Online
-                </Button>
+                <CartButton />
               </div>
             </div>
           )}
@@ -245,36 +244,44 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {[
               {
+                id: 1,
                 name: "Signature Latte",
                 price: "$4.50",
                 description: "Rich espresso with steamed milk and our house blend",
-                image: "beautiful latte art heart design in white ceramic cup on wooden table",
+                image: "/placeholder.svg?height=240&width=320",
                 badge: "Popular",
                 badgeColor: "bg-red-100 text-red-700",
+                category: "coffee",
               },
               {
+                id: 15,
                 name: "Artisan Croissant",
                 price: "$3.25",
                 description: "Buttery, flaky pastry baked fresh every morning",
-                image: "golden flaky croissant on rustic wooden board with butter",
+                image: "/placeholder.svg?height=240&width=320",
                 badge: "Fresh Daily",
                 badgeColor: "bg-green-100 text-green-700",
+                category: "pastries",
               },
               {
+                id: 3,
                 name: "Cold Brew",
                 price: "$3.75",
                 description: "Smooth, refreshing coffee steeped for 12 hours",
-                image: "iced cold brew coffee in tall glass with ice cubes and straw",
+                image: "/placeholder.svg?height=240&width=320",
                 badge: "Refreshing",
                 badgeColor: "bg-blue-100 text-blue-700",
+                category: "coffee",
               },
               {
+                id: 20,
                 name: "Avocado Toast",
                 price: "$8.50",
                 description: "Smashed avocado on sourdough with everything seasoning",
-                image: "avocado toast with seeds herbs on artisan sourdough bread",
+                image: "/placeholder.svg?height=240&width=320",
                 badge: "Healthy",
                 badgeColor: "bg-green-100 text-green-700",
+                category: "food",
               },
             ].map((item, index) => (
               <Card
@@ -284,7 +291,7 @@ export default function HomePage() {
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
                     <img
-                      src={`/placeholder.svg?height=240&width=320&query=${item.image}`}
+                      src={item.image || "/placeholder.svg"}
                       alt={item.name}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -299,7 +306,8 @@ export default function HomePage() {
                       <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>
                       <span className="text-xl font-bold text-orange-600">{item.price}</span>
                     </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+                    <p className="text-gray-600 text-sm leading-relaxed mb-4">{item.description}</p>
+                    <AddToCartButton item={item} className="w-full" />
                   </div>
                 </CardContent>
               </Card>
@@ -394,6 +402,7 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+      <CartSidebar />
     </div>
   )
 }

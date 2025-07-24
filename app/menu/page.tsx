@@ -5,6 +5,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Coffee, Menu, X } from "lucide-react"
 import Link from "next/link"
+import { CartButton } from "@/components/cart/cart-button"
+import { CartSidebar } from "@/components/cart/cart-sidebar"
+import { AddToCartButton } from "@/components/cart/add-to-cart-button"
 
 export default function MenuPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -332,9 +335,7 @@ export default function MenuPage() {
             </div>
 
             <div className="flex items-center gap-4">
-              <Button className="hidden sm:block bg-orange-500 hover:bg-orange-600 text-white rounded-full px-6 shadow-lg hover:shadow-xl transition-all">
-                Order Online
-              </Button>
+              <CartButton />
 
               {/* Mobile Menu Button */}
               <button
@@ -382,9 +383,7 @@ export default function MenuPage() {
                 >
                   Contact
                 </Link>
-                <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full mt-4 shadow-lg">
-                  Order Online
-                </Button>
+                <CartButton />
               </div>
             </div>
           )}
@@ -472,9 +471,7 @@ export default function MenuPage() {
                       <span className="text-xl font-bold text-orange-600">{item.price}</span>
                     </div>
                     <p className="text-gray-600 text-sm leading-relaxed mb-4">{item.description}</p>
-                    <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white rounded-full py-2 text-sm">
-                      Add to Order
-                    </Button>
+                    <AddToCartButton item={item} className="w-full" />
                   </div>
                 </CardContent>
               </Card>
@@ -584,6 +581,7 @@ export default function MenuPage() {
           </div>
         </div>
       </footer>
+      <CartSidebar />
     </div>
   )
 }
