@@ -10,8 +10,8 @@ export interface CartItem {
   category: string
   quantity: number
   options?: {
-    size?: "small" | "medium" | "large"
     temperature?: "hot" | "iced"
+    size?: "small" | "medium" | "large"
     milk?: "regular" | "oat" | "almond" | "soy"
     extras?: string[]
   }
@@ -40,15 +40,27 @@ const initialState: CartState = {
   isOpen: false,
 }
 
+function generateCartItemId(item: Omit<CartItem, "quantity">): string {
+  // Create unique ID based on item properties and options
+  const baseId = item.id.toString()
+  const temperature = item.options?.temperature || ""
+  const size = item.options?.size || ""
+  const milk = item.options?.milk || ""
+  const extras = item.options?.extras?.join(",") || ""
+
+  return `${baseId}-${temperature}-${size}-${milk}-${extras}`
+}
+
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "ADD_ITEM": {
-      const existingItem = state.items.find((item) => item.id === action.payload.id)
+      const itemId = generateCartItemId(action.payload)
+      const existingItem = state.items.find((item) => generateCartItemId(item) === itemId)
 
       let newItems: CartItem[]
       if (existingItem) {
         newItems = state.items.map((item) =>
-          item.id === action.payload.id ? { ...item, quantity: item.quantity + 1 } : item,
+          generateCartItemId(item) === itemId ? { ...item, quantity: item.quantity + 1 } : item,
         )
       } else {
         newItems = [...state.items, { ...action.payload, quantity: 1 }]

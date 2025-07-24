@@ -1,8 +1,8 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Plus, Check } from "lucide-react"
-import { useCart } from "@/contexts/cart-context"
+import { Plus } from "lucide-react"
 import { useState } from "react"
+import { AddToCartModal } from "./add-to-cart-modal"
 
 interface AddToCartButtonProps {
   item: {
@@ -11,6 +11,11 @@ interface AddToCartButtonProps {
     price: string
     image: string
     category: string
+    description?: string
+    hot?: boolean
+    iced?: boolean
+    badge?: string
+    badgeColor?: string
   }
   className?: string
   size?: "sm" | "default" | "lg"
@@ -18,47 +23,24 @@ interface AddToCartButtonProps {
 }
 
 export function AddToCartButton({ item, className = "", size = "default", showIcon = true }: AddToCartButtonProps) {
-  const { dispatch } = useCart()
-  const [isAdded, setIsAdded] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const handleAddToCart = () => {
-    const price = Number.parseFloat(item.price.replace("$", ""))
-
-    dispatch({
-      type: "ADD_ITEM",
-      payload: {
-        id: item.id,
-        name: item.name,
-        price,
-        image: item.image,
-        category: item.category,
-      },
-    })
-
-    // Show success state
-    setIsAdded(true)
-    setTimeout(() => setIsAdded(false), 2000)
-
-    // Open cart briefly to show the item was added
-    dispatch({ type: "OPEN_CART" })
-    setTimeout(() => dispatch({ type: "CLOSE_CART" }), 1500)
+  const handleClick = () => {
+    setIsModalOpen(true)
   }
 
   return (
-    <Button
-      onClick={handleAddToCart}
-      size={size}
-      className={`bg-orange-500 hover:bg-orange-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all group ${className} ${
-        isAdded ? "bg-green-500 hover:bg-green-600" : ""
-      }`}
-    >
-      {showIcon &&
-        (isAdded ? (
-          <Check className="h-4 w-4 mr-2" />
-        ) : (
-          <Plus className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
-        ))}
-      {isAdded ? "Added!" : "Add to Cart"}
-    </Button>
+    <>
+      <Button
+        onClick={handleClick}
+        size={size}
+        className={`bg-orange-500 hover:bg-orange-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all group ${className}`}
+      >
+        {showIcon && <Plus className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />}
+        Add to Cart
+      </Button>
+
+      <AddToCartModal item={item} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </>
   )
 }

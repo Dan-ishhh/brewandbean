@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { X, Plus, Minus, Trash2, ShoppingBag } from "lucide-react"
+import { X, Plus, Minus, Trash2, ShoppingBag, Thermometer, Snowflake } from "lucide-react"
 import { useCart } from "@/contexts/cart-context"
 import { useEffect } from "react"
 
@@ -80,8 +80,8 @@ export function CartSidebar() {
               </div>
             ) : (
               <div className="space-y-4">
-                {state.items.map((item) => (
-                  <Card key={item.id} className="border border-gray-200">
+                {state.items.map((item, index) => (
+                  <Card key={`${item.id}-${index}`} className="border border-gray-200">
                     <CardContent className="p-4">
                       <div className="flex gap-4">
                         <img
@@ -91,6 +91,19 @@ export function CartSidebar() {
                         />
                         <div className="flex-1">
                           <h3 className="font-semibold text-gray-800 mb-1">{item.name}</h3>
+
+                          {/* Temperature Option */}
+                          {item.options?.temperature && (
+                            <div className="flex items-center gap-1 mb-1">
+                              {item.options.temperature === "hot" ? (
+                                <Thermometer className="h-3 w-3 text-red-500" />
+                              ) : (
+                                <Snowflake className="h-3 w-3 text-blue-500" />
+                              )}
+                              <span className="text-xs text-gray-600 capitalize">{item.options.temperature}</span>
+                            </div>
+                          )}
+
                           <p className="text-sm text-gray-600 mb-2">${item.price.toFixed(2)} each</p>
 
                           {/* Quantity Controls */}
