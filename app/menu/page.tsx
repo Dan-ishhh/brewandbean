@@ -69,7 +69,7 @@ export default function MenuPage() {
       badge: "Strong",
       badgeColor: "bg-gray-100 text-gray-700",
       hot: true,
-      iced: false,
+      iced: false, // Espresso is typically only served hot
     },
     {
       id: 5,
@@ -117,7 +117,7 @@ export default function MenuPage() {
       badge: "Smooth",
       badgeColor: "bg-green-100 text-green-700",
       hot: true,
-      iced: false,
+      iced: false, // Flat White is traditionally only served hot
     },
 
     // Tea & Others
@@ -167,7 +167,7 @@ export default function MenuPage() {
       badge: "Cozy",
       badgeColor: "bg-brown-100 text-brown-700",
       hot: true,
-      iced: false,
+      iced: false, // Hot chocolate is only served hot
     },
     {
       id: 13,
@@ -191,7 +191,7 @@ export default function MenuPage() {
       badge: "Fresh",
       badgeColor: "bg-yellow-100 text-yellow-700",
       hot: false,
-      iced: true,
+      iced: true, // Fresh juice is only served cold
     },
 
     // Pastries

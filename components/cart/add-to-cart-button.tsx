@@ -1,8 +1,9 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Plus } from "lucide-react"
+import { Plus, Check } from "lucide-react"
 import { useState } from "react"
 import { AddToCartModal } from "./add-to-cart-modal"
+import { useCart } from "@/contexts/cart-context"
 
 interface AddToCartButtonProps {
   item: {
@@ -23,10 +24,51 @@ interface AddToCartButtonProps {
 }
 
 export function AddToCartButton({ item, className = "", size = "default", showIcon = true }: AddToCartButtonProps) {
+  const { dispatch } = useCart()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isAdded, setIsAdded] = useState(false)
 
-  const handleClick = () => {
-    setIsModalOpen(true)
+  // Determine if item needs temperature selection
+  const needsTemperatureSelection = item.hot && item.iced
+  const hasOnlyOneTemperature = (item.hot && !item.iced) || (!item.hot && item.iced)
+  const noTemperatureOptions = !item.hot && !item.iced
+
+  const handleClick = async () => {
+    // If item has both hot and iced options, show modal
+    if (needsTemperatureSelection) {
+      setIsModalOpen(true)
+      return
+    }
+
+    // If item has only one temperature or no temperature options, add directly
+    setIsAdded(true)
+    const price = Number.parseFloat(item.price.replace("$", ""))
+
+    let temperature: "hot" | "iced" | undefined = undefined
+    if (item.hot && !item.iced) {
+      temperature = "hot"
+    } else if (item.iced && !item.hot) {
+      temperature = "iced"
+    }
+
+    dispatch({
+      type: "ADD_ITEM",
+      payload: {
+        id: item.id,
+        name: item.name,
+        price,
+        image: item.image || "/placeholder.svg",
+        category: item.category,
+        options: temperature ? { temperature } : undefined,
+      },
+    })
+
+    // Show success state
+    setTimeout(() => setIsAdded(false), 2000)
+
+    // Open cart briefly to show the item was added
+    dispatch({ type: "OPEN_CART" })
+    setTimeout(() => dispatch({ type: "CLOSE_CART" }), 1500)
   }
 
   return (
@@ -34,13 +76,23 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
       <Button
         onClick={handleClick}
         size={size}
-        className={`bg-orange-500 hover:bg-orange-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all group ${className}`}
+        className={`rounded-full shadow-lg hover:shadow-xl transition-all group ${className} ${
+          isAdded ? "bg-green-500 hover:bg-green-600" : "bg-orange-500 hover:bg-orange-600"
+        } text-white`}
       >
-        {showIcon && <Plus className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />}
-        Add to Cart
+        {showIcon &&
+          (isAdded ? (
+            <Check className="h-4 w-4 mr-2" />
+          ) : (
+            <Plus className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
+          ))}
+        {isAdded ? "Added!" : "Add to Cart"}
       </Button>
 
-      <AddToCartModal item={item} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {/* Only show modal for items that need temperature selection */}
+      {needsTemperatureSelection && (
+        <AddToCartModal item={item} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      )}
     </>
   )
 }

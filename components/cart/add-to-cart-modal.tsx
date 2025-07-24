@@ -29,7 +29,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
   const [quantity, setQuantity] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
 
-  // Reset state when modal opens/closes
+  // Reset state when modal opens
   useState(() => {
     if (isOpen) {
       setSelectedTemperature(null)
@@ -40,8 +40,9 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
 
   if (!isOpen) return null
 
-  const hasTemperatureOptions = item.hot || item.iced
-  const canAddToCart = !hasTemperatureOptions || selectedTemperature !== null
+  // This modal should only be shown for items that have BOTH hot and iced options
+  const hasTemperatureOptions = item.hot && item.iced
+  const canAddToCart = selectedTemperature !== null
 
   const handleAddToCart = async () => {
     if (!canAddToCart) return
@@ -59,11 +60,9 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
           price,
           image: item.image || "/placeholder.svg",
           category: item.category,
-          options: hasTemperatureOptions
-            ? {
-                temperature: selectedTemperature!,
-              }
-            : undefined,
+          options: {
+            temperature: selectedTemperature!,
+          },
         },
       })
     }
@@ -116,41 +115,37 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                 {item.description && <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>}
               </div>
 
-              {/* Temperature Selection */}
+              {/* Temperature Selection - Only shown for items with both options */}
               {hasTemperatureOptions && (
                 <div>
                   <h4 className="font-semibold text-gray-800 mb-3">Choose Temperature</h4>
                   <div className="grid grid-cols-2 gap-3">
-                    {item.hot && (
-                      <button
-                        onClick={() => setSelectedTemperature("hot")}
-                        className={`p-4 rounded-xl border-2 transition-all ${
-                          selectedTemperature === "hot"
-                            ? "border-red-500 bg-red-50 text-red-700"
-                            : "border-gray-200 hover:border-red-300 hover:bg-red-50/50"
-                        }`}
-                      >
-                        <div className="flex flex-col items-center gap-2">
-                          <Thermometer className="h-6 w-6" />
-                          <span className="font-medium">Hot</span>
-                        </div>
-                      </button>
-                    )}
-                    {item.iced && (
-                      <button
-                        onClick={() => setSelectedTemperature("iced")}
-                        className={`p-4 rounded-xl border-2 transition-all ${
-                          selectedTemperature === "iced"
-                            ? "border-blue-500 bg-blue-50 text-blue-700"
-                            : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50"
-                        }`}
-                      >
-                        <div className="flex flex-col items-center gap-2">
-                          <Snowflake className="h-6 w-6" />
-                          <span className="font-medium">Iced</span>
-                        </div>
-                      </button>
-                    )}
+                    <button
+                      onClick={() => setSelectedTemperature("hot")}
+                      className={`p-4 rounded-xl border-2 transition-all ${
+                        selectedTemperature === "hot"
+                          ? "border-red-500 bg-red-50 text-red-700"
+                          : "border-gray-200 hover:border-red-300 hover:bg-red-50/50"
+                      }`}
+                    >
+                      <div className="flex flex-col items-center gap-2">
+                        <Thermometer className="h-6 w-6" />
+                        <span className="font-medium">Hot</span>
+                      </div>
+                    </button>
+                    <button
+                      onClick={() => setSelectedTemperature("iced")}
+                      className={`p-4 rounded-xl border-2 transition-all ${
+                        selectedTemperature === "iced"
+                          ? "border-blue-500 bg-blue-50 text-blue-700"
+                          : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50"
+                      }`}
+                    >
+                      <div className="flex flex-col items-center gap-2">
+                        <Snowflake className="h-6 w-6" />
+                        <span className="font-medium">Iced</span>
+                      </div>
+                    </button>
                   </div>
                 </div>
               )}
