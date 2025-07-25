@@ -21,11 +21,11 @@ interface AddToCartButtonProps {
   className?: string
   size?: "sm" | "default" | "lg"
   showIcon?: boolean
+  onOpenModal?: () => void
 }
 
-export function AddToCartButton({ item, className = "", size = "default", showIcon = true }: AddToCartButtonProps) {
+export function AddToCartButton({ item, className = "", size = "default", showIcon = true, onOpenModal }: AddToCartButtonProps) {
   const { dispatch } = useCart()
-  const [isModalOpen, setIsModalOpen] = useState(false)
   const [isAdded, setIsAdded] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -35,10 +35,12 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
   const noTemperatureOptions = !item.hot && !item.iced
 
   const handleClick = async () => {
-    // If item has both hot and iced options, show modal
+    // If item has both hot and iced options, trigger global modal
     if (needsTemperatureSelection) {
-      setIsModalOpen(true)
-      return
+      if (typeof onOpenModal === "function") {
+        onOpenModal();
+      }
+      return;
     }
 
     // If item has only one temperature or no temperature options, add directly
@@ -118,10 +120,7 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
         {isLoading ? "Adding..." : isAdded ? "Added!" : "Add to Cart"}
       </Button>
 
-      {/* Only show modal for items that need temperature selection */}
-      {needsTemperatureSelection && (
-        <AddToCartModal item={item} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      )}
+      {/* Modal is now handled globally, not here */}
     </>
   )
 }

@@ -1,64 +1,66 @@
-"use client"
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { X, Plus, Check, Thermometer, Snowflake, Minus } from "lucide-react"
-import { useCart } from "@/contexts/cart-context"
+"use client";
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { X, Plus, Check, Thermometer, Snowflake, Minus } from "lucide-react";
+import { useCart } from "@/contexts/cart-context";
 
 interface AddToCartModalProps {
   item: {
-    id: number
-    name: string
-    price: string
-    image: string
-    category: string
-    description?: string
-    hot?: boolean
-    iced?: boolean
-    badge?: string
-    badgeColor?: string
-  }
-  isOpen: boolean
-  onClose: () => void
+    id: number;
+    name: string;
+    price: string;
+    image: string;
+    category: string;
+    description?: string;
+    hot?: boolean;
+    iced?: boolean;
+    badge?: string;
+    badgeColor?: string;
+  };
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
-  const { dispatch } = useCart()
-  const [selectedTemperature, setSelectedTemperature] = useState<"hot" | "iced" | null>(null)
-  const [quantity, setQuantity] = useState(1)
-  const [isAdding, setIsAdding] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
+  const { dispatch } = useCart();
+  const [selectedTemperature, setSelectedTemperature] = useState<
+    "hot" | "iced" | null
+  >(null);
+  const [quantity, setQuantity] = useState(1);
+  const [isAdding, setIsAdding] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Handle modal visibility with animation
   useEffect(() => {
     if (isOpen) {
-      setIsVisible(true)
-      setSelectedTemperature(null)
-      setQuantity(1)
-      setIsAdding(false)
-      document.body.style.overflow = "hidden"
+      setIsVisible(true);
+      setSelectedTemperature(null);
+      setQuantity(1);
+      setIsAdding(false);
+      document.body.style.overflow = "hidden";
     } else {
-      const timer = setTimeout(() => setIsVisible(false), 300)
-      document.body.style.overflow = "unset"
-      return () => clearTimeout(timer)
+      const timer = setTimeout(() => setIsVisible(false), 300);
+      document.body.style.overflow = "unset";
+      return () => clearTimeout(timer);
     }
 
     return () => {
-      document.body.style.overflow = "unset"
-    }
-  }, [isOpen])
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
-  if (!isVisible) return null
+  if (!isVisible) return null;
 
-  const hasTemperatureOptions = item.hot && item.iced
-  const canAddToCart = selectedTemperature !== null
+  const hasTemperatureOptions = item.hot && item.iced;
+  const canAddToCart = selectedTemperature !== null;
 
   const handleAddToCart = async () => {
-    if (!canAddToCart) return
+    if (!canAddToCart) return;
 
-    setIsAdding(true)
-    const price = Number.parseFloat(item.price.replace("$", ""))
+    setIsAdding(true);
+    const price = Number.parseFloat(item.price.replace("$", ""));
 
     // Add each quantity as separate dispatch calls to handle quantity properly
     for (let i = 0; i < quantity; i++) {
@@ -74,18 +76,18 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
             temperature: selectedTemperature!,
           },
         },
-      })
+      });
     }
 
     // Show success state briefly
-    await new Promise((resolve) => setTimeout(resolve, 800))
+    await new Promise((resolve) => setTimeout(resolve, 800));
 
     // Open cart briefly to show the item was added
-    dispatch({ type: "OPEN_CART" })
-    setTimeout(() => dispatch({ type: "CLOSE_CART" }), 2000)
+    dispatch({ type: "OPEN_CART" });
+    setTimeout(() => dispatch({ type: "CLOSE_CART" }), 2000);
 
-    onClose()
-  }
+    onClose();
+  };
 
   return (
     <>
@@ -109,19 +111,24 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
             {/* Header with image and close button */}
             <div className="relative overflow-hidden">
               <img
-                src={item.image || "/placeholder.svg?height=192&width=384&query=food item"}
+                src={
+                  item.image ||
+                  "/placeholder.svg?height=192&width=384&query=food item"
+                }
                 alt={item.name}
                 className="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"
                 onError={(e) => {
-                  const target = e.target as HTMLImageElement
-                  target.src = "/placeholder.svg?height=192&width=384"
+                  const target = e.target as HTMLImageElement;
+                  target.src = "/placeholder.svg?height=192&width=384";
                 }}
               />
               {item.badge && (
                 <Badge
                   className={`absolute top-4 left-4 border-0 px-3 py-1 text-xs font-medium animate-fade-in-scale`}
                   style={{
-                    backgroundColor: item.badgeColor?.includes("red") ? "#FAF3E0" : "#F5F5DC",
+                    backgroundColor: item.badgeColor?.includes("red")
+                      ? "#FAF3E0"
+                      : "#F5F5DC",
                     color: "#4B2E2B",
                   }}
                 >
@@ -139,19 +146,31 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
             </div>
 
             {/* Content with staggered animations */}
-            <div className="p-6 space-y-6" style={{ backgroundColor: "#FFF8F0" }}>
+            <div
+              className="p-6 space-y-6"
+              style={{ backgroundColor: "#FFF8F0" }}
+            >
               {/* Item Info */}
               <div className="animate-fade-in-up">
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold transition-colors duration-300" style={{ color: "#4B2E2B" }}>
+                  <h3
+                    className="text-xl font-bold transition-colors duration-300"
+                    style={{ color: "#4B2E2B" }}
+                  >
                     {item.name}
                   </h3>
-                  <span className="text-xl font-bold animate-pulse-gentle" style={{ color: "#6F4E37" }}>
+                  <span
+                    className="text-xl font-bold animate-pulse-gentle"
+                    style={{ color: "#6F4E37" }}
+                  >
                     {item.price}
                   </span>
                 </div>
                 {item.description && (
-                  <p className="text-sm leading-relaxed transition-colors duration-300" style={{ color: "#4B2E2B" }}>
+                  <p
+                    className="text-sm leading-relaxed transition-colors duration-300"
+                    style={{ color: "#4B2E2B" }}
+                  >
                     {item.description}
                   </p>
                 )}
@@ -159,8 +178,14 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
 
               {/* Temperature Selection with hover animations */}
               {hasTemperatureOptions && (
-                <div className="animate-fade-in-up" style={{ animationDelay: "100ms" }}>
-                  <h4 className="font-semibold mb-3" style={{ color: "#4B2E2B" }}>
+                <div
+                  className="animate-fade-in-up"
+                  style={{ animationDelay: "100ms" }}
+                >
+                  <h4
+                    className="font-semibold mb-3"
+                    style={{ color: "#4B2E2B" }}
+                  >
                     Choose Temperature
                   </h4>
                   <div className="grid grid-cols-2 gap-3">
@@ -170,13 +195,21 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                         selectedTemperature === "hot" ? "animate-bounce-in" : ""
                       }`}
                       style={{
-                        borderColor: selectedTemperature === "hot" ? "#6F4E37" : "#F5F5DC",
-                        backgroundColor: selectedTemperature === "hot" ? "#FAF3E0" : "transparent",
+                        borderColor:
+                          selectedTemperature === "hot" ? "#6F4E37" : "#F5F5DC",
+                        backgroundColor:
+                          selectedTemperature === "hot"
+                            ? "#FAF3E0"
+                            : "transparent",
                       }}
                     >
                       <div className="flex flex-col items-center gap-2">
                         <Thermometer
-                          className={`h-6 w-6 transition-all duration-300 ${selectedTemperature === "hot" ? "animate-pulse text-red-500" : ""}`}
+                          className={`h-6 w-6 transition-all duration-300 ${
+                            selectedTemperature === "hot"
+                              ? "animate-pulse text-red-500"
+                              : ""
+                          }`}
                         />
                         <span className="font-medium">Hot</span>
                       </div>
@@ -184,16 +217,28 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                     <button
                       onClick={() => setSelectedTemperature("iced")}
                       className={`p-4 rounded-xl border-2 transition-all duration-300 transform hover:scale-105 active:scale-95 ${
-                        selectedTemperature === "iced" ? "animate-bounce-in" : ""
+                        selectedTemperature === "iced"
+                          ? "animate-bounce-in"
+                          : ""
                       }`}
                       style={{
-                        borderColor: selectedTemperature === "iced" ? "#6F4E37" : "#F5F5DC",
-                        backgroundColor: selectedTemperature === "iced" ? "#FAF3E0" : "transparent",
+                        borderColor:
+                          selectedTemperature === "iced"
+                            ? "#6F4E37"
+                            : "#F5F5DC",
+                        backgroundColor:
+                          selectedTemperature === "iced"
+                            ? "#FAF3E0"
+                            : "transparent",
                       }}
                     >
                       <div className="flex flex-col items-center gap-2">
                         <Snowflake
-                          className={`h-6 w-6 transition-all duration-300 ${selectedTemperature === "iced" ? "animate-pulse text-blue-500" : ""}`}
+                          className={`h-6 w-6 transition-all duration-300 ${
+                            selectedTemperature === "iced"
+                              ? "animate-pulse text-blue-500"
+                              : ""
+                          }`}
                         />
                         <span className="font-medium">Iced</span>
                       </div>
@@ -202,8 +247,21 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                 </div>
               )}
 
+              {/* Temperature Selection Reminder */}
+              {hasTemperatureOptions && !selectedTemperature && (
+                <p
+                  className="text-center text-sm animate-fade-in-up"
+                  style={{ color: "#6F4E37" }}
+                >
+                  Please select a temperature option above
+                </p>
+              )}
+
               {/* Quantity Selection with smooth animations */}
-              <div className="animate-fade-in-up" style={{ animationDelay: "200ms" }}>
+              <div
+                className="animate-fade-in-up"
+                style={{ animationDelay: "200ms" }}
+              >
                 <h4 className="font-semibold mb-3" style={{ color: "#4B2E2B" }}>
                   Quantity
                 </h4>
@@ -245,8 +303,14 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                   <span className="font-medium" style={{ color: "#4B2E2B" }}>
                     Total:
                   </span>
-                  <span className="font-bold text-xl animate-pulse-gentle" style={{ color: "#6F4E37" }}>
-                    ${(Number.parseFloat(item.price.replace("$", "")) * quantity).toFixed(2)}
+                  <span
+                    className="font-bold text-xl animate-pulse-gentle"
+                    style={{ color: "#6F4E37" }}
+                  >
+                    $
+                    {(
+                      Number.parseFloat(item.price.replace("$", "")) * quantity
+                    ).toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -259,8 +323,12 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                   isAdding ? "animate-pulse-gentle" : ""
                 }`}
                 style={{ backgroundColor: isAdding ? "#32CD32" : "#6F4E37" }}
-                onMouseEnter={(e) => !isAdding && (e.target.style.backgroundColor = "#4B2E2B")}
-                onMouseLeave={(e) => !isAdding && (e.target.style.backgroundColor = "#6F4E37")}
+                onMouseEnter={(e) =>
+                  !isAdding && (e.target.style.backgroundColor = "#4B2E2B")
+                }
+                onMouseLeave={(e) =>
+                  !isAdding && (e.target.style.backgroundColor = "#6F4E37")
+                }
               >
                 {isAdding ? (
                   <>
@@ -275,17 +343,10 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                   </>
                 )}
               </Button>
-
-              {/* Temperature Selection Reminder */}
-              {hasTemperatureOptions && !selectedTemperature && (
-                <p className="text-center text-sm animate-fade-in-up" style={{ color: "#6F4E37" }}>
-                  Please select a temperature option above
-                </p>
-              )}
             </div>
           </CardContent>
         </Card>
       </div>
     </>
-  )
+  );
 }
