@@ -27,6 +27,7 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
   const { dispatch } = useCart()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isAdded, setIsAdded] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   // Determine if item needs temperature selection
   const needsTemperatureSelection = item.hot && item.iced
@@ -41,6 +42,11 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
     }
 
     // If item has only one temperature or no temperature options, add directly
+    setIsLoading(true)
+
+    // Simulate brief loading for smooth UX
+    await new Promise((resolve) => setTimeout(resolve, 300))
+
     setIsAdded(true)
     const price = Number.parseFloat(item.price.replace("$", ""))
 
@@ -64,7 +70,10 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
     })
 
     // Show success state
-    setTimeout(() => setIsAdded(false), 2000)
+    setTimeout(() => {
+      setIsAdded(false)
+      setIsLoading(false)
+    }, 2000)
 
     // Open cart briefly to show the item was added
     dispatch({ type: "OPEN_CART" })
@@ -75,27 +84,43 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
     <>
       <Button
         onClick={handleClick}
+        disabled={isLoading}
         size={size}
-        className={`rounded-full shadow-lg hover:shadow-xl transition-all group text-white border-0 ${className}`}
+        className={`rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group text-white border-0 transform hover:scale-105 active:scale-95 ${
+          isAdded ? "animate-bounce-in" : ""
+        } ${isLoading ? "animate-pulse" : ""} ${className}`}
         style={{
           backgroundColor: isAdded ? "#32CD32" : "#6F4E37",
           ":hover": { backgroundColor: isAdded ? "#228B22" : "#4B2E2B" },
         }}
-        onMouseEnter={(e) => (e.target.style.backgroundColor = isAdded ? "#228B22" : "#4B2E2B")}
-        onMouseLeave={(e) => (e.target.style.backgroundColor = isAdded ? "#32CD32" : "#6F4E37")}
+        onMouseEnter={(e) => {
+          if (!isAdded && !isLoading) {
+            e.target.style.backgroundColor = "#4B2E2B"
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!isAdded && !isLoading) {
+            e.target.style.backgroundColor = "#6F4E37"
+          }
+        }}
       >
-        {showIcon &&
-          (isAdded ? (
-            <Check className="h-4 w-4 mr-2" />
-          ) : (
-            <Plus className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
-          ))}
-        {isAdded ? "Added!" : "Add to Cart"}
+        {showIcon && (
+          <>
+            {isLoading ? (
+              <div className="h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            ) : isAdded ? (
+              <Check className="h-4 w-4 mr-2 animate-bounce" />
+            ) : (
+              <Plus className="h-4 w-4 mr-2 group-hover:scale-110 group-hover:rotate-90 transition-all duration-300" />
+            )}
+          </>
+        )}
+        {isLoading ? "Adding..." : isAdded ? "Added!" : "Add to Cart"}
       </Button>
 
       {/* Only show modal for items that need temperature selection */}
       {needsTemperatureSelection && (
-        <AddToCartModal item={item} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} dispatch={dispatch} />
+        <AddToCartModal item={item} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       )}
     </>
   )
