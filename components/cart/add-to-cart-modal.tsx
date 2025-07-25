@@ -84,13 +84,30 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
 
       {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md bg-white shadow-2xl border-0 rounded-2xl overflow-hidden">
+        <Card
+          className="w-full max-w-md shadow-2xl border-0 rounded-2xl overflow-hidden"
+          style={{ backgroundColor: "#FFF8F0" }}
+        >
           <CardContent className="p-0">
             {/* Header */}
             <div className="relative">
-              <img src={item.image || "/placeholder.svg"} alt={item.name} className="w-full h-48 object-cover" />
+              <img
+                src={item.image || "/placeholder.svg?height=192&width=384&query=food item"}
+                alt={item.name}
+                className="w-full h-48 object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement
+                  target.src = "/placeholder.svg?height=192&width=384"
+                }}
+              />
               {item.badge && (
-                <Badge className={`absolute top-4 left-4 ${item.badgeColor} border-0 px-3 py-1 text-xs font-medium`}>
+                <Badge
+                  className="absolute top-4 left-4 border-0 px-3 py-1 text-xs font-medium"
+                  style={{
+                    backgroundColor: item.badgeColor?.includes("red") ? "#FAF3E0" : "#F5F5DC",
+                    color: "#4B2E2B",
+                  }}
+                >
                   {item.badge}
                 </Badge>
               )}
@@ -105,28 +122,40 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
             </div>
 
             {/* Content */}
-            <div className="p-6 space-y-6">
+            <div className="p-6 space-y-6" style={{ backgroundColor: "#FFF8F0" }}>
               {/* Item Info */}
               <div>
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold text-gray-800">{item.name}</h3>
-                  <span className="text-xl font-bold text-orange-600">{item.price}</span>
+                  <h3 className="text-xl font-bold" style={{ color: "#4B2E2B" }}>
+                    {item.name}
+                  </h3>
+                  <span className="text-xl font-bold" style={{ color: "#6F4E37" }}>
+                    {item.price}
+                  </span>
                 </div>
-                {item.description && <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>}
+                {item.description && (
+                  <p className="text-sm leading-relaxed" style={{ color: "#4B2E2B" }}>
+                    {item.description}
+                  </p>
+                )}
               </div>
 
               {/* Temperature Selection - Only shown for items with both options */}
               {hasTemperatureOptions && (
                 <div>
-                  <h4 className="font-semibold text-gray-800 mb-3">Choose Temperature</h4>
+                  <h4 className="font-semibold mb-3" style={{ color: "#4B2E2B" }}>
+                    Choose Temperature
+                  </h4>
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       onClick={() => setSelectedTemperature("hot")}
                       className={`p-4 rounded-xl border-2 transition-all ${
-                        selectedTemperature === "hot"
-                          ? "border-red-500 bg-red-50 text-red-700"
-                          : "border-gray-200 hover:border-red-300 hover:bg-red-50/50"
+                        selectedTemperature === "hot" ? "text-red-700" : "hover:border-red-300 hover:bg-red-50/50"
                       }`}
+                      style={{
+                        borderColor: selectedTemperature === "hot" ? "#6F4E37" : "#F5F5DC",
+                        backgroundColor: selectedTemperature === "hot" ? "#FAF3E0" : "transparent",
+                      }}
                     >
                       <div className="flex flex-col items-center gap-2">
                         <Thermometer className="h-6 w-6" />
@@ -138,8 +167,12 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                       className={`p-4 rounded-xl border-2 transition-all ${
                         selectedTemperature === "iced"
                           ? "border-blue-500 bg-blue-50 text-blue-700"
-                          : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50"
+                          : "hover:border-blue-300 hover:bg-blue-50/50"
                       }`}
+                      style={{
+                        borderColor: selectedTemperature === "iced" ? "#6F4E37" : "#F5F5DC",
+                        backgroundColor: selectedTemperature === "iced" ? "#FAF3E0" : "transparent",
+                      }}
                     >
                       <div className="flex flex-col items-center gap-2">
                         <Snowflake className="h-6 w-6" />
@@ -152,7 +185,9 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
 
               {/* Quantity Selection */}
               <div>
-                <h4 className="font-semibold text-gray-800 mb-3">Quantity</h4>
+                <h4 className="font-semibold mb-3" style={{ color: "#4B2E2B" }}>
+                  Quantity
+                </h4>
                 <div className="flex items-center justify-center gap-4">
                   <Button
                     variant="outline"
@@ -160,15 +195,19 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="h-10 w-10 p-0 rounded-full"
                     disabled={quantity <= 1}
+                    style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
                   >
                     <Plus className="h-4 w-4 rotate-45" />
                   </Button>
-                  <span className="font-bold text-xl text-gray-800 min-w-[3rem] text-center">{quantity}</span>
+                  <span className="font-bold text-xl min-w-[3rem] text-center" style={{ color: "#4B2E2B" }}>
+                    {quantity}
+                  </span>
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => setQuantity(quantity + 1)}
                     className="h-10 w-10 p-0 rounded-full"
+                    style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
@@ -176,10 +215,12 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
               </div>
 
               {/* Total Price */}
-              <div className="bg-orange-50 rounded-xl p-4">
+              <div className="rounded-xl p-4" style={{ backgroundColor: "#FAF3E0" }}>
                 <div className="flex justify-between items-center">
-                  <span className="font-medium text-gray-700">Total:</span>
-                  <span className="font-bold text-xl text-orange-600">
+                  <span className="font-medium" style={{ color: "#4B2E2B" }}>
+                    Total:
+                  </span>
+                  <span className="font-bold text-xl" style={{ color: "#6F4E37" }}>
                     ${(Number.parseFloat(item.price.replace("$", "")) * quantity).toFixed(2)}
                   </span>
                 </div>
@@ -189,9 +230,10 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
               <Button
                 onClick={handleAddToCart}
                 disabled={!canAddToCart || isAdding}
-                className={`w-full py-4 rounded-full shadow-lg hover:shadow-xl transition-all group ${
-                  isAdding ? "bg-green-500 hover:bg-green-600" : "bg-orange-500 hover:bg-orange-600"
-                } text-white`}
+                className="w-full py-4 rounded-full shadow-lg hover:shadow-xl transition-all group text-white border-0"
+                style={{ backgroundColor: isAdding ? "#32CD32" : "#6F4E37" }}
+                onMouseEnter={(e) => !isAdding && (e.target.style.backgroundColor = "#4B2E2B")}
+                onMouseLeave={(e) => !isAdding && (e.target.style.backgroundColor = "#6F4E37")}
               >
                 {isAdding ? (
                   <>
@@ -209,7 +251,9 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
 
               {/* Temperature Selection Reminder */}
               {hasTemperatureOptions && !selectedTemperature && (
-                <p className="text-center text-sm text-gray-500">Please select a temperature option above</p>
+                <p className="text-center text-sm" style={{ color: "#6F4E37" }}>
+                  Please select a temperature option above
+                </p>
               )}
             </div>
           </CardContent>

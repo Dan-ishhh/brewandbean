@@ -12,104 +12,154 @@ export default function AboutPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-amber-50">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-orange-100 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center">
-                  <Coffee className="h-6 w-6 text-white" />
+    <div className="min-h-screen" style={{ backgroundColor: "#FFF8F0" }}>
+      {/* Floating Navigation */}
+      <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-6xl px-4">
+        <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-xl border" style={{ borderColor: "#F5F5DC" }}>
+          <div className="px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              <Link href="/" className="flex items-center gap-3">
+                <div className="relative">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: "linear-gradient(to bottom right, #6F4E37, #4B2E2B)" }}
+                  >
+                    <Coffee className="h-6 w-6 text-white" />
+                  </div>
+                  <div
+                    className="absolute -top-1 -right-1 w-3 h-3 rounded-full animate-pulse"
+                    style={{ backgroundColor: "#F5F5DC" }}
+                  ></div>
                 </div>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-400 rounded-full animate-pulse"></div>
-              </div>
-              <span className="text-2xl font-bold text-gray-800">Brew & Bean</span>
-            </Link>
-
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-orange-600 transition-colors font-medium">
-                Home
+                <span className="text-xl font-bold" style={{ color: "#4B2E2B" }}>
+                  Brew & Bean
+                </span>
               </Link>
-              <Link href="/about" className="text-orange-600 font-semibold">
-                About
-              </Link>
-              <Link href="/menu" className="text-gray-700 hover:text-orange-600 transition-colors font-medium">
-                Menu
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-orange-600 transition-colors font-medium">
-                Contact
-              </Link>
-            </div>
 
-            <div className="flex items-center gap-4">
-              <CartButton />
-
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-2 rounded-xl hover:bg-orange-50 transition-colors"
-              >
-                {isMobileMenuOpen ? (
-                  <X className="h-6 w-6 text-gray-700" />
-                ) : (
-                  <Menu className="h-6 w-6 text-gray-700" />
-                )}
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden border-t border-orange-100 bg-white/95 backdrop-blur-sm">
-              <div className="px-4 py-6 space-y-4">
+              {/* Desktop Menu */}
+              <div className="hidden md:flex items-center space-x-1">
                 <Link
                   href="/"
-                  className="block text-gray-700 hover:text-orange-600 transition-colors py-3 font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="px-4 py-2 rounded-xl font-medium transition-all duration-200 hover:bg-opacity-80"
+                  style={{ color: "#4B2E2B", ":hover": { backgroundColor: "#F5F5DC" } }}
+                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
+                  onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
                 >
                   Home
                 </Link>
                 <Link
                   href="/about"
-                  className="block text-orange-600 font-semibold py-3"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="px-4 py-2 rounded-xl font-medium transition-all duration-200 text-white"
+                  style={{ backgroundColor: "#6F4E37" }}
                 >
                   About
                 </Link>
                 <Link
                   href="/menu"
-                  className="block text-gray-700 hover:text-orange-600 transition-colors py-3 font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="px-4 py-2 rounded-xl font-medium transition-all duration-200 hover:bg-opacity-80"
+                  style={{ color: "#4B2E2B", ":hover": { backgroundColor: "#F5F5DC" } }}
+                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
+                  onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
                 >
                   Menu
                 </Link>
                 <Link
                   href="/contact"
-                  className="block text-gray-700 hover:text-orange-600 transition-colors py-3 font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="px-4 py-2 rounded-xl font-medium transition-all duration-200 hover:bg-opacity-80"
+                  style={{ color: "#4B2E2B", ":hover": { backgroundColor: "#F5F5DC" } }}
+                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
+                  onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
                 >
                   Contact
                 </Link>
+              </div>
+
+              <div className="flex items-center gap-4">
                 <CartButton />
+
+                {/* Mobile Menu Button */}
+                <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  className="md:hidden p-2 rounded-xl transition-colors"
+                  style={{
+                    backgroundColor: isMobileMenuOpen ? "#F5F5DC" : "transparent",
+                    color: "#4B2E2B",
+                  }}
+                >
+                  {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </button>
               </div>
             </div>
-          )}
+
+            {/* Mobile Menu */}
+            {isMobileMenuOpen && (
+              <div className="md:hidden border-t py-4" style={{ borderColor: "#F5F5DC" }}>
+                <div className="space-y-2">
+                  <Link
+                    href="/"
+                    className="block px-4 py-3 rounded-xl font-medium transition-all duration-200"
+                    style={{ color: "#4B2E2B" }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
+                    onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="block px-4 py-3 rounded-xl font-medium transition-all duration-200 text-white"
+                    style={{ backgroundColor: "#6F4E37" }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    About
+                  </Link>
+                  <Link
+                    href="/menu"
+                    className="block px-4 py-3 rounded-xl font-medium transition-all duration-200"
+                    style={{ color: "#4B2E2B" }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
+                    onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
+                  >
+                    Menu
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="block px-4 py-3 rounded-xl font-medium transition-all duration-200"
+                    style={{ color: "#4B2E2B" }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
+                    onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
+                  >
+                    Contact
+                  </Link>
+                  <div className="pt-2">
+                    <CartButton />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-24 pb-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+      <section
+        className="pt-32 pb-20"
+        style={{ background: "linear-gradient(to bottom right, #FFF8F0, #FAF3E0, #F5F5DC)" }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <Badge className="bg-green-100 text-green-800 border-green-200 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <Badge
+              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-0"
+              style={{ backgroundColor: "#F5F5DC", color: "#4B2E2B" }}
+            >
               Our Story
             </Badge>
-            <h1 className="text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
-              About <span className="text-orange-600">Brew & Bean</span>
+            <h1 className="text-5xl lg:text-6xl font-bold mb-6" style={{ color: "#4B2E2B" }}>
+              About <span style={{ color: "#6F4E37" }}>Brew & Bean</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: "#4B2E2B" }}>
               More than just a coffee shop, we're a community hub where passion meets purpose, and every cup tells a
               story of quality, sustainability, and connection.
             </p>
@@ -118,14 +168,14 @@ export default function AboutPage() {
       </section>
 
       {/* Our Story */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ backgroundColor: "#FFF8F0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-800 mb-6">
-                Our <span className="text-orange-600">Journey</span>
+              <h2 className="text-4xl font-bold mb-6" style={{ color: "#4B2E2B" }}>
+                Our <span style={{ color: "#6F4E37" }}>Journey</span>
               </h2>
-              <div className="space-y-6 text-gray-600 leading-relaxed">
+              <div className="space-y-6 leading-relaxed" style={{ color: "#4B2E2B" }}>
                 <p>
                   Founded in 2018 by coffee enthusiasts Maria and James, Brew & Bean started as a dream to create a
                   space where exceptional coffee meets genuine community connection. What began as a small neighborhood
@@ -155,108 +205,96 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-gradient-to-br from-amber-50 to-orange-50">
+      <section className="py-20" style={{ background: "linear-gradient(to bottom right, #FAF3E0, #F5F5DC)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-6">
-              Our <span className="text-orange-600">Values</span>
+            <h2 className="text-4xl font-bold mb-6" style={{ color: "#4B2E2B" }}>
+              Our <span style={{ color: "#6F4E37" }}>Values</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl max-w-3xl mx-auto" style={{ color: "#4B2E2B" }}>
               Everything we do is guided by our core values that shape our approach to coffee, community, and
               sustainability.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="border-2 border-orange-100 hover:border-orange-200 hover:shadow-xl transition-all duration-300 group bg-white">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                  <Coffee className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Quality First</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  We source only the finest beans from sustainable farms and roast them to perfection, ensuring every
-                  cup meets our high standards.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-green-100 hover:border-green-200 hover:shadow-xl transition-all duration-300 group bg-white">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                  <Users className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Community Focus</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  We're more than a cafe—we're a gathering place where neighbors become friends and ideas come to life
-                  over great coffee.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-blue-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 group bg-white">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                  <Leaf className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Sustainability</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Environmental responsibility guides our choices, from ethically sourced beans to eco-friendly
-                  packaging and practices.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-purple-100 hover:border-purple-200 hover:shadow-xl transition-all duration-300 group bg-white">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                  <Heart className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Passion</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Our love for coffee and community drives everything we do, from the perfect roast to the warm welcome
-                  you receive.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-yellow-100 hover:border-yellow-200 hover:shadow-xl transition-all duration-300 group bg-white">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                  <Award className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Excellence</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  We strive for excellence in every aspect, from our carefully crafted beverages to our exceptional
-                  customer service.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 border-red-100 hover:border-red-200 hover:shadow-xl transition-all duration-300 group bg-white">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-red-400 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                  <Clock className="h-8 w-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Consistency</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Whether it's your first visit or your hundredth, you can count on the same high quality and warm
-                  service every time.
-                </p>
-              </CardContent>
-            </Card>
+            {[
+              {
+                icon: Coffee,
+                title: "Quality First",
+                description:
+                  "We source only the finest beans from sustainable farms and roast them to perfection, ensuring every cup meets our high standards.",
+                gradient: "from-emerald-700 to-green-800",
+              },
+              {
+                icon: Users,
+                title: "Community Focus",
+                description:
+                  "We're more than a cafe—we're a gathering place where neighbors become friends and ideas come to life over great coffee.",
+                gradient: "from-teal-500 to-emerald-600",
+              },
+              {
+                icon: Leaf,
+                title: "Sustainability",
+                description:
+                  "Environmental responsibility guides our choices, from ethically sourced beans to eco-friendly packaging and practices.",
+                gradient: "from-blue-400 to-cyan-500",
+              },
+              {
+                icon: Heart,
+                title: "Passion",
+                description:
+                  "Our love for coffee and community drives everything we do, from the perfect roast to the warm welcome you receive.",
+                gradient: "from-purple-400 to-pink-500",
+              },
+              {
+                icon: Award,
+                title: "Excellence",
+                description:
+                  "We strive for excellence in every aspect, from our carefully crafted beverages to our exceptional customer service.",
+                gradient: "from-yellow-400 to-orange-500",
+              },
+              {
+                icon: Clock,
+                title: "Consistency",
+                description:
+                  "Whether it's your first visit or your hundredth, you can count on the same high quality and warm service every time.",
+                gradient: "from-red-400 to-pink-500",
+              },
+            ].map((value, index) => (
+              <Card
+                key={index}
+                className="border-2 hover:shadow-xl transition-all duration-300 group"
+                style={{ borderColor: "#F5F5DC", backgroundColor: "#FFF8F0" }}
+              >
+                <CardContent className="p-8 text-center">
+                  <div
+                    className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg`}
+                    style={{ background: "linear-gradient(to bottom right, #6F4E37, #4B2E2B)" }}
+                  >
+                    <value.icon className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-4" style={{ color: "#4B2E2B" }}>
+                    {value.title}
+                  </h3>
+                  <p className="leading-relaxed" style={{ color: "#4B2E2B" }}>
+                    {value.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20" style={{ backgroundColor: "#FFF8F0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-800 mb-6">
-              Meet Our <span className="text-orange-600">Team</span>
+            <h2 className="text-4xl font-bold mb-6" style={{ color: "#4B2E2B" }}>
+              Meet Our <span style={{ color: "#6F4E37" }}>Team</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl max-w-3xl mx-auto" style={{ color: "#4B2E2B" }}>
               The passionate people behind every perfect cup and warm smile.
             </p>
           </div>
@@ -292,7 +330,8 @@ export default function AboutPage() {
             ].map((member, index) => (
               <Card
                 key={index}
-                className="border-0 hover:shadow-xl transition-all duration-300 group overflow-hidden rounded-2xl bg-white"
+                className="border-0 hover:shadow-xl transition-all duration-300 group overflow-hidden rounded-2xl"
+                style={{ backgroundColor: "#FFF8F0" }}
               >
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
@@ -303,9 +342,15 @@ export default function AboutPage() {
                     />
                   </div>
                   <div className="p-6 text-center">
-                    <h3 className="text-lg font-bold text-gray-800 mb-1">{member.name}</h3>
-                    <p className="text-orange-600 font-medium mb-3">{member.role}</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">{member.description}</p>
+                    <h3 className="text-lg font-bold mb-1" style={{ color: "#4B2E2B" }}>
+                      {member.name}
+                    </h3>
+                    <p className="font-medium mb-3" style={{ color: "#6F4E37" }}>
+                      {member.role}
+                    </p>
+                    <p className="text-sm leading-relaxed" style={{ color: "#4B2E2B" }}>
+                      {member.description}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -315,7 +360,10 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-500 to-amber-600 text-white">
+      <section
+        className="py-20 text-white"
+        style={{ background: "linear-gradient(to bottom right, #6F4E37, #4B2E2B)" }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Join Our Community?</h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
@@ -325,7 +373,8 @@ export default function AboutPage() {
             <Link href="/menu">
               <Button
                 size="lg"
-                className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all"
+                className="px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0"
+                style={{ backgroundColor: "#FFF8F0", color: "#4B2E2B" }}
               >
                 Explore Our Menu
               </Button>
@@ -334,7 +383,10 @@ export default function AboutPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-8 py-4 rounded-full bg-transparent"
+                className="border-2 border-white text-white hover:bg-white px-8 py-4 rounded-full bg-transparent"
+                style={{ ":hover": { color: "#4B2E2B" } }}
+                onMouseEnter={(e) => (e.target.style.color = "#4B2E2B")}
+                onMouseLeave={(e) => (e.target.style.color = "white")}
               >
                 Visit Us Today
               </Button>
@@ -344,37 +396,42 @@ export default function AboutPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-16">
+      <footer className="text-white py-16" style={{ backgroundColor: "#4B2E2B" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="col-span-2">
               <Link href="/" className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-amber-500 rounded-xl flex items-center justify-center">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={{ background: "linear-gradient(to bottom right, #6F4E37, #4B2E2B)" }}
+                >
                   <Coffee className="h-7 w-7 text-white" />
                 </div>
                 <span className="text-2xl font-bold">Brew & Bean</span>
               </Link>
-              <p className="text-gray-300 mb-6 leading-relaxed max-w-md">
+              <p className="mb-6 leading-relaxed max-w-md" style={{ color: "#FAF3E0" }}>
                 Your neighborhood cafe where quality meets comfort. Join us for exceptional coffee, warm hospitality,
                 and a welcoming community atmosphere.
               </p>
             </div>
 
             <div>
-              <h4 className="font-bold mb-6 text-orange-300">Quick Links</h4>
-              <div className="space-y-3 text-gray-300">
+              <h4 className="font-bold mb-6" style={{ color: "#6F4E37" }}>
+                Quick Links
+              </h4>
+              <div className="space-y-3" style={{ color: "#FAF3E0" }}>
                 <p>
-                  <Link href="/menu" className="hover:text-orange-300 transition-colors">
+                  <Link href="/menu" className="hover:text-white transition-colors">
                     Menu
                   </Link>
                 </p>
                 <p>
-                  <Link href="/about" className="hover:text-orange-300 transition-colors">
+                  <Link href="/about" className="hover:text-white transition-colors">
                     About Us
                   </Link>
                 </p>
                 <p>
-                  <Link href="/contact" className="hover:text-orange-300 transition-colors">
+                  <Link href="/contact" className="hover:text-white transition-colors">
                     Contact
                   </Link>
                 </p>
@@ -382,8 +439,10 @@ export default function AboutPage() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-6 text-green-300">Contact Info</h4>
-              <div className="space-y-3 text-gray-300">
+              <h4 className="font-bold mb-6" style={{ color: "#F5F5DC" }}>
+                Contact Info
+              </h4>
+              <div className="space-y-3" style={{ color: "#FAF3E0" }}>
                 <p>123 Coffee Street</p>
                 <p>Downtown District</p>
                 <p>(555) 123-BREW</p>
@@ -392,7 +451,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+          <div className="border-t mt-12 pt-8 text-center" style={{ borderColor: "#6F4E37", color: "#FAF3E0" }}>
             <p>&copy; 2024 Brew & Bean. All rights reserved. Made with ❤️ for coffee lovers.</p>
           </div>
         </div>

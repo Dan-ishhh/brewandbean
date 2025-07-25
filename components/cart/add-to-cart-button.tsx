@@ -57,7 +57,7 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
         id: item.id,
         name: item.name,
         price,
-        image: item.image || "/placeholder.svg",
+        image: item.image || "/placeholder.svg?height=64&width=64",
         category: item.category,
         options: temperature ? { temperature } : undefined,
       },
@@ -76,9 +76,13 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
       <Button
         onClick={handleClick}
         size={size}
-        className={`rounded-full shadow-lg hover:shadow-xl transition-all group ${className} ${
-          isAdded ? "bg-green-500 hover:bg-green-600" : "bg-orange-500 hover:bg-orange-600"
-        } text-white`}
+        className={`rounded-full shadow-lg hover:shadow-xl transition-all group text-white border-0 ${className}`}
+        style={{
+          backgroundColor: isAdded ? "#32CD32" : "#6F4E37",
+          ":hover": { backgroundColor: isAdded ? "#228B22" : "#4B2E2B" },
+        }}
+        onMouseEnter={(e) => (e.target.style.backgroundColor = isAdded ? "#228B22" : "#4B2E2B")}
+        onMouseLeave={(e) => (e.target.style.backgroundColor = isAdded ? "#32CD32" : "#6F4E37")}
       >
         {showIcon &&
           (isAdded ? (
@@ -91,7 +95,7 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
 
       {/* Only show modal for items that need temperature selection */}
       {needsTemperatureSelection && (
-        <AddToCartModal item={item} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <AddToCartModal item={item} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} dispatch={dispatch} />
       )}
     </>
   )

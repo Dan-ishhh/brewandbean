@@ -41,15 +41,20 @@ export function CartSidebar() {
       />
 
       {/* Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform transition-transform">
+      <div
+        className="fixed right-0 top-0 h-full w-full max-w-md shadow-2xl z-50 transform transition-transform"
+        style={{ backgroundColor: "#FFF8F0" }}
+      >
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <div className="flex items-center justify-between p-6 border-b" style={{ borderColor: "#F5F5DC" }}>
             <div className="flex items-center gap-3">
-              <ShoppingBag className="h-6 w-6 text-orange-600" />
-              <h2 className="text-xl font-bold text-gray-800">Your Order</h2>
+              <ShoppingBag className="h-6 w-6" style={{ color: "#6F4E37" }} />
+              <h2 className="text-xl font-bold" style={{ color: "#4B2E2B" }}>
+                Your Order
+              </h2>
               {state.itemCount > 0 && (
-                <Badge className="bg-orange-100 text-orange-700">
+                <Badge className="border-0" style={{ backgroundColor: "#F5F5DC", color: "#4B2E2B" }}>
                   {state.itemCount} {state.itemCount === 1 ? "item" : "items"}
                 </Badge>
               )}
@@ -58,9 +63,12 @@ export function CartSidebar() {
               variant="ghost"
               size="sm"
               onClick={() => dispatch({ type: "CLOSE_CART" })}
-              className="rounded-full p-2 hover:bg-gray-100"
+              className="rounded-full p-2"
+              style={{ ":hover": { backgroundColor: "#F5F5DC" } }}
+              onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
+              onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
             >
-              <X className="h-5 w-5" />
+              <X className="h-5 w-5" style={{ color: "#4B2E2B" }} />
             </Button>
           </div>
 
@@ -68,12 +76,17 @@ export function CartSidebar() {
           <div className="flex-1 overflow-y-auto p-6">
             {state.items.length === 0 ? (
               <div className="text-center py-12">
-                <ShoppingBag className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-500 mb-2">Your cart is empty</h3>
-                <p className="text-gray-400 mb-6">Add some delicious items to get started!</p>
+                <ShoppingBag className="h-16 w-16 mx-auto mb-4" style={{ color: "#F5F5DC" }} />
+                <h3 className="text-lg font-medium mb-2" style={{ color: "#4B2E2B" }}>
+                  Your cart is empty
+                </h3>
+                <p className="mb-6" style={{ color: "#6F4E37" }}>
+                  Add some delicious items to get started!
+                </p>
                 <Button
                   onClick={() => dispatch({ type: "CLOSE_CART" })}
-                  className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-6"
+                  className="text-white rounded-full px-6 border-0"
+                  style={{ backgroundColor: "#6F4E37" }}
                 >
                   Browse Menu
                 </Button>
@@ -81,16 +94,26 @@ export function CartSidebar() {
             ) : (
               <div className="space-y-4">
                 {state.items.map((item, index) => (
-                  <Card key={`${item.id}-${index}`} className="border border-gray-200">
+                  <Card
+                    key={`${item.id}-${index}`}
+                    className="border"
+                    style={{ borderColor: "#F5F5DC", backgroundColor: "#FFF8F0" }}
+                  >
                     <CardContent className="p-4">
                       <div className="flex gap-4">
                         <img
-                          src={item.image || "/placeholder.svg"}
+                          src={item.image || "/placeholder.svg?height=64&width=64&query=food item"}
                           alt={item.name}
                           className="w-16 h-16 object-cover rounded-lg"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement
+                            target.src = "/placeholder.svg?height=64&width=64"
+                          }}
                         />
                         <div className="flex-1">
-                          <h3 className="font-semibold text-gray-800 mb-1">{item.name}</h3>
+                          <h3 className="font-semibold mb-1" style={{ color: "#4B2E2B" }}>
+                            {item.name}
+                          </h3>
 
                           {/* Temperature Option */}
                           {item.options?.temperature && (
@@ -100,11 +123,15 @@ export function CartSidebar() {
                               ) : (
                                 <Snowflake className="h-3 w-3 text-blue-500" />
                               )}
-                              <span className="text-xs text-gray-600 capitalize">{item.options.temperature}</span>
+                              <span className="text-xs capitalize" style={{ color: "#6F4E37" }}>
+                                {item.options.temperature}
+                              </span>
                             </div>
                           )}
 
-                          <p className="text-sm text-gray-600 mb-2">${item.price.toFixed(2)} each</p>
+                          <p className="text-sm mb-2" style={{ color: "#6F4E37" }}>
+                            ${item.price.toFixed(2)} each
+                          </p>
 
                           {/* Quantity Controls */}
                           <div className="flex items-center justify-between">
@@ -119,10 +146,11 @@ export function CartSidebar() {
                                   })
                                 }
                                 className="h-8 w-8 p-0 rounded-full"
+                                style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
                               >
                                 <Minus className="h-3 w-3" />
                               </Button>
-                              <span className="font-medium text-gray-800 min-w-[2rem] text-center">
+                              <span className="font-medium min-w-[2rem] text-center" style={{ color: "#4B2E2B" }}>
                                 {item.quantity}
                               </span>
                               <Button
@@ -135,13 +163,14 @@ export function CartSidebar() {
                                   })
                                 }
                                 className="h-8 w-8 p-0 rounded-full"
+                                style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
                               >
                                 <Plus className="h-3 w-3" />
                               </Button>
                             </div>
 
                             <div className="flex items-center gap-2">
-                              <span className="font-semibold text-gray-800">
+                              <span className="font-semibold" style={{ color: "#4B2E2B" }}>
                                 ${(item.price * item.quantity).toFixed(2)}
                               </span>
                               <Button
@@ -165,29 +194,36 @@ export function CartSidebar() {
 
           {/* Footer */}
           {state.items.length > 0 && (
-            <div className="border-t border-gray-200 p-6 space-y-4">
+            <div className="border-t p-6 space-y-4" style={{ borderColor: "#F5F5DC" }}>
               {/* Total */}
               <div className="flex justify-between items-center text-lg font-bold">
-                <span>Total:</span>
-                <span className="text-orange-600">${state.total.toFixed(2)}</span>
+                <span style={{ color: "#4B2E2B" }}>Total:</span>
+                <span style={{ color: "#6F4E37" }}>${state.total.toFixed(2)}</span>
               </div>
 
               {/* Action Buttons */}
               <div className="space-y-3">
-                <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-full shadow-lg hover:shadow-xl transition-all">
+                <Button
+                  className="w-full text-white py-3 rounded-full shadow-lg hover:shadow-xl transition-all border-0"
+                  style={{ backgroundColor: "#6F4E37" }}
+                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#4B2E2B")}
+                  onMouseLeave={(e) => (e.target.style.backgroundColor = "#6F4E37")}
+                >
                   Proceed to Checkout
                 </Button>
                 <Button
                   variant="outline"
-                  onClick={() => dispatch({ type: "CLEAR_CART" })}
-                  className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 py-3 rounded-full"
+                  className="w-full py-3 rounded-full bg-transparent"
+                  style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
+                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
+                  onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
                 >
                   Clear Cart
                 </Button>
               </div>
 
               {/* Pickup Info */}
-              <div className="text-center text-sm text-gray-500 pt-2">
+              <div className="text-center text-sm pt-2" style={{ color: "#6F4E37" }}>
                 <p>🕐 Ready for pickup in 10-15 minutes</p>
                 <p>📍 123 Coffee Street, Downtown District</p>
               </div>
