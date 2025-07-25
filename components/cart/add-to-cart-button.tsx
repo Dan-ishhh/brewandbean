@@ -1,38 +1,45 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { Plus, Check } from "lucide-react"
-import { useState } from "react"
-import { AddToCartModal } from "./add-to-cart-modal"
-import { useCart } from "@/contexts/cart-context"
+"use client";
+import { Button } from "@/components/ui/button";
+import { Plus, Check } from "lucide-react";
+import { useState } from "react";
+import { AddToCartModal } from "./add-to-cart-modal";
+import { useCart } from "@/contexts/cart-context";
 
 interface AddToCartButtonProps {
   item: {
-    id: number
-    name: string
-    price: string
-    image: string
-    category: string
-    description?: string
-    hot?: boolean
-    iced?: boolean
-    badge?: string
-    badgeColor?: string
-  }
-  className?: string
-  size?: "sm" | "default" | "lg"
-  showIcon?: boolean
-  onOpenModal?: () => void
+    id: number;
+    name: string;
+    price: string;
+    image: string;
+    category: string;
+    description?: string;
+    hot?: boolean;
+    iced?: boolean;
+    badge?: string;
+    badgeColor?: string;
+  };
+  className?: string;
+  size?: "sm" | "default" | "lg";
+  showIcon?: boolean;
+  onOpenModal?: () => void;
 }
 
-export function AddToCartButton({ item, className = "", size = "default", showIcon = true, onOpenModal }: AddToCartButtonProps) {
-  const { dispatch } = useCart()
-  const [isAdded, setIsAdded] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+export function AddToCartButton({
+  item,
+  className = "",
+  size = "default",
+  showIcon = true,
+  onOpenModal,
+}: AddToCartButtonProps) {
+  const { dispatch } = useCart();
+  const [isAdded, setIsAdded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Determine if item needs temperature selection
-  const needsTemperatureSelection = item.hot && item.iced
-  const hasOnlyOneTemperature = (item.hot && !item.iced) || (!item.hot && item.iced)
-  const noTemperatureOptions = !item.hot && !item.iced
+  const needsTemperatureSelection = item.hot && item.iced;
+  const hasOnlyOneTemperature =
+    (item.hot && !item.iced) || (!item.hot && item.iced);
+  const noTemperatureOptions = !item.hot && !item.iced;
 
   const handleClick = async () => {
     // If item has both hot and iced options, trigger global modal
@@ -44,19 +51,19 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
     }
 
     // If item has only one temperature or no temperature options, add directly
-    setIsLoading(true)
+    setIsLoading(true);
 
     // Simulate brief loading for smooth UX
-    await new Promise((resolve) => setTimeout(resolve, 300))
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
-    setIsAdded(true)
-    const price = Number.parseFloat(item.price.replace("$", ""))
+    setIsAdded(true);
+    const price = Number.parseFloat(item.price.replace("$", ""));
 
-    let temperature: "hot" | "iced" | undefined = undefined
+    let temperature: "hot" | "iced" | undefined = undefined;
     if (item.hot && !item.iced) {
-      temperature = "hot"
+      temperature = "hot";
     } else if (item.iced && !item.hot) {
-      temperature = "iced"
+      temperature = "iced";
     }
 
     dispatch({
@@ -69,18 +76,18 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
         category: item.category,
         options: temperature ? { temperature } : undefined,
       },
-    })
+    });
 
     // Show success state
     setTimeout(() => {
-      setIsAdded(false)
-      setIsLoading(false)
-    }, 2000)
+      setIsAdded(false);
+      setIsLoading(false);
+    }, 2000);
 
     // Open cart briefly to show the item was added
-    dispatch({ type: "OPEN_CART" })
-    setTimeout(() => dispatch({ type: "CLOSE_CART" }), 1500)
-  }
+    dispatch({ type: "OPEN_CART" });
+    setTimeout(() => dispatch({ type: "CLOSE_CART" }), 1500);
+  };
 
   return (
     <>
@@ -97,12 +104,12 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
         }}
         onMouseEnter={(e) => {
           if (!isAdded && !isLoading) {
-            e.target.style.backgroundColor = "#4B2E2B"
+            e.target.style.backgroundColor = "#4B2E2B";
           }
         }}
         onMouseLeave={(e) => {
           if (!isAdded && !isLoading) {
-            e.target.style.backgroundColor = "#6F4E37"
+            e.target.style.backgroundColor = "#6F4E37";
           }
         }}
       >
@@ -122,5 +129,5 @@ export function AddToCartButton({ item, className = "", size = "default", showIc
 
       {/* Modal is now handled globally, not here */}
     </>
-  )
+  );
 }
