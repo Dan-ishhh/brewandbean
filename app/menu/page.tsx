@@ -427,39 +427,6 @@ export default function MenuPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section
-        className="py-20 text-white"
-        style={{
-          background: "linear-gradient(to bottom right, #6F4E37, #4B2E2B)",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Order?</h2>
-          <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Visit us in-store or place your order online for pickup. We can't
-            wait to serve you!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0 bg-[#FFF8F0] text-[#4B2E2B]"
-            >
-              Order Online
-            </Button>
-            <Link href="/contact">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-[#4B2E2B] px-8 py-4 rounded-full bg-transparent"
-              >
-                Visit Our Store
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <Footer />
 
