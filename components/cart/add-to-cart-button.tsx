@@ -99,8 +99,8 @@ export function AddToCartButton({
           isAdded ? "animate-bounce-in" : ""
         } ${isLoading ? "animate-pulse" : ""} ${className}`}
         style={{
-          backgroundColor: isAdded ? "#32CD32" : "#6F4E37",
-          ":hover": { backgroundColor: isAdded ? "#228B22" : "#4B2E2B" },
+          backgroundColor: isAdded ? "#4B2E2B" : "#6F4E37",
+          ":hover": { backgroundColor: isAdded ? "#6F4E37" : "#4B2E2B" },
         }}
         onMouseEnter={(e) => {
           if (!isAdded && !isLoading) {

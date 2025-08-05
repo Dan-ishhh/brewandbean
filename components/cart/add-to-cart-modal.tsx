@@ -322,7 +322,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                 className={`w-full py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group text-white border-0 transform hover:scale-105 active:scale-95 ${
                   isAdding ? "animate-pulse-gentle" : ""
                 }`}
-                style={{ backgroundColor: isAdding ? "#32CD32" : "#6F4E37" }}
+                style={{ backgroundColor: isAdding ? "#4B2E2B" : "#6F4E37" }}
                 onMouseEnter={(e) =>
                   !isAdding && (e.target.style.backgroundColor = "#4B2E2B")
                 }

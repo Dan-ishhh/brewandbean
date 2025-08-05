@@ -1,43 +1,52 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { X, Plus, Minus, Trash2, ShoppingBag, Thermometer, Snowflake } from "lucide-react"
-import { useCart } from "@/contexts/cart-context"
-import { useEffect, useState } from "react"
+"use client";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  X,
+  Plus,
+  Minus,
+  Trash2,
+  ShoppingBag,
+  Thermometer,
+  Snowflake,
+} from "lucide-react";
+import { useCart } from "@/contexts/cart-context";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export function CartSidebar() {
-  const { state, dispatch } = useCart()
-  const [isVisible, setIsVisible] = useState(false)
+  const { state, dispatch } = useCart();
+  const [isVisible, setIsVisible] = useState(false);
 
   // Handle sidebar visibility with animation
   useEffect(() => {
     if (state.isOpen) {
-      setIsVisible(true)
-      document.body.style.overflow = "hidden"
+      setIsVisible(true);
+      document.body.style.overflow = "hidden";
     } else {
-      const timer = setTimeout(() => setIsVisible(false), 300)
-      document.body.style.overflow = "unset"
-      return () => clearTimeout(timer)
+      const timer = setTimeout(() => setIsVisible(false), 300);
+      document.body.style.overflow = "unset";
+      return () => clearTimeout(timer);
     }
 
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        dispatch({ type: "CLOSE_CART" })
+        dispatch({ type: "CLOSE_CART" });
       }
-    }
+    };
 
     if (state.isOpen) {
-      document.addEventListener("keydown", handleEscape)
+      document.addEventListener("keydown", handleEscape);
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscape)
-      document.body.style.overflow = "unset"
-    }
-  }, [state.isOpen, dispatch])
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
+    };
+  }, [state.isOpen, dispatch]);
 
-  if (!isVisible) return null
+  if (!isVisible) return null;
 
   return (
     <>
@@ -65,7 +74,10 @@ export function CartSidebar() {
             style={{ borderColor: "#F5F5DC" }}
           >
             <div className="flex items-center gap-3">
-              <ShoppingBag className="h-6 w-6 animate-pulse-gentle" style={{ color: "#6F4E37" }} />
+              <ShoppingBag
+                className="h-6 w-6 animate-pulse-gentle"
+                style={{ color: "#6F4E37" }}
+              />
               <h2 className="text-xl font-bold" style={{ color: "#4B2E2B" }}>
                 Your Order
               </h2>
@@ -85,7 +97,9 @@ export function CartSidebar() {
               className="rounded-full p-2 hover:rotate-90 transition-all duration-300"
               style={{ ":hover": { backgroundColor: "#F5F5DC" } }}
               onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
-              onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
+              onMouseLeave={(e) =>
+                (e.target.style.backgroundColor = "transparent")
+              }
             >
               <X className="h-5 w-5" style={{ color: "#4B2E2B" }} />
             </Button>
@@ -95,20 +109,28 @@ export function CartSidebar() {
           <div className="flex-1 overflow-y-auto p-6">
             {state.items.length === 0 ? (
               <div className="text-center py-12 animate-fade-in-up">
-                <ShoppingBag className="h-16 w-16 mx-auto mb-4 animate-pulse-gentle" style={{ color: "#F5F5DC" }} />
-                <h3 className="text-lg font-medium mb-2" style={{ color: "#4B2E2B" }}>
+                <ShoppingBag
+                  className="h-16 w-16 mx-auto mb-4 animate-pulse-gentle"
+                  style={{ color: "#F5F5DC" }}
+                />
+                <h3
+                  className="text-lg font-medium mb-2"
+                  style={{ color: "#4B2E2B" }}
+                >
                   Your cart is empty
                 </h3>
                 <p className="mb-6" style={{ color: "#6F4E37" }}>
                   Add some delicious items to get started!
                 </p>
-                <Button
-                  onClick={() => dispatch({ type: "CLOSE_CART" })}
-                  className="text-white rounded-full px-6 border-0 transform hover:scale-105 transition-all duration-300"
-                  style={{ backgroundColor: "#6F4E37" }}
-                >
-                  Browse Menu
-                </Button>
+                <Link href="/menu">
+                  <Button
+                    onClick={() => dispatch({ type: "CLOSE_CART" })}
+                    className="text-white rounded-full px-6 border-0 transform hover:scale-105 transition-all duration-300"
+                    style={{ backgroundColor: "#6F4E37" }}
+                  >
+                    Browse Menu
+                  </Button>
+                </Link>
               </div>
             ) : (
               <div className="space-y-4">
@@ -126,12 +148,16 @@ export function CartSidebar() {
                       <div className="flex gap-4">
                         <div className="relative overflow-hidden rounded-lg">
                           <img
-                            src={item.image || "/placeholder.svg?height=64&width=64&query=food item"}
+                            src={
+                              item.image ||
+                              "/placeholder.svg?height=64&width=64&query=food item"
+                            }
                             alt={item.name}
                             className="w-16 h-16 object-cover transition-transform duration-300 hover:scale-110"
                             onError={(e) => {
-                              const target = e.target as HTMLImageElement
-                              target.src = "/placeholder.svg?height=64&width=64"
+                              const target = e.target as HTMLImageElement;
+                              target.src =
+                                "/placeholder.svg?height=64&width=64";
                             }}
                           />
                         </div>
@@ -160,7 +186,10 @@ export function CartSidebar() {
                             </div>
                           )}
 
-                          <p className="text-sm mb-2 transition-colors duration-300" style={{ color: "#6F4E37" }}>
+                          <p
+                            className="text-sm mb-2 transition-colors duration-300"
+                            style={{ color: "#6F4E37" }}
+                          >
                             ${item.price.toFixed(2)} each
                           </p>
 
@@ -173,11 +202,17 @@ export function CartSidebar() {
                                 onClick={() =>
                                   dispatch({
                                     type: "UPDATE_QUANTITY",
-                                    payload: { id: item.id, quantity: item.quantity - 1 },
+                                    payload: {
+                                      id: item.id,
+                                      quantity: item.quantity - 1,
+                                    },
                                   })
                                 }
                                 className="h-8 w-8 p-0 rounded-full transform hover:scale-110 active:scale-95 transition-all duration-200"
-                                style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
+                                style={{
+                                  borderColor: "#F5F5DC",
+                                  color: "#4B2E2B",
+                                }}
                               >
                                 <Minus className="h-3 w-3" />
                               </Button>
@@ -193,11 +228,17 @@ export function CartSidebar() {
                                 onClick={() =>
                                   dispatch({
                                     type: "UPDATE_QUANTITY",
-                                    payload: { id: item.id, quantity: item.quantity + 1 },
+                                    payload: {
+                                      id: item.id,
+                                      quantity: item.quantity + 1,
+                                    },
                                   })
                                 }
                                 className="h-8 w-8 p-0 rounded-full transform hover:scale-110 active:scale-95 transition-all duration-200"
-                                style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
+                                style={{
+                                  borderColor: "#F5F5DC",
+                                  color: "#4B2E2B",
+                                }}
                               >
                                 <Plus className="h-3 w-3" />
                               </Button>
@@ -213,7 +254,12 @@ export function CartSidebar() {
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                onClick={() => dispatch({ type: "REMOVE_ITEM", payload: item.id })}
+                                onClick={() =>
+                                  dispatch({
+                                    type: "REMOVE_ITEM",
+                                    payload: item.id,
+                                  })
+                                }
                                 className="h-8 w-8 p-0 rounded-full text-red-500 hover:text-red-700 hover:bg-red-50 transform hover:scale-110 active:scale-95 transition-all duration-200"
                               >
                                 <Trash2 className="h-3 w-3" />
@@ -240,7 +286,10 @@ export function CartSidebar() {
               {/* Total with emphasis animation */}
               <div className="flex justify-between items-center text-lg font-bold animate-fade-in-scale">
                 <span style={{ color: "#4B2E2B" }}>Total:</span>
-                <span className="animate-pulse-gentle" style={{ color: "#6F4E37" }}>
+                <span
+                  className="animate-pulse-gentle"
+                  style={{ color: "#6F4E37" }}
+                >
                   ${state.total.toFixed(2)}
                 </span>
               </div>
@@ -250,8 +299,12 @@ export function CartSidebar() {
                 <Button
                   className="w-full text-white py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95"
                   style={{ backgroundColor: "#6F4E37" }}
-                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#4B2E2B")}
-                  onMouseLeave={(e) => (e.target.style.backgroundColor = "#6F4E37")}
+                  onMouseEnter={(e) =>
+                    (e.target.style.backgroundColor = "#4B2E2B")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.backgroundColor = "#6F4E37")
+                  }
                 >
                   Proceed to Checkout
                 </Button>
@@ -260,16 +313,25 @@ export function CartSidebar() {
                   onClick={() => dispatch({ type: "CLEAR_CART" })}
                   className="w-full py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 bg-transparent transform hover:scale-105 active:scale-95"
                   style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
-                  onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
-                  onMouseLeave={(e) => (e.target.style.backgroundColor = "transparent")}
+                  onMouseEnter={(e) =>
+                    (e.target.style.backgroundColor = "#F5F5DC")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.target.style.backgroundColor = "transparent")
+                  }
                 >
                   Clear Cart
                 </Button>
               </div>
 
               {/* Pickup Info with gentle animation */}
-              <div className="text-center text-sm pt-2 animate-fade-in-up" style={{ color: "#6F4E37" }}>
-                <p className="animate-pulse-gentle">🕐 Ready for pickup in 10-15 minutes</p>
+              <div
+                className="text-center text-sm pt-2 animate-fade-in-up"
+                style={{ color: "#6F4E37" }}
+              >
+                <p className="animate-pulse-gentle">
+                  🕐 Ready for pickup in 10-15 minutes
+                </p>
                 <p>📍 123 Coffee Street, Downtown District</p>
               </div>
             </div>
@@ -277,5 +339,5 @@ export function CartSidebar() {
         </div>
       </div>
     </>
-  )
+  );
 }
