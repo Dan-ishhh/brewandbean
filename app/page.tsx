@@ -183,16 +183,15 @@ export default function HomePage() {
                 <Button
                   size="lg"
                   className="text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto border-0"
-                  style={{
-                    backgroundColor: "#6F4E37",
-                    ":hover": { backgroundColor: "#4B2E2B" },
+                  style={{ backgroundColor: "#6F4E37" }}
+                  onMouseEnter={(e) => {
+                    const target = e.currentTarget as HTMLElement;
+                    target.style.backgroundColor = "#4B2E2B";
                   }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.backgroundColor = "#4B2E2B")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.backgroundColor = "#6F4E37")
-                  }
+                  onMouseLeave={(e) => {
+                    const target = e.currentTarget as HTMLElement;
+                    target.style.backgroundColor = "#6F4E37";
+                  }}
                 >
                   Explore Our Menu
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -203,18 +202,15 @@ export default function HomePage() {
                   size="lg"
                   variant="outline"
                   className="bg-white/80 px-8 py-4 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto"
-                  style={{
-                    borderColor: "#F5F5DC",
-                    color: "#4B2E2B",
-                    ":hover": { backgroundColor: "#F5F5DC" },
+                  style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
+                  onMouseEnter={(e) => {
+                    const target = e.currentTarget as HTMLElement;
+                    target.style.backgroundColor = "#F5F5DC";
                   }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.backgroundColor = "#F5F5DC")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.backgroundColor =
-                      "rgba(255, 255, 255, 0.8)")
-                  }
+                  onMouseLeave={(e) => {
+                    const target = e.currentTarget as HTMLElement;
+                    target.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+                  }}
                 >
                   Find Us
                 </Button>
@@ -336,16 +332,15 @@ export default function HomePage() {
             <Link href="/about">
               <Button
                 className="text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border-0"
-                style={{
-                  backgroundColor: "#6F4E37",
-                  ":hover": { backgroundColor: "#4B2E2B" },
+                style={{ backgroundColor: "#6F4E37" }}
+                onMouseEnter={(e) => {
+                  const target = e.currentTarget as HTMLElement;
+                  target.style.backgroundColor = "#4B2E2B";
                 }}
-                onMouseEnter={(e) =>
-                  (e.target.style.backgroundColor = "#4B2E2B")
-                }
-                onMouseLeave={(e) =>
-                  (e.target.style.backgroundColor = "#6F4E37")
-                }
+                onMouseLeave={(e) => {
+                  const target = e.currentTarget as HTMLElement;
+                  target.style.backgroundColor = "#6F4E37";
+                }}
               >
                 Learn More About Us
               </Button>
@@ -523,16 +518,15 @@ export default function HomePage() {
               <Button
                 size="lg"
                 className="text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0"
-                style={{
-                  backgroundColor: "#6F4E37",
-                  ":hover": { backgroundColor: "#4B2E2B" },
+                style={{ backgroundColor: "#6F4E37" }}
+                onMouseEnter={(e) => {
+                  const target = e.currentTarget as HTMLElement;
+                  target.style.backgroundColor = "#4B2E2B";
                 }}
-                onMouseEnter={(e) =>
-                  (e.target.style.backgroundColor = "#4B2E2B")
-                }
-                onMouseLeave={(e) =>
-                  (e.target.style.backgroundColor = "#6F4E37")
-                }
+                onMouseLeave={(e) => {
+                  const target = e.currentTarget as HTMLElement;
+                  target.style.backgroundColor = "#6F4E37";
+                }}
               >
                 View Full Menu
               </Button>

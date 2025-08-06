@@ -95,11 +95,15 @@ export function CartSidebar() {
               size="sm"
               onClick={() => dispatch({ type: "CLOSE_CART" })}
               className="rounded-full p-2 hover:rotate-90 transition-all duration-300"
-              style={{ ":hover": { backgroundColor: "#F5F5DC" } }}
-              onMouseEnter={(e) => (e.target.style.backgroundColor = "#F5F5DC")}
-              onMouseLeave={(e) =>
-                (e.target.style.backgroundColor = "transparent")
-              }
+              style={{ backgroundColor: "transparent" }}
+              onMouseEnter={(e) => {
+                const target = e.currentTarget as HTMLElement;
+                target.style.backgroundColor = "#F5F5DC";
+              }}
+              onMouseLeave={(e) => {
+                const target = e.currentTarget as HTMLElement;
+                target.style.backgroundColor = "transparent";
+              }}
             >
               <X className="h-5 w-5" style={{ color: "#4B2E2B" }} />
             </Button>
@@ -299,12 +303,14 @@ export function CartSidebar() {
                 <Button
                   className="w-full text-white py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95"
                   style={{ backgroundColor: "#6F4E37" }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.backgroundColor = "#4B2E2B")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.backgroundColor = "#6F4E37")
-                  }
+                  onMouseEnter={(e) => {
+                    const target = e.currentTarget as HTMLElement;
+                    target.style.backgroundColor = "#4B2E2B";
+                  }}
+                  onMouseLeave={(e) => {
+                    const target = e.currentTarget as HTMLElement;
+                    target.style.backgroundColor = "#6F4E37";
+                  }}
                 >
                   Proceed to Checkout
                 </Button>
@@ -313,12 +319,14 @@ export function CartSidebar() {
                   onClick={() => dispatch({ type: "CLEAR_CART" })}
                   className="w-full py-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 bg-transparent transform hover:scale-105 active:scale-95"
                   style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.backgroundColor = "#F5F5DC")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.backgroundColor = "transparent")
-                  }
+                  onMouseEnter={(e) => {
+                    const target = e.currentTarget as HTMLElement;
+                    target.style.backgroundColor = "#F5F5DC";
+                  }}
+                  onMouseLeave={(e) => {
+                    const target = e.currentTarget as HTMLElement;
+                    target.style.backgroundColor = "transparent";
+                  }}
                 >
                   Clear Cart
                 </Button>
