@@ -22,14 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Chewy&display=swap"
+          rel="stylesheet"
+        />
         <style>{`
           html {
-            // font-family: ${GeistSans.style.fontFamily};
-            --font-sans: ${GeistSans.variable};
-            --font-mono: ${GeistMono.variable};
-            font-family: "Playwrite HU", cursive;
-            font-optical-sizing: auto;
-            font-weight: 500;
+            font-family: 'Chewy', sans-serif;
+            font-weight: 400;
             font-style: normal;
           }
         `}</style>
@@ -38,7 +38,10 @@ export default function RootLayout({
         <Providers>
           <div
             className="min-h-screen flex flex-col"
-            style={{ backgroundColor: "#FFF8F0" }}
+            style={{
+              backgroundColor: "#FFF8F0",
+              fontFamily: "Chewy, sans-serif",
+            }}
           >
             <TopbarMenu />
             <main className="flex-1">{children}</main>
