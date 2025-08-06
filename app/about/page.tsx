@@ -2,21 +2,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { TopbarMenu } from "@/components/ui/topbar-menu";
-import { Footer } from "@/components/ui/footer";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
 import Link from "next/link";
 import { Coffee, Users, Heart, Award, Leaf, Clock } from "lucide-react";
 
 export default function AboutPage() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFF8F0" }}>
-      {/* Common Topbar Menu */}
-      <TopbarMenu activePage="about" />
-
       {/* Our Story */}
       <section className="py-20" style={{ backgroundColor: "#FFF8F0" }}>
         <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
@@ -301,7 +293,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <Footer />
       <CartSidebar />
     </div>
   );

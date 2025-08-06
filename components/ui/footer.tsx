@@ -1,4 +1,5 @@
 import { Coffee } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -10,13 +11,19 @@ export function Footer() {
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-6">
               <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center"
-                style={{
-                  background:
-                    "linear-gradient(to bottom right, #6F4E37, #4B2E2B)",
-                }}
+                className="w-12 h-12 flex items-center justify-center"
+                // style={{
+                //   background:
+                //     "linear-gradient(to bottom right, #6F4E37, #4B2E2B)",
+                // }}
               >
-                <Coffee className="h-7 w-7 text-white" />
+                <Image
+                  src="/coffee-cup.png"
+                  alt="Logo"
+                  width={100}
+                  height={100}
+                  className="w-10 h-10"
+                />
               </div>
               <span className="text-2xl font-bold">Brew & Bean</span>
             </Link>
@@ -80,7 +87,7 @@ export function Footer() {
           style={{ borderColor: "#6F4E37", color: "#FAF3E0" }}
         >
           <p>
-            &copy; 2024 Brew & Bean. All rights reserved. Made with ❤️ for
+            &copy; 2025 Brew & Bean. All rights reserved. Made with ❤️ for
             coffee lovers.
           </p>
         </div>

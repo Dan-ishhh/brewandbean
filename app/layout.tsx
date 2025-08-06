@@ -1,5 +1,7 @@
 import type React from "react";
 import type { Metadata } from "next";
+import { TopbarMenu } from "@/components/ui/topbar-menu";
+import { Footer } from "@/components/ui/footer";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
@@ -21,15 +23,28 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <style>{`
-html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
-}
+          html {
+            // font-family: ${GeistSans.style.fontFamily};
+            --font-sans: ${GeistSans.variable};
+            --font-mono: ${GeistMono.variable};
+            font-family: "Playwrite HU", cursive;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+          }
         `}</style>
       </head>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <div
+            className="min-h-screen flex flex-col"
+            style={{ backgroundColor: "#FFF8F0" }}
+          >
+            <TopbarMenu />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );

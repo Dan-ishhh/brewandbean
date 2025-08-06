@@ -1,18 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Coffee, Menu, X } from "lucide-react";
-import { CartButton } from "@/components/cart/cart-button";
 import { MenuItemCard } from "@/components/menu/menu-item-card";
 import { MenuItemSkeleton } from "@/components/menu/menu-item-skeleton";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
-import { TopbarMenu } from "@/components/ui/topbar-menu";
-import { Footer } from "@/components/ui/footer";
-import Link from "next/link";
 
 export default function MenuPage() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,14 +14,6 @@ export default function MenuPage() {
     const timer = setTimeout(() => setIsLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
-
-  const categories = [
-    { id: "all", name: "All Items", count: 24 },
-    { id: "coffee", name: "Coffee", count: 8 },
-    { id: "tea", name: "Tea & Others", count: 6 },
-    { id: "pastries", name: "Pastries", count: 5 },
-    { id: "food", name: "Food", count: 5 },
-  ];
 
   const menuItems = [
     // Coffee
@@ -310,6 +295,85 @@ export default function MenuPage() {
       badge: "Protein Rich",
       badgeColor: "bg-purple-100 text-purple-700",
     },
+
+    // Pizzas
+    {
+      id: 101,
+      category: "pizza",
+      name: "Margherita Pizza",
+      price: "$9.99",
+      description: "Classic pizza with tomato sauce, mozzarella, and basil.",
+      image: "/images/margherita-pizza.jpg",
+      badge: "Vegetarian",
+      badgeColor: "bg-green-100 text-green-700",
+      hot: true,
+      iced: false,
+    },
+    {
+      id: 102,
+      category: "pizza",
+      name: "Pepperoni Pizza",
+      price: "$11.99",
+      description: "Loaded with pepperoni and mozzarella cheese.",
+      image: "/images/pepperoni-pizza.jpg",
+      badge: "Popular",
+      badgeColor: "bg-red-100 text-red-700",
+      hot: true,
+      iced: false,
+    },
+    {
+      id: 103,
+      category: "pizza",
+      name: "Veggie Supreme",
+      price: "$10.99",
+      description: "Topped with bell peppers, onions, olives, and mushrooms.",
+      image: "/images/veggie-supreme-pizza.jpg",
+      badge: "Healthy",
+      badgeColor: "bg-green-100 text-green-700",
+      hot: true,
+      iced: false,
+    },
+    {
+      id: 104,
+      category: "pizza",
+      name: "BBQ Chicken Pizza",
+      price: "$12.99",
+      description: "Grilled chicken, BBQ sauce, onions, and cheese.",
+      image: "/images/bbq-chicken-pizza.jpg",
+      badge: "Chef's Special",
+      badgeColor: "bg-yellow-100 text-yellow-700",
+      hot: true,
+      iced: false,
+    },
+  ];
+
+  const categories = [
+    { id: "all", name: "All Items", count: menuItems.length },
+    {
+      id: "coffee",
+      name: "Coffee",
+      count: menuItems.filter((item) => item.category === "coffee").length,
+    },
+    {
+      id: "tea",
+      name: "Tea & Others",
+      count: menuItems.filter((item) => item.category === "tea").length,
+    },
+    {
+      id: "pastries",
+      name: "Pastries",
+      count: menuItems.filter((item) => item.category === "pastries").length,
+    },
+    {
+      id: "food",
+      name: "Food",
+      count: menuItems.filter((item) => item.category === "food").length,
+    },
+    {
+      id: "pizza",
+      name: "Pizza",
+      count: menuItems.filter((item) => item.category === "pizza").length,
+    },
   ];
 
   const filteredItems =
@@ -319,9 +383,6 @@ export default function MenuPage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFF8F0" }}>
-      {/* Common Topbar Menu */}
-      <TopbarMenu activePage="menu" />
-
       {/* Hero Section */}
       <section
         className="pt-32 pb-12"
@@ -366,7 +427,7 @@ export default function MenuPage() {
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all ${
+                className={`px-6 py-3 rounded-full font-medium transition-all text-sm sm:text-md md:text-lg ${
                   selectedCategory === category.id
                     ? "text-white shadow-lg"
                     : "hover:bg-opacity-80"
@@ -380,21 +441,6 @@ export default function MenuPage() {
                 {category.name} ({category.count})
               </button>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Menu Items */}
-      <section className="py-16" style={{ backgroundColor: "#FFF8F0" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {isLoading
-              ? Array.from({ length: 8 }).map((_, index) => (
-                  <MenuItemSkeleton key={index} />
-                ))
-              : filteredItems.map((item) => (
-                  <MenuItemCard key={item.id} item={item} />
-                ))}
           </div>
         </div>
       </section>
@@ -427,8 +473,20 @@ export default function MenuPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <Footer />
+      {/* Menu Items */}
+      <section className="py-16" style={{ backgroundColor: "#FFF8F0" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {isLoading
+              ? Array.from({ length: 8 }).map((_, index) => (
+                  <MenuItemSkeleton key={index} />
+                ))
+              : filteredItems.map((item) => (
+                  <MenuItemCard key={item.id} item={item} />
+                ))}
+          </div>
+        </div>
+      </section>
 
       <CartSidebar />
     </div>

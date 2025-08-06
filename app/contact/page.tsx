@@ -1,12 +1,9 @@
 "use client";
 import { useState } from "react";
 import type React from "react";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TopbarMenu } from "@/components/ui/topbar-menu";
-import { Footer } from "@/components/ui/footer";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
 import {
   Clock,
@@ -17,10 +14,9 @@ import {
   Phone,
   Send,
 } from "lucide-react";
-import Link from "next/link";
+import { GoogleMapLocations } from "@/components/ui/google-map";
 
 export default function ContactPage() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -45,9 +41,6 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFF8F0" }}>
-      {/* Common Topbar Menu */}
-      <TopbarMenu activePage="contact" />
-
       {/* Hero Section */}
       <section
         className="pt-32 pb-20"
@@ -455,38 +448,17 @@ export default function ContactPage() {
           </div>
 
           <div
-            className="rounded-3xl h-96 flex items-center justify-center relative overflow-hidden border-2 shadow-xl"
+            className="rounded-3xl h-96 overflow-hidden border-2 shadow-xl"
             style={{
               background: "linear-gradient(to bottom right, #FAF3E0, #F5F5DC)",
               borderColor: "#F5F5DC",
             }}
           >
-            <div
-              className="text-center relative z-10"
-              style={{ color: "#4B2E2B" }}
-            >
-              <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <MapPin className="h-10 w-10" style={{ color: "#6F4E37" }} />
-              </div>
-              <p
-                className="font-semibold text-lg mb-2"
-                style={{ color: "#4B2E2B" }}
-              >
-                Interactive Map
-              </p>
-              <p style={{ color: "#4B2E2B" }}>
-                Google Maps integration would go here
-              </p>
-              <p className="text-sm mt-2" style={{ color: "#6F4E37" }}>
-                123 Coffee Street, Downtown District
-              </p>
-            </div>
+            <GoogleMapLocations />
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <Footer />
       <CartSidebar />
     </div>
   );

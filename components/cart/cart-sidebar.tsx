@@ -111,7 +111,7 @@ export function CartSidebar() {
               <div className="text-center py-12 animate-fade-in-up">
                 <ShoppingBag
                   className="h-16 w-16 mx-auto mb-4 animate-pulse-gentle"
-                  style={{ color: "#F5F5DC" }}
+                  style={{ color: "#4B2E2B" }}
                 />
                 <h3
                   className="text-lg font-medium mb-2"

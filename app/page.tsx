@@ -1,22 +1,79 @@
 "use client";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TopbarMenu } from "@/components/ui/topbar-menu";
-import { Footer } from "@/components/ui/footer";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import Link from "next/link";
 import { ArrowRight, Coffee, Heart, Star, Wifi } from "lucide-react";
+import { MenuItemCard } from "@/components/menu/menu-item-card";
+import { MenuItemSkeleton } from "@/components/menu/menu-item-skeleton";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Simulate loading
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
   // Customize order
   // Pizzas
   // Desserts
+  // Add favicon
+  // Change Fonts
 
+  const pizzaItems = [
+    {
+      id: 101,
+      name: "Margherita Pizza",
+      price: "$9.99",
+      description: "Classic pizza with tomato sauce, mozzarella, and basil.",
+      image: "/images/margherita-pizza.jpg",
+      badge: "Vegetarian",
+      badgeColor: "bg-green-100 text-green-700",
+      category: "pizza",
+      hot: true,
+      iced: false,
+    },
+    {
+      id: 102,
+      name: "Pepperoni Pizza",
+      price: "$11.99",
+      description: "Loaded with pepperoni and mozzarella cheese.",
+      image: "/images/pepperoni-pizza.jpg",
+      badge: "Popular",
+      badgeColor: "bg-red-100 text-red-700",
+      category: "pizza",
+      hot: true,
+      iced: false,
+    },
+    {
+      id: 103,
+      name: "Veggie Supreme",
+      price: "$10.99",
+      description: "Topped with bell peppers, onions, olives, and mushrooms.",
+      image: "/images/veggie-supreme-pizza.jpg",
+      badge: "Healthy",
+      badgeColor: "bg-green-100 text-green-700",
+      category: "pizza",
+      hot: true,
+      iced: false,
+    },
+    {
+      id: 104,
+      name: "BBQ Chicken Pizza",
+      price: "$12.99",
+      description: "Grilled chicken, BBQ sauce, onions, and cheese.",
+      image: "/images/bbq-chicken-pizza.jpg",
+      badge: "Chef's Special",
+      badgeColor: "bg-yellow-100 text-yellow-700",
+      category: "pizza",
+      hot: true,
+      iced: false,
+    },
+  ];
   const homeItems = [
     {
       id: 1,
@@ -27,6 +84,8 @@ export default function HomePage() {
       badge: "Popular",
       badgeColor: "bg-red-100 text-red-700",
       category: "coffee",
+      hot: true,
+      iced: true,
     },
     {
       id: 15,
@@ -37,6 +96,8 @@ export default function HomePage() {
       badge: "Fresh Daily",
       badgeColor: "bg-green-100 text-green-700",
       category: "pastries",
+      hot: false,
+      iced: false,
     },
     {
       id: 3,
@@ -47,6 +108,8 @@ export default function HomePage() {
       badge: "Refreshing",
       badgeColor: "bg-blue-100 text-blue-700",
       category: "coffee",
+      hot: false,
+      iced: true,
     },
     {
       id: 20,
@@ -57,13 +120,12 @@ export default function HomePage() {
       badge: "Healthy",
       badgeColor: "bg-green-100 text-green-700",
       category: "food",
+      hot: false,
+      iced: false,
     },
   ];
   return (
     <div className="min-h-screen" style={{ backgroundColor: "#FFF8F0" }}>
-      {/* Common Topbar Menu */}
-      <TopbarMenu activePage="home" />
-
       {/* Hero Section */}
       <section className="pt-24 min-h-screen flex items-center relative overflow-hidden">
         {/* Background Pattern */}
@@ -103,10 +165,8 @@ export default function HomePage() {
                 className="text-5xl lg:text-6xl font-bold leading-tight"
                 style={{ color: "#4B2E2B" }}
               >
-                Your Cozy Corner for
-                <span className="block" style={{ color: "#6F4E37" }}>
-                  Perfect Coffee
-                </span>
+                Your Cozy Corner for a
+                <span style={{ color: "#6F4E37" }}> Coffee</span>
               </h1>
               <p
                 className="text-xl leading-relaxed max-w-lg"
@@ -326,9 +386,9 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {homeItems?.map((item, index) => (
+            {/* {homeItems?.map((item, index) => (
               <Card
-                key={index}
+                key={item.id}
                 className="border-0 hover:shadow-2xl transition-all duration-300 group overflow-hidden rounded-2xl"
                 style={{ backgroundColor: "#FFF8F0" }}
               >
@@ -370,7 +430,92 @@ export default function HomePage() {
                   </div>
                 </CardContent>
               </Card>
-            ))}
+            ))} */}
+            {isLoading
+              ? Array.from({ length: 8 }).map((_, index) => (
+                  <MenuItemSkeleton key={index} />
+                ))
+              : homeItems.map((item) => (
+                  <MenuItemCard key={item.id} item={item} />
+                ))}
+          </div>
+
+          {/* Pizza Section */}
+          <div className="text-center mb-12">
+            <Badge
+              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-0"
+              style={{ backgroundColor: "#FAF3E0", color: "#4B2E2B" }}
+            >
+              Pizzas
+            </Badge>
+            <h2
+              className="text-3xl lg:text-4xl font-bold mb-6"
+              style={{ color: "#4B2E2B" }}
+            >
+              <span style={{ color: "#6F4E37" }}>Delicious</span> Pizzas
+            </h2>
+            <p
+              className="text-lg max-w-2xl mx-auto leading-relaxed"
+              style={{ color: "#4B2E2B" }}
+            >
+              Try our new range of pizzas, baked to perfection with fresh
+              ingredients and love.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            {/* {pizzaItems?.map((item) => (
+              <Card
+                key={item.id}
+                className="border-0 hover:shadow-2xl transition-all duration-300 group overflow-hidden rounded-2xl"
+                style={{ backgroundColor: "#FFF8F0" }}
+              >
+                <CardContent className="p-0">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={item.image || "/placeholder.svg"}
+                      alt={item.name}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <Badge
+                      className={`absolute top-4 left-4 ${item.badgeColor} hover:${item.badgeColor} border-0 px-3 py-1 text-xs font-medium`}
+                    >
+                      {item.badge}
+                    </Badge>
+                  </div>
+                  <div className="p-6" style={{ backgroundColor: "#FFF8F0" }}>
+                    <div className="flex justify-between items-start mb-3">
+                      <h3
+                        className="text-lg font-bold"
+                        style={{ color: "#4B2E2B" }}
+                      >
+                        {item.name}
+                      </h3>
+                      <span
+                        className="text-xl font-bold"
+                        style={{ color: "#6F4E37" }}
+                      >
+                        {item.price}
+                      </span>
+                    </div>
+                    <p
+                      className="text-sm leading-relaxed mb-4"
+                      style={{ color: "#4B2E2B" }}
+                    >
+                      {item.description}
+                    </p>
+                    <AddToCartButton item={item} className="w-full" />
+                  </div>
+                </CardContent>
+              </Card>
+            ))} */}
+
+            {isLoading
+              ? Array.from({ length: 8 }).map((_, index) => (
+                  <MenuItemSkeleton key={index} />
+                ))
+              : pizzaItems.map((item) => (
+                  <MenuItemCard key={item.id} item={item} />
+                ))}
           </div>
 
           <div className="text-center">
@@ -431,7 +576,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <Footer />
       <CartSidebar />
     </div>
   );
