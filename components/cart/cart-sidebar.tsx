@@ -83,7 +83,7 @@ export function CartSidebar() {
               </h2>
               {state.itemCount > 0 && (
                 <Badge
-                  className="border-0 animate-fade-in-scale"
+                  className="border-#E6B800 animate-fade-in-scale"
                   style={{ backgroundColor: "#F5F5DC", color: "#4B2E2B" }}
                 >
                   {state.itemCount} {state.itemCount === 1 ? "item" : "items"}

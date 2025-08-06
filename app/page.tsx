@@ -359,7 +359,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <Badge
-              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-0"
+              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
               style={{ backgroundColor: "#F5F5DC", color: "#4B2E2B" }}
             >
               Our Menu
@@ -381,51 +381,6 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {/* {homeItems?.map((item, index) => (
-              <Card
-                key={item.id}
-                className="border-0 hover:shadow-2xl transition-all duration-300 group overflow-hidden rounded-2xl"
-                style={{ backgroundColor: "#FFF8F0" }}
-              >
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={item.image || "/placeholder.svg"}
-                      alt={item.name}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <Badge
-                      className={`absolute top-4 left-4 ${item.badgeColor} hover:${item.badgeColor} border-0 px-3 py-1 text-xs font-medium`}
-                    >
-                      {item.badge}
-                    </Badge>
-                  </div>
-                  <div className="p-6" style={{ backgroundColor: "#FFF8F0" }}>
-                    <div className="flex justify-between items-start mb-3">
-                      <h3
-                        className="text-lg font-bold"
-                        style={{ color: "#4B2E2B" }}
-                      >
-                        {item.name}
-                      </h3>
-                      <span
-                        className="text-xl font-bold"
-                        style={{ color: "#6F4E37" }}
-                      >
-                        {item.price}
-                      </span>
-                    </div>
-                    <p
-                      className="text-sm leading-relaxed mb-4"
-                      style={{ color: "#4B2E2B" }}
-                    >
-                      {item.description}
-                    </p>
-                    <AddToCartButton item={item} className="w-full" />
-                  </div>
-                </CardContent>
-              </Card>
-            ))} */}
             {isLoading
               ? Array.from({ length: 8 }).map((_, index) => (
                   <MenuItemSkeleton key={index} />
@@ -435,11 +390,35 @@ export default function HomePage() {
                 ))}
           </div>
 
+          <div className="text-center">
+            <Link href="/menu">
+              <Button
+                size="lg"
+                className="text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0"
+                style={{ backgroundColor: "#6F4E37" }}
+                onMouseEnter={(e) => {
+                  const target = e.currentTarget as HTMLElement;
+                  target.style.backgroundColor = "#4B2E2B";
+                }}
+                onMouseLeave={(e) => {
+                  const target = e.currentTarget as HTMLElement;
+                  target.style.backgroundColor = "#6F4E37";
+                }}
+              >
+                View Full Menu
+              </Button>
+            </Link>
+          </div>
+
           {/* Pizza Section */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 mt-12">
             <Badge
-              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-0"
-              style={{ backgroundColor: "#FAF3E0", color: "#4B2E2B" }}
+              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
+              style={{
+                backgroundColor: "#FAF3E0",
+                color: "#4B2E2B",
+                // border: "1px solid red",
+              }}
             >
               Pizzas
             </Badge>
@@ -458,52 +437,6 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-            {/* {pizzaItems?.map((item) => (
-              <Card
-                key={item.id}
-                className="border-0 hover:shadow-2xl transition-all duration-300 group overflow-hidden rounded-2xl"
-                style={{ backgroundColor: "#FFF8F0" }}
-              >
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={item.image || "/placeholder.svg"}
-                      alt={item.name}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <Badge
-                      className={`absolute top-4 left-4 ${item.badgeColor} hover:${item.badgeColor} border-0 px-3 py-1 text-xs font-medium`}
-                    >
-                      {item.badge}
-                    </Badge>
-                  </div>
-                  <div className="p-6" style={{ backgroundColor: "#FFF8F0" }}>
-                    <div className="flex justify-between items-start mb-3">
-                      <h3
-                        className="text-lg font-bold"
-                        style={{ color: "#4B2E2B" }}
-                      >
-                        {item.name}
-                      </h3>
-                      <span
-                        className="text-xl font-bold"
-                        style={{ color: "#6F4E37" }}
-                      >
-                        {item.price}
-                      </span>
-                    </div>
-                    <p
-                      className="text-sm leading-relaxed mb-4"
-                      style={{ color: "#4B2E2B" }}
-                    >
-                      {item.description}
-                    </p>
-                    <AddToCartButton item={item} className="w-full" />
-                  </div>
-                </CardContent>
-              </Card>
-            ))} */}
-
             {isLoading
               ? Array.from({ length: 8 }).map((_, index) => (
                   <MenuItemSkeleton key={index} />
