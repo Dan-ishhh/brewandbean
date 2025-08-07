@@ -4,6 +4,7 @@ import { Footer } from "@/components/ui/footer";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
   children,
@@ -39,6 +40,7 @@ export default function RootLayout({
             <main className="flex-1">
               {children}
               <Analytics />
+              <SpeedInsights />
             </main>
             <Footer />
           </div>
