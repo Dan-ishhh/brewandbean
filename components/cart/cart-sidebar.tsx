@@ -173,22 +173,93 @@ export function CartSidebar() {
                             {item.name}
                           </h3>
 
-                          {/* Temperature Option with icon animation */}
-                          {item.options?.temperature && (
-                            <div className="flex items-center gap-1 mb-1">
-                              {item.options.temperature === "hot" ? (
-                                <Thermometer className="h-3 w-3 text-red-500 animate-pulse" />
-                              ) : (
-                                <Snowflake className="h-3 w-3 text-blue-500 animate-pulse" />
-                              )}
-                              <span
-                                className="text-xs capitalize transition-colors duration-300"
-                                style={{ color: "#6F4E37" }}
-                              >
-                                {item.options.temperature}
-                              </span>
-                            </div>
-                          )}
+                          {/* Show chosen options for Coffee and Pizza */}
+                          {(item.category === "coffee" ||
+                            item.category === "pizza") &&
+                            item.options && (
+                              <div className="mb-1 text-xs text-[#6F4E37] space-y-1">
+                                {(() => {
+                                  const opts = item.options as any;
+                                  return (
+                                    <>
+                                      {/* Temperature */}
+                                      {opts.temperature && (
+                                        <div className="flex items-center gap-1">
+                                          {opts.temperature === "hot" ? (
+                                            <Thermometer className="h-3 w-3 text-red-500 animate-pulse" />
+                                          ) : (
+                                            <Snowflake className="h-3 w-3 text-blue-500 animate-pulse" />
+                                          )}
+                                          <span className="capitalize">
+                                            {opts.temperature}
+                                          </span>
+                                        </div>
+                                      )}
+                                      {/* Coffee customizations */}
+                                      {item.category === "coffee" && (
+                                        <>
+                                          {opts.milk && (
+                                            <div>
+                                              Milk:{" "}
+                                              <span className="font-medium">
+                                                {opts.milk}
+                                              </span>
+                                            </div>
+                                          )}
+                                          {opts.coffeeType && (
+                                            <div>
+                                              Coffee Type:{" "}
+                                              <span className="font-medium">
+                                                {opts.coffeeType}
+                                              </span>
+                                            </div>
+                                          )}
+                                          {opts.sugar && (
+                                            <div>
+                                              Sugar:{" "}
+                                              <span className="font-medium">
+                                                {opts.sugar}
+                                              </span>
+                                            </div>
+                                          )}
+                                        </>
+                                      )}
+                                      {/* Pizza customizations */}
+                                      {item.category === "pizza" && (
+                                        <>
+                                          {opts.cheese && (
+                                            <div>
+                                              Cheese:{" "}
+                                              <span className="font-medium">
+                                                {opts.cheese}
+                                              </span>
+                                            </div>
+                                          )}
+                                          {opts.crust && (
+                                            <div>
+                                              Crust:{" "}
+                                              <span className="font-medium">
+                                                {opts.crust}
+                                              </span>
+                                            </div>
+                                          )}
+                                          {opts.toppings &&
+                                            Array.isArray(opts.toppings) &&
+                                            opts.toppings.length > 0 && (
+                                              <div>
+                                                Toppings:{" "}
+                                                <span className="font-medium">
+                                                  {opts.toppings.join(", ")}
+                                                </span>
+                                              </div>
+                                            )}
+                                        </>
+                                      )}
+                                    </>
+                                  );
+                                })()}
+                              </div>
+                            )}
 
                           <p
                             className="text-sm mb-2 transition-colors duration-300"
@@ -261,7 +332,12 @@ export function CartSidebar() {
                                 onClick={() =>
                                   dispatch({
                                     type: "REMOVE_ITEM",
-                                    payload: item.id,
+                                    payload: {
+                                      id: item.id,
+                                      options: {
+                                        temperature: item.options?.temperature,
+                                      },
+                                    },
                                   })
                                 }
                                 className="h-8 w-8 p-0 rounded-full text-red-500 hover:text-red-700 hover:bg-red-50 transform hover:scale-110 active:scale-95 transition-all duration-200"

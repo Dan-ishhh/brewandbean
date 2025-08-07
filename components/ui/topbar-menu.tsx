@@ -1,14 +1,10 @@
 "use client";
 import Link from "next/link";
-import { Coffee, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { CartButton } from "@/components/cart/cart-button";
 import Image from "next/image";
-
-interface TopbarMenuProps {
-  // Removed activePage prop
-}
 
 export function TopbarMenu() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -31,19 +27,7 @@ export function TopbarMenu() {
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center gap-2">
               <div className="relative">
-                <div
-                  className="w-10 h-10 flex items-center justify-center"
-                  // style={{
-                  //   background:
-                  //     "linear-gradient(to bottom right, #6F4E37, #4B2E2B)",
-                  // }}
-                >
-                  {/* <Coffee className="h-6 w-6 text-white" />
-                  <img
-                src="/coffee-cup.png"
-                alt="Cafe"
-                className="w-5 h-5 rounded-full"
-              /> */}
+                <div className="w-10 h-10 flex items-center justify-center">
                   <Image
                     src="/coffee-cup.png"
                     alt="Logo"

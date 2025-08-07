@@ -1,9 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
-import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import Link from "next/link";
 import { ArrowRight, Coffee, Heart, Star, Wifi } from "lucide-react";
 import { MenuItemCard } from "@/components/menu/menu-item-card";
@@ -18,11 +16,12 @@ export default function HomePage() {
     const timer = setTimeout(() => setIsLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
+
   // Customize order
-  // Pizzas
-  // Desserts
+  // Create a dummy checkout page with pay online and pay in store
+  // Create an invoice with the order details
   // Add favicon
-  // Change Fonts
+  // Change from Redux to Zustand
 
   const pizzaItems = [
     {
@@ -36,6 +35,10 @@ export default function HomePage() {
       category: "pizza",
       hot: true,
       iced: false,
+      customizable: true,
+      cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
+      crustOptions: ["Thin", "Thick", "Stuffed"],
+      toppingsOptions: ["Basil", "Olives", "Mushrooms", "Onions"],
     },
     {
       id: 102,
@@ -48,6 +51,10 @@ export default function HomePage() {
       category: "pizza",
       hot: true,
       iced: false,
+      customizable: true,
+      cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
+      crustOptions: ["Thin", "Thick", "Stuffed"],
+      toppingsOptions: ["Pepperoni", "Olives", "Mushrooms", "Onions"],
     },
     {
       id: 103,
@@ -60,6 +67,10 @@ export default function HomePage() {
       category: "pizza",
       hot: true,
       iced: false,
+      customizable: true,
+      cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
+      crustOptions: ["Thin", "Thick", "Stuffed"],
+      toppingsOptions: ["Bell Peppers", "Olives", "Mushrooms", "Onions"],
     },
     {
       id: 104,
@@ -72,6 +83,10 @@ export default function HomePage() {
       category: "pizza",
       hot: true,
       iced: false,
+      customizable: true,
+      cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
+      crustOptions: ["Thin", "Thick", "Stuffed"],
+      toppingsOptions: ["BBQ Chicken", "Onions", "Mushrooms", "Peppers"],
     },
   ];
   const homeItems = [
@@ -86,6 +101,10 @@ export default function HomePage() {
       category: "coffee",
       hot: true,
       iced: true,
+      customizable: true,
+      milkOptions: ["Whole", "Skim", "Soy", "Oat"],
+      coffeeTypeOptions: ["Espresso", "Latte", "Cappuccino"],
+      sugarLevelOptions: ["No Sugar", "Less Sugar", "Regular", "Extra"],
     },
     {
       id: 15,
@@ -96,7 +115,7 @@ export default function HomePage() {
       badge: "Fresh Daily",
       badgeColor: "bg-green-100 text-green-700",
       category: "pastries",
-      hot: false,
+      hot: true,
       iced: false,
     },
     {
@@ -110,6 +129,10 @@ export default function HomePage() {
       category: "coffee",
       hot: false,
       iced: true,
+      customizable: true,
+      milkOptions: ["Whole", "Skim", "Soy", "Oat"],
+      coffeeTypeOptions: ["Cold Brew", "Latte", "Cappuccino"],
+      sugarLevelOptions: ["No Sugar", "Less Sugar", "Regular", "Extra"],
     },
     {
       id: 20,
@@ -120,7 +143,7 @@ export default function HomePage() {
       badge: "Healthy",
       badgeColor: "bg-green-100 text-green-700",
       category: "food",
-      hot: false,
+      hot: true,
       iced: false,
     },
   ];
@@ -390,7 +413,7 @@ export default function HomePage() {
                 ))}
           </div>
 
-          <div className="text-center">
+          {/* <div className="text-center">
             <Link href="/menu">
               <Button
                 size="lg"
@@ -408,10 +431,10 @@ export default function HomePage() {
                 View Full Menu
               </Button>
             </Link>
-          </div>
+          </div> */}
 
           {/* Pizza Section */}
-          <div className="text-center mb-12 mt-12">
+          <div className="text-center mb-12">
             <Badge
               className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
               style={{

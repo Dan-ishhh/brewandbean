@@ -17,6 +17,7 @@ interface AddToCartButtonProps {
     iced?: boolean;
     badge?: string;
     badgeColor?: string;
+    customizable?: boolean;
   };
   className?: string;
   size?: "sm" | "default" | "lg";
@@ -35,37 +36,26 @@ export function AddToCartButton({
   const [isAdded, setIsAdded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Determine if item needs temperature selection
-  const needsTemperatureSelection = item.hot && item.iced;
-  const hasOnlyOneTemperature =
-    (item.hot && !item.iced) || (!item.hot && item.iced);
-  const noTemperatureOptions = !item.hot && !item.iced;
-
+  // Always open modal for customizable items (coffee or pizza)
   const handleClick = async () => {
-    // If item has both hot and iced options, trigger global modal
-    if (needsTemperatureSelection) {
+    if (item.customizable) {
       if (typeof onOpenModal === "function") {
         onOpenModal();
       }
       return;
     }
 
-    // If item has only one temperature or no temperature options, add directly
+    // If not customizable, add directly
     setIsLoading(true);
-
-    // Simulate brief loading for smooth UX
     await new Promise((resolve) => setTimeout(resolve, 300));
-
     setIsAdded(true);
     const price = Number.parseFloat(item.price.replace("$", ""));
-
     let temperature: "hot" | "iced" | undefined = undefined;
     if (item.hot && !item.iced) {
       temperature = "hot";
     } else if (item.iced && !item.hot) {
       temperature = "iced";
     }
-
     dispatch({
       type: "ADD_ITEM",
       payload: {
@@ -77,14 +67,10 @@ export function AddToCartButton({
         options: temperature ? { temperature } : undefined,
       },
     });
-
-    // Show success state
     setTimeout(() => {
       setIsAdded(false);
       setIsLoading(false);
     }, 2000);
-
-    // Open cart briefly to show the item was added
     dispatch({ type: "OPEN_CART" });
     setTimeout(() => dispatch({ type: "CLOSE_CART" }), 1500);
   };
@@ -100,16 +86,17 @@ export function AddToCartButton({
         } ${isLoading ? "animate-pulse" : ""} ${className}`}
         style={{
           backgroundColor: isAdded ? "#4B2E2B" : "#6F4E37",
-          ":hover": { backgroundColor: isAdded ? "#6F4E37" : "#4B2E2B" },
         }}
         onMouseEnter={(e) => {
           if (!isAdded && !isLoading) {
-            e.target.style.backgroundColor = "#4B2E2B";
+            const target = e.target as HTMLElement;
+            target.style.backgroundColor = "#4B2E2B";
           }
         }}
         onMouseLeave={(e) => {
           if (!isAdded && !isLoading) {
-            e.target.style.backgroundColor = "#6F4E37";
+            const target = e.target as HTMLElement;
+            target.style.backgroundColor = "#6F4E37";
           }
         }}
       >

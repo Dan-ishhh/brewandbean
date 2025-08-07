@@ -26,7 +26,7 @@ interface CartState {
 
 type CartAction =
   | { type: "ADD_ITEM"; payload: Omit<CartItem, "quantity"> }
-  | { type: "REMOVE_ITEM"; payload: number }
+  | { type: "REMOVE_ITEM"; payload: number | { id: number; options?: { temperature?: "hot" | "iced" } } }
   | { type: "UPDATE_QUANTITY"; payload: { id: number; quantity: number } }
   | { type: "CLEAR_CART" }
   | { type: "TOGGLE_CART" }
@@ -78,16 +78,46 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     }
 
     case "REMOVE_ITEM": {
-      const newItems = state.items.filter((item) => item.id !== action.payload)
-      const total = newItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-      const itemCount = newItems.reduce((sum, item) => sum + item.quantity, 0)
-
+      let newItems: CartItem[];
+      if (
+        typeof action.payload === "object" &&
+        action.payload !== null &&
+        "id" in action.payload
+      ) {
+        const payload = action.payload as { id: number; options?: { temperature?: "hot" | "iced" } };
+        newItems = state.items.map((item) => {
+          if (
+            item.id === payload.id &&
+            item.options?.temperature === payload.options?.temperature
+          ) {
+            if (item.quantity > 1) {
+              return { ...item, quantity: item.quantity - 1 };
+            } else {
+              return null;
+            }
+          }
+          return item;
+        }).filter(Boolean) as CartItem[];
+      } else {
+        newItems = state.items.map((item) => {
+          if (item.id === action.payload) {
+            if (item.quantity > 1) {
+              return { ...item, quantity: item.quantity - 1 };
+            } else {
+              return null;
+            }
+          }
+          return item;
+        }).filter(Boolean) as CartItem[];
+      }
+      const total = newItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const itemCount = newItems.reduce((sum, item) => sum + item.quantity, 0);
       return {
         ...state,
         items: newItems,
         total,
         itemCount,
-      }
+      };
     }
 
     case "UPDATE_QUANTITY": {
@@ -154,9 +184,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       try {
         const parsedCart = JSON.parse(savedCart)
         parsedCart.items.forEach((item: CartItem) => {
-          dispatch({ type: "ADD_ITEM", payload: { ...item, quantity: item.quantity - 1 } })
-          for (let i = 1; i < item.quantity; i++) {
-            dispatch({ type: "ADD_ITEM", payload: item })
+          const { quantity, ...rest } = item;
+          for (let i = 0; i < item.quantity; i++) {
+            dispatch({ type: "ADD_ITEM", payload: rest })
           }
         })
       } catch (error) {

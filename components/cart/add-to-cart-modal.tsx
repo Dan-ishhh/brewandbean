@@ -5,10 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { X, Plus, Check, Thermometer, Snowflake, Minus } from "lucide-react";
 import { useCart } from "@/contexts/cart-context";
+import Image from "next/image";
 
 interface AddToCartModalProps {
   item: {
-    id: number;
+    id: any;
     name: string;
     price: string;
     image: string;
@@ -18,12 +19,31 @@ interface AddToCartModalProps {
     iced?: boolean;
     badge?: string;
     badgeColor?: string;
+    customizable?: boolean;
+    milkOptions?: string[];
+    coffeeTypeOptions?: string[];
+    sugarLevelOptions?: string[];
+    toppingsOptions?: string[];
+    cheeseOptions?: string[];
+    crustOptions?: string[];
   };
   isOpen: boolean;
   onClose: () => void;
 }
 
 export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
+  console.log("item", item);
+  // Customization states
+  const [selectedMilk, setSelectedMilk] = useState<string>("");
+  const [selectedCoffeeType, setSelectedCoffeeType] = useState<string>("");
+  const [selectedSugar, setSelectedSugar] = useState<string>("");
+  const [selectedToppings, setSelectedToppings] = useState<string[]>([]);
+  const [selectedCheese, setSelectedCheese] = useState<string>("");
+  const [selectedCrust, setSelectedCrust] = useState<string>("");
+  // Cost per extra topping for pizza
+  const toppingCost = 0.5;
+  console.log("item", item);
+
   const { dispatch } = useCart();
   const [selectedTemperature, setSelectedTemperature] = useState<
     "hot" | "iced" | null
@@ -32,7 +52,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
   const [isAdding, setIsAdding] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Handle modal visibility with animation
+  // All hooks must be called before any return
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
@@ -45,36 +65,99 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
       document.body.style.overflow = "unset";
       return () => clearTimeout(timer);
     }
-
     return () => {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
+  const hasTemperatureOptions = Boolean(item.hot) && Boolean(item.iced);
+  const isCoffeeCustom = item.category === "coffee" && item.customizable;
+  const isPizzaCustom = item.category === "pizza" && item.customizable;
+
+  // For coffee, require temperature only if both hot and iced are available
+  let requiredTemperature = false;
+  if (item.category === "coffee" && item.customizable) {
+    requiredTemperature = hasTemperatureOptions;
+  }
+
+  useEffect(() => {
+    if (
+      isOpen &&
+      item.category === "coffee" &&
+      item.customizable &&
+      !hasTemperatureOptions
+    ) {
+      if (item.hot && !item.iced) setSelectedTemperature("hot");
+      else if (!item.hot && item.iced) setSelectedTemperature("iced");
+    }
+  }, [isOpen, item, hasTemperatureOptions]);
+
   if (!isVisible) return null;
 
-  const hasTemperatureOptions = item.hot && item.iced;
-  const canAddToCart = selectedTemperature !== null;
+  // For coffee, require all customizations
+  const canCustomizeCoffee = isCoffeeCustom
+    ? selectedMilk && selectedCoffeeType && selectedSugar
+    : true;
+  // For pizza, require all customizations
+  const canCustomizePizza = isPizzaCustom
+    ? selectedCheese && selectedCrust
+    : true;
+
+  // For coffee, require temperature only if both hot and iced
+  const canAddToCart = requiredTemperature
+    ? selectedTemperature !== null
+    : true;
+  const canAddCustomToCart =
+    canAddToCart && canCustomizeCoffee && canCustomizePizza;
 
   const handleAddToCart = async () => {
-    if (!canAddToCart) return;
+    if (!canAddCustomToCart) return;
 
     setIsAdding(true);
     const price = Number.parseFloat(item.price.replace("$", ""));
+
+    // Generate a unique customization key for coffee and pizza
+    const customizationKey = JSON.stringify({
+      temperature: selectedTemperature,
+      ...(isCoffeeCustom && {
+        milk: selectedMilk,
+        coffeeType: selectedCoffeeType,
+        sugar: selectedSugar,
+      }),
+      ...(isPizzaCustom && {
+        cheese: selectedCheese,
+        crust: selectedCrust,
+        toppings: selectedToppings,
+      }),
+    });
 
     // Add each quantity as separate dispatch calls to handle quantity properly
     for (let i = 0; i < quantity; i++) {
       dispatch({
         type: "ADD_ITEM",
         payload: {
-          id: item.id,
+          // Use a composite id for coffee/pizza: base id + customizationKey
+          id:
+            isCoffeeCustom || isPizzaCustom
+              ? `${item.id}-${customizationKey}`
+              : item.id,
           name: item.name,
           price,
           image: item.image || "/placeholder.svg",
           category: item.category,
           options: {
             temperature: selectedTemperature!,
-          },
+            ...(isCoffeeCustom && {
+              milk: selectedMilk,
+              coffeeType: selectedCoffeeType,
+              sugar: selectedSugar,
+            }),
+            ...(isPizzaCustom && {
+              cheese: selectedCheese,
+              crust: selectedCrust,
+              toppings: selectedToppings,
+            }),
+          } as any,
         },
       });
     }
@@ -107,16 +190,21 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
           }`}
           style={{ backgroundColor: "#FFF8F0" }}
         >
-          <CardContent className="p-0">
+          <CardContent
+            className="p-0"
+            style={{ maxHeight: "700px", height: "100%", overflowY: "scroll" }}
+          >
             {/* Header with image and close button */}
             <div className="relative overflow-hidden">
-              <img
+              <Image
                 src={
                   item.image ||
                   "/placeholder.svg?height=192&width=384&query=food item"
                 }
                 alt={item.name}
-                className="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"
+                width={384} // or your desired width
+                height={192} // or your desired height
+                className="w-full h-48 object-cover transition-transform duration-500"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.src = "/placeholder.svg?height=192&width=384";
@@ -124,13 +212,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
               />
               {item.badge && (
                 <Badge
-                  className={`absolute top-4 left-4 border-0 px-3 py-1 text-xs font-medium animate-fade-in-scale`}
-                  style={{
-                    backgroundColor: item.badgeColor?.includes("red")
-                      ? "#FAF3E0"
-                      : "#F5F5DC",
-                    color: "#4B2E2B",
-                  }}
+                  className={`absolute top-4 left-4 border-0 px-3 py-1 text-xs font-medium animate-fade-in-scale ${item.badgeColor}`}
                 >
                   {item.badge}
                 </Badge>
@@ -145,7 +227,6 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
               </Button>
             </div>
 
-            {/* Content with staggered animations */}
             <div
               className="p-6 space-y-6"
               style={{ backgroundColor: "#FFF8F0" }}
@@ -176,12 +257,185 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                 )}
               </div>
 
-              {/* Temperature Selection with hover animations */}
+              {/* Content with staggered animations */}
+              <div>
+                {/* Coffee Customization */}
+                {isCoffeeCustom && (
+                  <div className="space-y-4 animate-fade-in-up">
+                    <h4
+                      className="font-semibold mb-2"
+                      style={{ color: "#4B2E2B" }}
+                    >
+                      Customize Your Coffee
+                    </h4>
+                    <div className="mb-2">
+                      <label
+                        className="block mb-1 font-medium"
+                        style={{ color: "#4B2E2B" }}
+                      >
+                        Milk
+                      </label>
+                      <div className="flex gap-2 flex-wrap">
+                        {item.milkOptions?.map((milk) => (
+                          <Button
+                            key={milk}
+                            size="sm"
+                            className={`rounded-full px-4 py-2 border-2 hover:text-white ${
+                              selectedMilk === milk
+                                ? "border-[#6F4E37] bg-[#FAF3E0] text-[#6F4E37]"
+                                : "border-[#F5F5DC] bg-[#FAF3E0] text-red"
+                            }`}
+                            onClick={() => setSelectedMilk(milk)}
+                          >
+                            {milk}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mb-2">
+                      <label
+                        className="block mb-1 font-medium"
+                        style={{ color: "#4B2E2B" }}
+                      >
+                        Coffee Type
+                      </label>
+                      <div className="flex gap-2 flex-wrap">
+                        {item.coffeeTypeOptions?.map((type) => (
+                          <Button
+                            key={type}
+                            size="sm"
+                            className={`rounded-full px-4 py-2 border-2 hover:text-white ${
+                              selectedCoffeeType === type
+                                ? "border-[#6F4E37] bg-[#FAF3E0] text-[#6F4E37]"
+                                : "border-[#F5F5DC] bg-[#FAF3E0] text-red"
+                            }`}
+                            onClick={() => setSelectedCoffeeType(type)}
+                          >
+                            {type}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mb-2">
+                      <label
+                        className="block mb-1 font-medium"
+                        style={{ color: "#4B2E2B" }}
+                      >
+                        Sugar Level
+                      </label>
+                      <div className="flex gap-2 flex-wrap">
+                        {item.sugarLevelOptions?.map((level) => (
+                          <Button
+                            key={level}
+                            size="sm"
+                            className={`rounded-full px-4 py-2 border-2 hover:text-white ${
+                              selectedSugar === level
+                                ? "border-[#6F4E37] bg-[#FAF3E0] text-[#6F4E37]"
+                                : "border-[#F5F5DC] bg-[#FAF3E0] text-red"
+                            }`}
+                            onClick={() => setSelectedSugar(level)}
+                          >
+                            {level}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {/* Pizza Customization */}
+                {isPizzaCustom && (
+                  <div className="space-y-4 animate-fade-in-up">
+                    <h4
+                      className="font-semibold mb-2"
+                      style={{ color: "#4B2E2B" }}
+                    >
+                      Customize Your Pizza
+                    </h4>
+                    <div className="mb-2">
+                      <label
+                        className="block mb-1 font-medium"
+                        style={{ color: "#4B2E2B" }}
+                      >
+                        Extra Cheese
+                      </label>
+                      <div className="flex gap-2 flex-wrap">
+                        {item.cheeseOptions?.map((cheese) => (
+                          <Button
+                            key={cheese}
+                            size="sm"
+                            className={`rounded-full px-4 py-2 border-2 hover:text-white ${
+                              selectedCheese === cheese
+                                ? "border-[#6F4E37] bg-[#FAF3E0] text-[#6F4E37]"
+                                : "border-[#F5F5DC] bg-[#FAF3E0] text-red"
+                            }`}
+                            onClick={() => setSelectedCheese(cheese)}
+                          >
+                            {cheese}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mb-2">
+                      <label
+                        className="block mb-1 font-medium"
+                        style={{ color: "#4B2E2B" }}
+                      >
+                        Crust
+                      </label>
+                      <div className="flex gap-2 flex-wrap">
+                        {item.crustOptions?.map((crust) => (
+                          <Button
+                            key={crust}
+                            size="sm"
+                            className={`rounded-full px-4 py-2 border-2 hover:text-white ${
+                              selectedCrust === crust
+                                ? "border-[#6F4E37] bg-[#FAF3E0] text-[#6F4E37]"
+                                : "border-[#F5F5DC] bg-[#FAF3E0] text-red"
+                            }`}
+                            onClick={() => setSelectedCrust(crust)}
+                          >
+                            {crust}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="mb-2">
+                      <label
+                        className="block mb-1 font-medium"
+                        style={{ color: "#4B2E2B" }}
+                      >
+                        Toppings
+                      </label>
+                      <div className="flex gap-2 flex-wrap">
+                        {item.toppingsOptions?.map((topping) => (
+                          <Button
+                            key={topping}
+                            size="sm"
+                            className={`rounded-full px-4 py-2 border-2 hover:text-white ${
+                              selectedToppings.includes(topping)
+                                ? "border-[#6F4E37] bg-[#FAF3E0] text-[#6F4E37]"
+                                : "border-[#F5F5DC] bg-[#FAF3E0] text-red"
+                            }`}
+                            onClick={() =>
+                              setSelectedToppings((prev) =>
+                                prev.includes(topping)
+                                  ? prev.filter((t) => t !== topping)
+                                  : [...prev, topping]
+                              )
+                            }
+                          >
+                            {topping}
+                          </Button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Temperature */}
               {hasTemperatureOptions && (
-                <div
-                  className="animate-fade-in-up"
-                  style={{ animationDelay: "100ms" }}
-                >
+                <>
                   <h4
                     className="font-semibold mb-3"
                     style={{ color: "#4B2E2B" }}
@@ -214,6 +468,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                         <span className="font-medium">Hot</span>
                       </div>
                     </button>
+
                     <button
                       onClick={() => setSelectedTemperature("iced")}
                       className={`p-4 rounded-xl border-2 transition-all duration-300 transform hover:scale-105 active:scale-95 ${
@@ -244,20 +499,10 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                       </div>
                     </button>
                   </div>
-                </div>
+                </>
               )}
 
-              {/* Temperature Selection Reminder */}
-              {hasTemperatureOptions && !selectedTemperature && (
-                <p
-                  className="text-center text-sm animate-fade-in-up"
-                  style={{ color: "#6F4E37" }}
-                >
-                  Please select a temperature option above
-                </p>
-              )}
-
-              {/* Quantity Selection with smooth animations */}
+              {/* Quantity */}
               <div
                 className="animate-fade-in-up"
                 style={{ animationDelay: "200ms" }}
@@ -294,7 +539,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                 </div>
               </div>
 
-              {/* Total Price with emphasis */}
+              {/* Total Price */}
               <div
                 className="rounded-xl p-4 animate-fade-in-up"
                 style={{ backgroundColor: "#FAF3E0", animationDelay: "300ms" }}
@@ -315,19 +560,23 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                 </div>
               </div>
 
-              {/* Add to Cart Button with success animation */}
+              {/* Add to Cart Button */}
               <Button
                 onClick={handleAddToCart}
-                disabled={!canAddToCart || isAdding}
+                disabled={isAdding || !canAddCustomToCart}
                 className={`w-full py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group text-white border-0 transform hover:scale-105 active:scale-95 ${
                   isAdding ? "animate-pulse-gentle" : ""
                 }`}
                 style={{ backgroundColor: isAdding ? "#4B2E2B" : "#6F4E37" }}
                 onMouseEnter={(e) =>
-                  !isAdding && (e.target.style.backgroundColor = "#4B2E2B")
+                  !isAdding &&
+                  e.target instanceof HTMLElement &&
+                  (e.target.style.backgroundColor = "#4B2E2B")
                 }
                 onMouseLeave={(e) =>
-                  !isAdding && (e.target.style.backgroundColor = "#6F4E37")
+                  !isAdding &&
+                  e.target instanceof HTMLElement &&
+                  (e.target.style.backgroundColor = "#6F4E37")
                 }
               >
                 {isAdding ? (
