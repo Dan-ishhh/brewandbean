@@ -73,24 +73,24 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
   const hasTemperatureOptions = Boolean(item.hot) && Boolean(item.iced);
   const isCoffeeCustom = item.category === "coffee" && item.customizable;
   const isPizzaCustom = item.category === "pizza" && item.customizable;
+  const isTeaWithTemp = item.category === "tea" && item.hot && item.iced;
 
-  // For coffee, require temperature only if both hot and iced are available
+  // For coffee and tea, require temperature only if both hot and iced are available
   let requiredTemperature = false;
-  if (item.category === "coffee" && item.customizable) {
+  if ((item.category === "coffee" && item.customizable) || isTeaWithTemp) {
     requiredTemperature = hasTemperatureOptions;
   }
 
   useEffect(() => {
     if (
       isOpen &&
-      item.category === "coffee" &&
-      item.customizable &&
+      ((item.category === "coffee" && item.customizable) || isTeaWithTemp) &&
       !hasTemperatureOptions
     ) {
       if (item.hot && !item.iced) setSelectedTemperature("hot");
       else if (!item.hot && item.iced) setSelectedTemperature("iced");
     }
-  }, [isOpen, item, hasTemperatureOptions]);
+  }, [isOpen, item, hasTemperatureOptions, isTeaWithTemp]);
 
   if (!isVisible) return null;
 
@@ -103,7 +103,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
     ? selectedCheese && selectedCrust
     : true;
 
-  // For coffee, require temperature only if both hot and iced
+  // For coffee and tea, require temperature only if both hot and iced
   const canAddToCart = requiredTemperature
     ? selectedTemperature !== null
     : true;

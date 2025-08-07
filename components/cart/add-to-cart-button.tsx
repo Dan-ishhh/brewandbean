@@ -38,7 +38,11 @@ export function AddToCartButton({
 
   // Always open modal for customizable items (coffee or pizza)
   const handleClick = async () => {
-    if (item.customizable) {
+    // Open modal for customizable items or tea with both hot and iced
+    if (
+      item.customizable ||
+      (item.category === "tea" && item.hot && item.iced)
+    ) {
       if (typeof onOpenModal === "function") {
         onOpenModal();
       }

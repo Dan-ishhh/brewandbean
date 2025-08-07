@@ -17,7 +17,6 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Customize order
   // Create a dummy checkout page with pay online and pay in store
   // Create an invoice with the order details
   // Add favicon
@@ -179,8 +178,8 @@ export default function HomePage() {
           <div className="space-y-8">
             <div className="space-y-6">
               <Badge
-                className="px-4 py-2 rounded-full text-sm font-medium border-0"
-                style={{ backgroundColor: "#F5F5DC", color: "#4B2E2B" }}
+                className="px-4 py-2 rounded-full text-sm font-medium border-#E6B800"
+                style={{ backgroundColor: "#FFF8F0", color: "#4B2E2B" }}
               >
                 ☕ Freshly Roasted Daily
               </Badge>
@@ -228,7 +227,7 @@ export default function HomePage() {
                   style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
                   onMouseEnter={(e) => {
                     const target = e.currentTarget as HTMLElement;
-                    target.style.backgroundColor = "#F5F5DC";
+                    target.style.backgroundColor = "#FFF8F0";
                   }}
                   onMouseLeave={(e) => {
                     const target = e.currentTarget as HTMLElement;
@@ -280,7 +279,7 @@ export default function HomePage() {
               <div className="flex items-center gap-3">
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: "#FAF3E0" }}
+                  style={{ backgroundColor: "#FFF8F0" }}
                 >
                   <Coffee className="h-5 w-5" style={{ color: "#6F4E37" }} />
                 </div>
@@ -305,7 +304,7 @@ export default function HomePage() {
               <div className="flex items-center gap-3">
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: "#F5F5DC" }}
+                  style={{ backgroundColor: "#FFF8F0" }}
                 >
                   <Wifi className="h-5 w-5" style={{ color: "#6F4E37" }} />
                 </div>
@@ -331,7 +330,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <Badge
-              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-0"
+              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
               style={{ backgroundColor: "#FAF3E0", color: "#4B2E2B" }}
             >
               Our Story
@@ -383,7 +382,7 @@ export default function HomePage() {
           <div className="text-center mb-20">
             <Badge
               className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
-              style={{ backgroundColor: "#F5F5DC", color: "#4B2E2B" }}
+              style={{ backgroundColor: "#FFF8F0", color: "#4B2E2B" }}
             >
               Our Menu
             </Badge>
@@ -438,7 +437,7 @@ export default function HomePage() {
             <Badge
               className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
               style={{
-                backgroundColor: "#FAF3E0",
+                backgroundColor: "#FFF8F0",
                 color: "#4B2E2B",
                 // border: "1px solid red",
               }}

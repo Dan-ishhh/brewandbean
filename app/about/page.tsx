@@ -129,7 +129,7 @@ export default function AboutPage() {
             ].map((value, index) => (
               <Card
                 key={index}
-                className="border-2 hover:shadow-xl transition-all duration-300 group"
+                className="border-2 hover:shadow-xl transition-all duration-300 group rounded-2xl"
                 style={{ borderColor: "#F5F5DC", backgroundColor: "#FFF8F0" }}
               >
                 <CardContent className="p-8 text-center">

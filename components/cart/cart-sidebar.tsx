@@ -138,219 +138,236 @@ export function CartSidebar() {
               </div>
             ) : (
               <div className="space-y-4">
-                {state.items.map((item, index) => (
-                  <Card
-                    key={`${item.id}-${index}`}
-                    className={`border transform hover:scale-[1.02] transition-all duration-300 animate-slide-in-right-staggered`}
-                    style={{
-                      borderColor: "#F5F5DC",
-                      backgroundColor: "#FFF8F0",
-                      animationDelay: `${index * 100}ms`,
-                    }}
-                  >
-                    <CardContent className="p-4">
-                      <div className="flex gap-4">
-                        <div className="relative overflow-hidden rounded-lg">
-                          <img
-                            src={
-                              item.image ||
-                              "/placeholder.svg?height=64&width=64&query=food item"
-                            }
-                            alt={item.name}
-                            className="w-16 h-16 object-cover transition-transform duration-300 hover:scale-110"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.src =
-                                "/placeholder.svg?height=64&width=64";
-                            }}
-                          />
-                        </div>
-                        <div className="flex-1">
-                          <h3
-                            className="font-semibold mb-1 transition-colors duration-300"
-                            style={{ color: "#4B2E2B" }}
-                          >
-                            {item.name}
-                          </h3>
+                {state.items.map((item, index) => {
+                  return (
+                    <Card
+                      key={`${item.id}-${index}`}
+                      className={`border transform hover:scale-[1.02]`}
+                      style={{
+                        borderColor: "#F5F5DC",
+                        backgroundColor: "#FFF8F0",
+                        animationDelay: `${index * 100}ms`,
+                      }}
+                    >
+                      {/* transition-all duration-300 animate-slide-in-right-staggered */}
+                      <CardContent className="p-4">
+                        <div className="flex gap-4">
+                          <div className="relative overflow-hidden rounded-lg">
+                            <img
+                              src={
+                                item.image ||
+                                "/placeholder.svg?height=64&width=64&query=food item"
+                              }
+                              alt={item.name}
+                              className="w-16 h-16 object-cover transition-transform duration-300 hover:scale-110"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src =
+                                  "/placeholder.svg?height=64&width=64";
+                              }}
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <h3
+                              className="font-semibold mb-1 transition-colors duration-300"
+                              style={{ color: "#4B2E2B" }}
+                            >
+                              {item.name}
+                            </h3>
 
-                          {/* Show chosen options for Coffee and Pizza */}
-                          {(item.category === "coffee" ||
-                            item.category === "pizza") &&
-                            item.options && (
-                              <div className="mb-1 text-xs text-[#6F4E37] space-y-1">
-                                {(() => {
-                                  const opts = item.options as any;
-                                  return (
-                                    <>
-                                      {/* Temperature */}
-                                      {opts.temperature && (
-                                        <div className="flex items-center gap-1">
-                                          {opts.temperature === "hot" ? (
-                                            <Thermometer className="h-3 w-3 text-red-500 animate-pulse" />
-                                          ) : (
-                                            <Snowflake className="h-3 w-3 text-blue-500 animate-pulse" />
-                                          )}
-                                          <span className="capitalize">
-                                            {opts.temperature}
-                                          </span>
-                                        </div>
-                                      )}
-                                      {/* Coffee customizations */}
-                                      {item.category === "coffee" && (
-                                        <>
-                                          {opts.milk && (
-                                            <div>
-                                              Milk:{" "}
-                                              <span className="font-medium">
-                                                {opts.milk}
-                                              </span>
-                                            </div>
-                                          )}
-                                          {opts.coffeeType && (
-                                            <div>
-                                              Coffee Type:{" "}
-                                              <span className="font-medium">
-                                                {opts.coffeeType}
-                                              </span>
-                                            </div>
-                                          )}
-                                          {opts.sugar && (
-                                            <div>
-                                              Sugar:{" "}
-                                              <span className="font-medium">
-                                                {opts.sugar}
-                                              </span>
-                                            </div>
-                                          )}
-                                        </>
-                                      )}
-                                      {/* Pizza customizations */}
-                                      {item.category === "pizza" && (
-                                        <>
-                                          {opts.cheese && (
-                                            <div>
-                                              Cheese:{" "}
-                                              <span className="font-medium">
-                                                {opts.cheese}
-                                              </span>
-                                            </div>
-                                          )}
-                                          {opts.crust && (
-                                            <div>
-                                              Crust:{" "}
-                                              <span className="font-medium">
-                                                {opts.crust}
-                                              </span>
-                                            </div>
-                                          )}
-                                          {opts.toppings &&
-                                            Array.isArray(opts.toppings) &&
-                                            opts.toppings.length > 0 && (
-                                              <div>
-                                                Toppings:{" "}
-                                                <span className="font-medium">
-                                                  {opts.toppings.join(", ")}
-                                                </span>
-                                              </div>
-                                            )}
-                                        </>
-                                      )}
-                                    </>
-                                  );
-                                })()}
+                            {item.options?.temperature && (
+                              <div className="flex items-center gap-1 text-sm">
+                                {item.options?.temperature === "hot" ? (
+                                  <Thermometer className="h-3 w-3 text-red-500 animate-pulse" />
+                                ) : (
+                                  <Snowflake className="h-3 w-3 text-blue-500 animate-pulse" />
+                                )}
+                                <span className="capitalize">
+                                  {item.options?.temperature}
+                                </span>
                               </div>
                             )}
 
-                          <p
-                            className="text-sm mb-2 transition-colors duration-300"
-                            style={{ color: "#6F4E37" }}
-                          >
-                            ${item.price.toFixed(2)} each
-                          </p>
+                            {/* Show chosen options for Coffee and Pizza */}
+                            {(item.category === "coffee" ||
+                              item.category === "pizza") &&
+                              item.options && (
+                                <div className="mb-1 text-xs text-[#6F4E37] space-y-1">
+                                  {(() => {
+                                    const opts = item.options as any;
+                                    return (
+                                      <>
+                                        {/* Temperature */}
+                                        {/* {opts.temperature && (
+                                          <div className="flex items-center gap-1">
+                                            {opts.temperature === "hot" ? (
+                                              <Thermometer className="h-3 w-3 text-red-500 animate-pulse" />
+                                            ) : (
+                                              <Snowflake className="h-3 w-3 text-blue-500 animate-pulse" />
+                                            )}
+                                            <span className="capitalize">
+                                              {opts.temperature}
+                                            </span>
+                                          </div>
+                                        )} */}
+                                        {/* Coffee customizations */}
+                                        {item.category === "coffee" && (
+                                          <>
+                                            {opts.milk && (
+                                              <div>
+                                                Milk:{" "}
+                                                <span className="font-medium">
+                                                  {opts.milk}
+                                                </span>
+                                              </div>
+                                            )}
+                                            {opts.coffeeType && (
+                                              <div>
+                                                Coffee Type:{" "}
+                                                <span className="font-medium">
+                                                  {opts.coffeeType}
+                                                </span>
+                                              </div>
+                                            )}
+                                            {opts.sugar && (
+                                              <div>
+                                                Sugar:{" "}
+                                                <span className="font-medium">
+                                                  {opts.sugar}
+                                                </span>
+                                              </div>
+                                            )}
+                                          </>
+                                        )}
+                                        {/* Pizza customizations */}
+                                        {item.category === "pizza" && (
+                                          <>
+                                            {opts.cheese && (
+                                              <div>
+                                                Cheese:{" "}
+                                                <span className="font-medium">
+                                                  {opts.cheese}
+                                                </span>
+                                              </div>
+                                            )}
+                                            {opts.crust && (
+                                              <div>
+                                                Crust:{" "}
+                                                <span className="font-medium">
+                                                  {opts.crust}
+                                                </span>
+                                              </div>
+                                            )}
+                                            {opts.toppings &&
+                                              Array.isArray(opts.toppings) &&
+                                              opts.toppings.length > 0 && (
+                                                <div>
+                                                  Toppings:{" "}
+                                                  <span className="font-medium">
+                                                    {opts.toppings.join(", ")}
+                                                  </span>
+                                                </div>
+                                              )}
+                                          </>
+                                        )}
+                                      </>
+                                    );
+                                  })()}
+                                </div>
+                              )}
 
-                          {/* Quantity Controls with hover animations */}
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() =>
-                                  dispatch({
-                                    type: "UPDATE_QUANTITY",
-                                    payload: {
-                                      id: item.id,
-                                      quantity: item.quantity - 1,
-                                    },
-                                  })
-                                }
-                                className="h-8 w-8 p-0 rounded-full transform hover:scale-110 active:scale-95 transition-all duration-200"
-                                style={{
-                                  borderColor: "#F5F5DC",
-                                  color: "#4B2E2B",
-                                }}
-                              >
-                                <Minus className="h-3 w-3" />
-                              </Button>
-                              <span
-                                className="font-medium min-w-[2rem] text-center transition-all duration-300"
-                                style={{ color: "#4B2E2B" }}
-                              >
-                                {item.quantity}
-                              </span>
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() =>
-                                  dispatch({
-                                    type: "UPDATE_QUANTITY",
-                                    payload: {
-                                      id: item.id,
-                                      quantity: item.quantity + 1,
-                                    },
-                                  })
-                                }
-                                className="h-8 w-8 p-0 rounded-full transform hover:scale-110 active:scale-95 transition-all duration-200"
-                                style={{
-                                  borderColor: "#F5F5DC",
-                                  color: "#4B2E2B",
-                                }}
-                              >
-                                <Plus className="h-3 w-3" />
-                              </Button>
-                            </div>
+                            <p
+                              className="text-sm mb-2 transition-colors duration-300"
+                              style={{ color: "#6F4E37" }}
+                            >
+                              ${item.price.toFixed(2)} each
+                            </p>
 
-                            <div className="flex items-center gap-2">
-                              <span
-                                className="font-semibold transition-colors duration-300"
-                                style={{ color: "#4B2E2B" }}
-                              >
-                                ${(item.price * item.quantity).toFixed(2)}
-                              </span>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={() =>
-                                  dispatch({
-                                    type: "REMOVE_ITEM",
-                                    payload: {
-                                      id: item.id,
-                                      options: {
-                                        temperature: item.options?.temperature,
+                            {/* Quantity Controls with hover animations */}
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() =>
+                                    dispatch({
+                                      type: "UPDATE_QUANTITY",
+                                      payload: {
+                                        id: item.id,
+                                        quantity: item.quantity - 1,
                                       },
-                                    },
-                                  })
-                                }
-                                className="h-8 w-8 p-0 rounded-full text-red-500 hover:text-red-700 hover:bg-red-50 transform hover:scale-110 active:scale-95 transition-all duration-200"
-                              >
-                                <Trash2 className="h-3 w-3" />
-                              </Button>
+                                    })
+                                  }
+                                  className="h-8 w-8 p-0 rounded-full transform hover:scale-110 active:scale-95 transition-all duration-200"
+                                  style={{
+                                    borderColor: "#F5F5DC",
+                                    color: "#4B2E2B",
+                                  }}
+                                >
+                                  <Minus className="h-3 w-3" />
+                                </Button>
+                                <span
+                                  className="font-medium min-w-[2rem] text-center transition-all duration-300"
+                                  style={{ color: "#4B2E2B" }}
+                                >
+                                  {item.quantity}
+                                </span>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() =>
+                                    dispatch({
+                                      type: "UPDATE_QUANTITY",
+                                      payload: {
+                                        id: item.id,
+                                        quantity: item.quantity + 1,
+                                      },
+                                    })
+                                  }
+                                  className="h-8 w-8 p-0 rounded-full transform hover:scale-110 active:scale-95 transition-all duration-200"
+                                  style={{
+                                    borderColor: "#F5F5DC",
+                                    color: "#4B2E2B",
+                                  }}
+                                >
+                                  <Plus className="h-3 w-3" />
+                                </Button>
+                              </div>
+
+                              <div className="flex items-center gap-2">
+                                <span
+                                  className="font-semibold transition-colors duration-300"
+                                  style={{ color: "#4B2E2B" }}
+                                >
+                                  ${(item.price * item.quantity).toFixed(2)}
+                                </span>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() =>
+                                    dispatch({
+                                      type: "REMOVE_ITEM",
+                                      payload: {
+                                        id: item.id,
+                                        options: {
+                                          temperature:
+                                            item.options?.temperature,
+                                        },
+                                      },
+                                    })
+                                  }
+                                  className="h-8 w-8 p-0 rounded-full text-red-500 hover:text-red-700 hover:bg-red-50 transform hover:scale-110 active:scale-95 transition-all duration-200"
+                                >
+                                  <Trash2 className="h-3 w-3" />
+                                </Button>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+                      </CardContent>
+                    </Card>
+                  );
+                })}
               </div>
             )}
           </div>

@@ -447,7 +447,7 @@ export default function MenuPage() {
           <div className="text-center mb-12">
             <Badge
               className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
-              style={{ backgroundColor: "#F5F5DC", color: "#4B2E2B" }}
+              style={{ backgroundColor: "#FFF8F0", color: "#4B2E2B" }}
             >
               Our Menu
             </Badge>
