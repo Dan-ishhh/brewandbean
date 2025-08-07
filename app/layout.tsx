@@ -3,6 +3,7 @@ import { TopbarMenu } from "@/components/ui/topbar-menu";
 import { Footer } from "@/components/ui/footer";
 import "./globals.css";
 import { Providers } from "./providers";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function RootLayout({
   children,
@@ -35,7 +36,10 @@ export default function RootLayout({
             }}
           >
             <TopbarMenu />
-            <main className="flex-1">{children}</main>
+            <main className="flex-1">
+              {children}
+              <Analytics />
+            </main>
             <Footer />
           </div>
         </Providers>
