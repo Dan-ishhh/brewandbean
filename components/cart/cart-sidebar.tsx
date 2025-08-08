@@ -396,6 +396,7 @@ export function CartSidebar() {
                 <Link href="/checkout" passHref legacyBehavior>
                   <Button
                     className="w-full text-white py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95"
+                    onClick={() => dispatch({ type: "CLOSE_CART" })}
                     style={{ backgroundColor: "#6F4E37" }}
                     onMouseEnter={(e) => {
                       const target = e.currentTarget as HTMLElement;
