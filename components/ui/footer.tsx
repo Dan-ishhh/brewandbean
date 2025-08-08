@@ -55,7 +55,7 @@ export function Footer() {
                   href="/about"
                   className="hover:text-white transition-colors"
                 >
-                  About Us
+                  About
                 </Link>
               </p>
               <p>

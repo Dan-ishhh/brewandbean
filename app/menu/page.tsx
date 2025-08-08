@@ -470,7 +470,7 @@ export default function MenuPage() {
 
       {/* Category Filter */}
       <section
-        className="py-8 border-b"
+        className="py-8"
         style={{ backgroundColor: "#FFF8F0", borderColor: "#F5F5DC" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -499,14 +499,18 @@ export default function MenuPage() {
 
       {/* Legend */}
       <section
-        className="py-8"
+        className="py-4"
         style={{
           background: "linear-gradient(to bottom right, #FAF3E0, #F5F5DC)",
+          maxWidth: "318px",
+          width: "100%",
+          margin: "0 auto",
+          borderRadius: "24px",
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-6">
           <div
-            className="flex justify-center items-center gap-8 text-sm"
+            className="flex justify-between items-center gap-2 text-sm"
             style={{ color: "#4B2E2B" }}
           >
             <div className="flex items-center gap-2">
@@ -526,7 +530,7 @@ export default function MenuPage() {
       </section>
 
       {/* Menu Items */}
-      <section className="py-16" style={{ backgroundColor: "#FFF8F0" }}>
+      <section className="py-10" style={{ backgroundColor: "#FFF8F0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {isLoading

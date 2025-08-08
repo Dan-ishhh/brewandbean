@@ -393,20 +393,22 @@ export function CartSidebar() {
 
               {/* Action Buttons with hover effects */}
               <div className="space-y-3">
-                <Button
-                  className="w-full text-white py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95"
-                  style={{ backgroundColor: "#6F4E37" }}
-                  onMouseEnter={(e) => {
-                    const target = e.currentTarget as HTMLElement;
-                    target.style.backgroundColor = "#4B2E2B";
-                  }}
-                  onMouseLeave={(e) => {
-                    const target = e.currentTarget as HTMLElement;
-                    target.style.backgroundColor = "#6F4E37";
-                  }}
-                >
-                  Proceed to Checkout
-                </Button>
+                <Link href="/checkout" passHref legacyBehavior>
+                  <Button
+                    className="w-full text-white py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-0 transform hover:scale-105 active:scale-95"
+                    style={{ backgroundColor: "#6F4E37" }}
+                    onMouseEnter={(e) => {
+                      const target = e.currentTarget as HTMLElement;
+                      target.style.backgroundColor = "#4B2E2B";
+                    }}
+                    onMouseLeave={(e) => {
+                      const target = e.currentTarget as HTMLElement;
+                      target.style.backgroundColor = "#6F4E37";
+                    }}
+                  >
+                    Proceed to Checkout
+                  </Button>
+                </Link>
                 <Button
                   variant="outline"
                   onClick={() => dispatch({ type: "CLEAR_CART" })}

@@ -32,7 +32,6 @@ interface AddToCartModalProps {
 }
 
 export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
-  console.log("item", item);
   // Customization states
   const [selectedMilk, setSelectedMilk] = useState<string>("");
   const [selectedCoffeeType, setSelectedCoffeeType] = useState<string>("");
@@ -42,7 +41,6 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
   const [selectedCrust, setSelectedCrust] = useState<string>("");
   // Cost per extra topping for pizza
   const toppingCost = 0.5;
-  console.log("item", item);
 
   const { dispatch } = useCart();
   const [selectedTemperature, setSelectedTemperature] = useState<
@@ -72,6 +70,19 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
 
   const hasTemperatureOptions = Boolean(item.hot) && Boolean(item.iced);
   const isCoffeeCustom = item.category === "coffee" && item.customizable;
+  // Provide defaults if options are missing for customizable coffee
+  const milkOptions = item.milkOptions ?? ["Whole", "Skim", "Soy", "Oat"];
+  const coffeeTypeOptions = item.coffeeTypeOptions ?? [
+    "Espresso",
+    "Latte",
+    "Cappuccino",
+  ];
+  const sugarLevelOptions = item.sugarLevelOptions ?? [
+    "No Sugar",
+    "Less Sugar",
+    "Regular",
+    "Extra",
+  ];
   const isPizzaCustom = item.category === "pizza" && item.customizable;
   const isTeaWithTemp = item.category === "tea" && item.hot && item.iced;
 
@@ -99,9 +110,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
     ? selectedMilk && selectedCoffeeType && selectedSugar
     : true;
   // For pizza, require all customizations
-  const canCustomizePizza = isPizzaCustom
-    ? selectedCheese && selectedCrust
-    : true;
+  const canCustomizePizza = isPizzaCustom ? selectedCrust : true;
 
   // For coffee and tea, require temperature only if both hot and iced
   const canAddToCart = requiredTemperature
@@ -262,12 +271,12 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                 {/* Coffee Customization */}
                 {isCoffeeCustom && (
                   <div className="space-y-4 animate-fade-in-up">
-                    <h4
+                    {/* <h4
                       className="font-semibold mb-2"
                       style={{ color: "#4B2E2B" }}
                     >
                       Customize Your Coffee
-                    </h4>
+                    </h4> */}
                     <div className="mb-2">
                       <label
                         className="block mb-1 font-medium"
@@ -276,7 +285,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                         Milk
                       </label>
                       <div className="flex gap-2 flex-wrap">
-                        {item.milkOptions?.map((milk) => (
+                        {milkOptions.map((milk) => (
                           <Button
                             key={milk}
                             size="sm"
@@ -300,7 +309,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                         Coffee Type
                       </label>
                       <div className="flex gap-2 flex-wrap">
-                        {item.coffeeTypeOptions?.map((type) => (
+                        {coffeeTypeOptions.map((type) => (
                           <Button
                             key={type}
                             size="sm"
@@ -324,7 +333,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                         Sugar Level
                       </label>
                       <div className="flex gap-2 flex-wrap">
-                        {item.sugarLevelOptions?.map((level) => (
+                        {sugarLevelOptions.map((level) => (
                           <Button
                             key={level}
                             size="sm"
@@ -345,12 +354,12 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                 {/* Pizza Customization */}
                 {isPizzaCustom && (
                   <div className="space-y-4 animate-fade-in-up">
-                    <h4
+                    {/* <h4
                       className="font-semibold mb-2"
                       style={{ color: "#4B2E2B" }}
                     >
                       Customize Your Pizza
-                    </h4>
+                    </h4> */}
                     <div className="mb-2">
                       <label
                         className="block mb-1 font-medium"

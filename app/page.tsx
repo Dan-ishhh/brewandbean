@@ -17,9 +17,6 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Create a dummy checkout page with pay online and pay in store
-  // Create an invoice with the order details
-  // Add favicon
   // Change from Redux to Zustand
 
   const pizzaItems = [

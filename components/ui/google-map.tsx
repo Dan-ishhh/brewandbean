@@ -50,8 +50,9 @@ const center = { lat: 23.03, lng: 72.57 };
 
 export function GoogleMapLocations() {
   const [selected, setSelected] = useState<Location | null>(null);
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY || "";
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
+    googleMapsApiKey: apiKey,
   });
 
   if (!isLoaded) {
