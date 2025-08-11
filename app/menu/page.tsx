@@ -434,33 +434,35 @@ export default function MenuPage() {
       : menuItems.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#FFF8F0" }}>
-      {/* Hero Section */}
-      <section
-        className="pt-32 pb-12"
-        style={{
-          background:
-            "linear-gradient(to bottom right, #FFF8F0, #FAF3E0, #F5F5DC)",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <Badge
-              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
-              style={{ backgroundColor: "#FFF8F0", color: "#4B2E2B" }}
-            >
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+      {/* Banner Section - Home Style */}
+      <section className="pt-24 min-h-[40vh] flex items-center relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FAF3E0] to-[#F5F5DC] dark:from-[#18181c] dark:to-[#232326]">
+          {/* <div className="absolute inset-0 opacity-30">
+            <div
+              className="absolute top-20 right-40 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"
+              style={{ backgroundColor: "#6F4E37" }}
+            ></div>
+            <div
+              className="absolute bottom-10 left-80 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"
+              style={{ backgroundColor: "#6F4E37" }}
+            ></div>
+          </div> */}
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16">
+          <div className="text-center mb-10">
+            <Badge className="px-4 py-2 rounded-full text-sm font-medium mb-6 bg-[#FAF3E0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none">
               Our Menu
             </Badge>
-            <h1
-              className="text-5xl lg:text-6xl font-bold mb-6"
-              style={{ color: "#4B2E2B" }}
-            >
-              Delicious <span style={{ color: "#6F4E37" }}>Choices</span>
+            <h1 className="text-5xl lg:text-6xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+              Delicious{" "}
+              <span className="text-[#6F4E37] dark:text-[#e6b800]">
+                Choices
+              </span>
             </h1>
-            <p
-              className="text-xl max-w-3xl mx-auto leading-relaxed"
-              style={{ color: "#4B2E2B" }}
-            >
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed text-[#4B2E2B] dark:text-[#e6e6e6]">
               From expertly crafted coffee to fresh pastries and hearty meals,
               discover your new favorites from our carefully curated menu.
             </p>
@@ -469,26 +471,20 @@ export default function MenuPage() {
       </section>
 
       {/* Category Filter */}
-      <section
-        className="py-8"
-        style={{ backgroundColor: "#FFF8F0", borderColor: "#F5F5DC" }}
-      >
+      <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all text-sm sm:text-md md:text-lg ${
-                  selectedCategory === category.id
-                    ? "text-white shadow-lg"
-                    : "hover:bg-opacity-80"
-                }`}
-                style={{
-                  backgroundColor:
-                    selectedCategory === category.id ? "#6F4E37" : "#F5F5DC",
-                  color: selectedCategory === category.id ? "white" : "#4B2E2B",
-                }}
+                className={`px-6 py-3 rounded-full font-medium transition-all text-sm sm:text-md md:text-lg focus:outline-none focus:ring-2 focus:ring-[#6F4E37] dark:focus:ring-[#e6b800]
+                  ${
+                    selectedCategory === category.id
+                      ? "bg-[#6F4E37] text-[#FFF8F0] dark:bg-[#e6b800] dark:text-[#222] shadow-lg"
+                      : "bg-[#FAF3E0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] hover:bg-[#6F4E37] hover:text-[#FFF8F0] dark:hover:bg-[#e6b800] dark:hover:text-[#222]"
+                  }
+                `}
               >
                 {category.name} ({category.count})
               </button>
@@ -498,30 +494,18 @@ export default function MenuPage() {
       </section>
 
       {/* Legend */}
-      <section
-        className="py-4"
-        style={{
-          background: "linear-gradient(to bottom right, #FAF3E0, #F5F5DC)",
-          maxWidth: "318px",
-          width: "100%",
-          margin: "0 auto",
-          borderRadius: "24px",
-        }}
-      >
+      <section className="py-4 dark:bg-[#222] rounded-3xl mx-auto w-full max-w-xs mt-4">
         <div className="max-w-6xl mx-auto px-6">
-          <div
-            className="flex justify-between items-center gap-2 text-sm"
-            style={{ color: "#4B2E2B" }}
-          >
+          <div className="flex justify-between items-center gap-2 text-sm text-[#4B2E2B] dark:text-[#e6e6e6]">
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-red-100 rounded-full flex items-center justify-center">
-                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+              <div className="w-4 h-4 bg-red-100 dark:bg-[#442222] rounded-full flex items-center justify-center">
+                <div className="w-2 h-2 bg-red-500 dark:bg-[#e6b8b8] rounded-full"></div>
               </div>
               <span>Available Hot</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-blue-100 rounded-full flex items-center justify-center">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div className="w-4 h-4 bg-blue-100 dark:bg-[#223344] rounded-full flex items-center justify-center">
+                <div className="w-2 h-2 bg-blue-500 dark:bg-[#b8c8e6] rounded-full"></div>
               </div>
               <span>Available Iced</span>
             </div>
@@ -530,7 +514,7 @@ export default function MenuPage() {
       </section>
 
       {/* Menu Items */}
-      <section className="py-10" style={{ backgroundColor: "#FFF8F0" }}>
+      <section className="py-10 text-[#4B2E2B] dark:text-[#e6e6e6] transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {isLoading

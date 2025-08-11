@@ -8,22 +8,19 @@ import { Coffee, Users, Heart, Award, Leaf, Clock } from "lucide-react";
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#FFF8F0" }}>
+    <div className="min-h-screen bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#18181b] dark:text-[#e6e6e6]">
       {/* Our Story */}
-      <section className="py-20" style={{ backgroundColor: "#FFF8F0" }}>
+      <section className="py-20 bg-[#FFF8F0] dark:bg-[#18181b]">
         <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2
-                className="text-4xl font-bold mb-6"
-                style={{ color: "#4B2E2B" }}
-              >
-                Our <span style={{ color: "#6F4E37" }}>Journey</span>
+              <h2 className="text-4xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+                Our{" "}
+                <span className="text-[#6F4E37] dark:text-[#e6b800]">
+                  Journey
+                </span>
               </h2>
-              <div
-                className="space-y-6 leading-relaxed"
-                style={{ color: "#4B2E2B" }}
-              >
+              <div className="space-y-6 leading-relaxed text-[#4B2E2B] dark:text-[#cccccc]">
                 <p>
                   Founded in 2018 by coffee enthusiasts Maria and James, Brew &
                   Bean started as a dream to create a space where exceptional
@@ -59,24 +56,14 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section
-        className="py-20"
-        style={{
-          background: "linear-gradient(to bottom right, #FAF3E0, #F5F5DC)",
-        }}
-      >
+      <section className="py-20 bg-gradient-to-br from-[#FAF3E0] to-[#F5F5DC] dark:from-[#18181c] dark:to-[#232326]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2
-              className="text-4xl font-bold mb-6"
-              style={{ color: "#4B2E2B" }}
-            >
-              Our <span style={{ color: "#6F4E37" }}>Values</span>
+            <h2 className="text-4xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+              Our{" "}
+              <span className="text-[#6F4E37] dark:text-[#e6b800]">Values</span>
             </h2>
-            <p
-              className="text-xl max-w-3xl mx-auto"
-              style={{ color: "#4B2E2B" }}
-            >
+            <p className="text-xl max-w-3xl mx-auto text-[#4B2E2B] dark:text-[#e6e6e6]">
               Everything we do is guided by our core values that shape our
               approach to coffee, community, and sustainability.
             </p>
@@ -129,26 +116,18 @@ export default function AboutPage() {
             ].map((value, index) => (
               <Card
                 key={index}
-                className="border-2 hover:shadow-xl transition-all duration-300 group rounded-2xl"
-                style={{ borderColor: "#F5F5DC", backgroundColor: "#FFF8F0" }}
+                className="border-2 hover:shadow-xl transition-all duration-300 group rounded-2xl border-[#F5F5DC] dark:border-[#333] bg-[#FFF8F0] dark:bg-[#222]"
               >
                 <CardContent className="p-8 text-center">
                   <div
-                    className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg`}
-                    style={{
-                      background:
-                        "linear-gradient(to bottom right, #6F4E37, #4B2E2B)",
-                    }}
+                    className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg bg-[#6F4E37] dark:bg-[#18181c]`}
                   >
-                    <value.icon className="h-8 w-8 text-white" />
+                    <value.icon className="h-8 w-8 text-white dark:text-[#e6b800]" />
                   </div>
-                  <h3
-                    className="text-xl font-bold mb-4"
-                    style={{ color: "#4B2E2B" }}
-                  >
+                  <h3 className="text-xl font-bold mb-4 text-[#4B2E2B] dark:text-[#e6e6e6]">
                     {value.title}
                   </h3>
-                  <p className="leading-relaxed" style={{ color: "#4B2E2B" }}>
+                  <p className="leading-relaxed text-[#4B2E2B] dark:text-[#e6e6e6]">
                     {value.description}
                   </p>
                 </CardContent>
@@ -159,19 +138,14 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20" style={{ backgroundColor: "#FFF8F0" }}>
+      <section className="py-20 bg-[#FFF8F0] dark:bg-[#18181c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2
-              className="text-4xl font-bold mb-6"
-              style={{ color: "#4B2E2B" }}
-            >
-              Meet Our <span style={{ color: "#6F4E37" }}>Team</span>
+            <h2 className="text-4xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+              Meet Our{" "}
+              <span className="text-[#6F4E37] dark:text-[#e6b800]">Team</span>
             </h2>
-            <p
-              className="text-xl max-w-3xl mx-auto"
-              style={{ color: "#4B2E2B" }}
-            >
+            <p className="text-xl max-w-3xl mx-auto text-[#4B2E2B] dark:text-[#e6e6e6]">
               The passionate people behind every perfect cup and warm smile.
             </p>
           </div>
@@ -214,8 +188,7 @@ export default function AboutPage() {
             ].map((member, index) => (
               <Card
                 key={index}
-                className="border-0 hover:shadow-xl transition-all duration-300 group overflow-hidden rounded-2xl"
-                style={{ backgroundColor: "#FFF8F0" }}
+                className="border-0 hover:shadow-xl transition-all duration-300 group overflow-hidden rounded-2xl bg-[#FFF8F0] dark:bg-[#222]"
               >
                 <CardContent className="p-0">
                   <div className="relative overflow-hidden">
@@ -226,22 +199,13 @@ export default function AboutPage() {
                     />
                   </div>
                   <div className="p-6 text-center">
-                    <h3
-                      className="text-lg font-bold mb-1"
-                      style={{ color: "#4B2E2B" }}
-                    >
+                    <h3 className="text-lg font-bold mb-1 text-[#4B2E2B] dark:text-[#e6e6e6]">
                       {member.name}
                     </h3>
-                    <p
-                      className="font-medium mb-3"
-                      style={{ color: "#6F4E37" }}
-                    >
+                    <p className="font-medium mb-3 text-[#6F4E37] dark:text-[#e6b800]">
                       {member.role}
                     </p>
-                    <p
-                      className="text-sm leading-relaxed"
-                      style={{ color: "#4B2E2B" }}
-                    >
+                    <p className="text-sm leading-relaxed text-[#4B2E2B] dark:text-[#e6e6e6]">
                       {member.description}
                     </p>
                   </div>
@@ -253,12 +217,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section
-        className="py-20 text-white"
-        style={{
-          background: "linear-gradient(to bottom right, #6F4E37, #4B2E2B)",
-        }}
-      >
+      <section className="py-20 text-white bg-gradient-to-br from-[#6F4E37] to-[#4B2E2B] dark:from-[#222] dark:to-[#18181b]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">
             Ready to Join Our Community?
@@ -271,8 +230,7 @@ export default function AboutPage() {
             <Link href="/menu">
               <Button
                 size="lg"
-                className="px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0"
-                style={{ backgroundColor: "#FFF8F0", color: "#4B2E2B" }}
+                className="px-8 py-4 rounded-full shadow-lg bg-[#FFF8F0] hover-bg-[#6F4E37] text-[#4B2E2B] hover-text-[#FAF3E0] transition-all border-0 dark:bg-[#222] dark:text-[#e6e6e6]"
               >
                 Explore Our Menu
               </Button>
@@ -281,10 +239,7 @@ export default function AboutPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white px-8 py-4 rounded-full bg-transparent"
-                style={{ ":hover": { color: "#4B2E2B" } }}
-                onMouseEnter={(e) => (e.target.style.color = "#4B2E2B")}
-                onMouseLeave={(e) => (e.target.style.color = "white")}
+                className="border-2 border-white text-white hover:bg-white hover:text-[#4B2E2B] px-8 py-4 rounded-full bg-transparent dark:border-[#e6e6e6] dark:text-[#e6e6e6] dark:hover:bg-[#e6e6e6] dark:hover:text-[#18181b]"
               >
                 Visit Us Today
               </Button>

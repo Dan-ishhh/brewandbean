@@ -30,8 +30,8 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
   // Replace direct modal rendering with a callback
   return (
     <Card
-      className="border-0 hover:shadow-2xl transition-all duration-500 group overflow-hidden rounded-2xl transform hover:scale-[1.02] hover:-translate-y-2 animate-fade-in-up"
-      style={{ backgroundColor: "#FFF8F0" }}
+      className="bg-[#FFF8F0] dark:bg-[#222] border-0 hover:shadow-2xl transition-all duration-500 group overflow-hidden rounded-2xl transform hover:scale-[1.02] hover:-translate-y-2 animate-fade-in-up"
+      // style={{ backgroundColor: "#FFF8F0" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -68,12 +68,12 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
               }`}
             >
               {item.hot && (
-                <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center animate-pulse-gentle">
+                <div className="w-4 h-4 bg-red-100 rounded-full flex items-center justify-center animate-pulse-gentle">
                   <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                 </div>
               )}
               {item.iced && (
-                <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center animate-pulse-gentle">
+                <div className="w-4 h-4 bg-blue-100 rounded-full flex items-center justify-center animate-pulse-gentle">
                   <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 </div>
               )}
@@ -81,32 +81,32 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
           )}
         </div>
         <div
-          className="p-6 transition-all duration-300"
-          style={{ backgroundColor: "#FFF8F0" }}
+          className="bg-[#FFF8F0] dark:bg-[#222] p-6 transition-all duration-300"
+          // style={{ backgroundColor: "#FFF8F0" }}
         >
           <div className="flex justify-between items-start mb-3">
             <h3
-              className={`text-lg font-bold transition-all duration-300 ${
+              className={`text-[#4B2E2B] dark:text-[#e6e6e6] text-lg font-bold transition-all duration-300 ${
                 isHovered ? "text-opacity-80" : ""
               }`}
-              style={{ color: "#4B2E2B" }}
+              // style={{ color: "#4B2E2B" }}
             >
               {item.name}
             </h3>
             <span
-              className={`text-xl font-bold transition-all duration-300 ${
+              className={`text-[#6F4E37] dark:text-[#e6b800] text-xl font-bold transition-all duration-300 ${
                 isHovered ? "scale-110" : "scale-100"
               }`}
-              style={{ color: "#6F4E37" }}
+              // style={{ color: "#6F4E37" }}
             >
               {item.price}
             </span>
           </div>
           <p
-            className={`text-sm leading-relaxed mb-4 transition-all duration-300 ${
+            className={`text-[#4B2E2B] dark:text-[#e6e6e6] text-sm leading-relaxed mb-4 transition-all duration-300 ${
               isHovered ? "text-opacity-80" : ""
             }`}
-            style={{ color: "#4B2E2B" }}
+            // style={{ color: "#4B2E2B" }}
           >
             {item.description}
           </p>

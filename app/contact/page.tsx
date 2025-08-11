@@ -40,33 +40,33 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#FFF8F0" }}>
-      {/* Hero Section */}
-      <section
-        className="pt-32 pb-20"
-        style={{
-          background:
-            "linear-gradient(to bottom right, #FFF8F0, #FAF3E0, #F5F5DC)",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge
-              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
-              style={{ backgroundColor: "#FFF8F0", color: "#4B2E2B" }}
-            >
+    <div className="min-h-screen bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#18181b] dark:text-[#e6e6e6]">
+      {/* Banner Section - Home Style */}
+      <section className="pt-24 min-h-[40vh] flex items-center relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8F0] to-[#FAF3E0] dark:from-[#18181c] dark:to-[#232326]">
+          {/* <div className="absolute inset-0 opacity-30">
+            <div
+              className="absolute top-20 right-40 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"
+              style={{ backgroundColor: "#6F4E37" }}
+            ></div>
+            <div
+              className="absolute bottom-10 left-80 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"
+              style={{ backgroundColor: "#6F4E37" }}
+            ></div>
+          </div> */}
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16">
+          <div className="text-center mb-10">
+            <Badge className="px-4 py-2 rounded-full text-sm font-medium mb-6 bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none">
               Get In Touch
             </Badge>
-            <h1
-              className="text-5xl lg:text-6xl font-bold mb-6"
-              style={{ color: "#4B2E2B" }}
-            >
-              Contact <span style={{ color: "#6F4E37" }}>Us</span>
+            <h1 className="text-5xl lg:text-6xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+              Contact{" "}
+              <span className="text-[#6F4E37] dark:text-[#e6b800]">Us</span>
             </h1>
-            <p
-              className="text-xl max-w-3xl mx-auto leading-relaxed"
-              style={{ color: "#4B2E2B" }}
-            >
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed text-[#4B2E2B] dark:text-[#e6e6e6]">
               We'd love to hear from you! Whether you have questions, feedback,
               or just want to say hello, we're here to help.
             </p>
@@ -75,80 +75,62 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Information & Form */}
-      <section className="py-20" style={{ backgroundColor: "#FFF8F0" }}>
+      <section className="py-20 bg-[#FFF8F0] dark:bg-[#222]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Information */}
             <div className="space-y-10">
               <div>
-                <h2
-                  className="text-3xl font-bold mb-8"
-                  style={{ color: "#4B2E2B" }}
-                >
+                <h2 className="text-3xl font-bold mb-8 text-[#4B2E2B] dark:text-[#e6e6e6]">
                   Visit Our Cafe
                 </h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0"
-                      style={{ backgroundColor: "#FAF3E0" }}
-                    >
-                      <MapPin
-                        className="h-6 w-6"
-                        style={{ color: "#6F4E37" }}
-                      />
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0 bg-[#FAF3E0] dark:bg-[#18181c]">
+                      <MapPin className="h-6 w-6 text-[#6F4E37] dark:text-[#e6b800]" />
                     </div>
                     <div>
-                      <h3
-                        className="font-semibold mb-1"
-                        style={{ color: "#4B2E2B" }}
-                      >
+                      <h3 className="font-semibold mb-1 text-[#4B2E2B] dark:text-[#e6e6e6]">
                         Address
                       </h3>
-                      <p style={{ color: "#4B2E2B" }}>123 Coffee Street</p>
-                      <p style={{ color: "#4B2E2B" }}>
+                      <p className="text-[#4B2E2B] dark:text-[#e6e6e6]">
+                        123 Coffee Street
+                      </p>
+                      <p className="text-[#4B2E2B] dark:text-[#e6e6e6]">
                         Downtown District, City 12345
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0"
-                      style={{ backgroundColor: "#F5F5DC" }}
-                    >
-                      <Phone className="h-6 w-6" style={{ color: "#6F4E37" }} />
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0 bg-[#F5F5DC] dark:bg-[#18181c]">
+                      <Phone className="h-6 w-6 text-[#6F4E37] dark:text-[#e6b800]" />
                     </div>
                     <div>
-                      <h3
-                        className="font-semibold mb-1"
-                        style={{ color: "#4B2E2B" }}
-                      >
+                      <h3 className="font-semibold mb-1 text-[#4B2E2B] dark:text-[#e6e6e6]">
                         Phone
                       </h3>
-                      <p style={{ color: "#4B2E2B" }}>(555) 123-BREW</p>
-                      <p className="text-sm" style={{ color: "#6F4E37" }}>
+                      <p className="text-[#4B2E2B] dark:text-[#e6e6e6]">
+                        (555) 123-BREW
+                      </p>
+                      <p className="text-sm text-[#6F4E37] dark:text-[#e6b800]">
                         Call us for reservations or questions
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0"
-                      style={{ backgroundColor: "#FAF3E0" }}
-                    >
-                      <Mail className="h-6 w-6" style={{ color: "#6F4E37" }} />
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0 bg-[#FAF3E0] dark:bg-[#18181c]">
+                      <Mail className="h-6 w-6 text-[#6F4E37] dark:text-[#e6b800]" />
                     </div>
                     <div>
-                      <h3
-                        className="font-semibold mb-1"
-                        style={{ color: "#4B2E2B" }}
-                      >
+                      <h3 className="font-semibold mb-1 text-[#4B2E2B] dark:text-[#e6e6e6]">
                         Email
                       </h3>
-                      <p style={{ color: "#4B2E2B" }}>hello@brewandbean.com</p>
-                      <p className="text-sm" style={{ color: "#6F4E37" }}>
+                      <p className="text-[#4B2E2B] dark:text-[#e6e6e6]">
+                        hello@brewandbean.com
+                      </p>
+                      <p className="text-sm text-[#6F4E37] dark:text-[#e6b800]">
                         We'll respond within 24 hours
                       </p>
                     </div>
@@ -158,79 +140,40 @@ export default function ContactPage() {
 
               {/* Opening Hours */}
               <div>
-                <h3
-                  className="text-2xl font-bold mb-6"
-                  style={{ color: "#4B2E2B" }}
-                >
+                <h3 className="text-2xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
                   Opening Hours
                 </h3>
                 <div className="space-y-4">
-                  <div
-                    className="flex justify-between items-center p-4 rounded-xl border"
-                    style={{
-                      background: "linear-gradient(to right, #FAF3E0, #F5F5DC)",
-                      borderColor: "#F5F5DC",
-                    }}
-                  >
+                  <div className="flex justify-between items-center p-4 rounded-xl border bg-gradient-to-r from-[#FAF3E0] to-[#F5F5DC] dark:from-[#18181c] dark:to-[#232326] border-[#F5F5DC] dark:border-[#333]">
                     <div className="flex items-center gap-3">
-                      <Clock className="h-5 w-5" style={{ color: "#6F4E37" }} />
-                      <span
-                        className="font-medium"
-                        style={{ color: "#4B2E2B" }}
-                      >
+                      <Clock className="h-5 w-5 text-[#6F4E37] dark:text-[#e6b800]" />
+                      <span className="font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
                         Monday - Friday
                       </span>
                     </div>
-                    <span
-                      className="font-semibold"
-                      style={{ color: "#4B2E2B" }}
-                    >
+                    <span className="font-semibold text-[#4B2E2B] dark:text-[#e6e6e6]">
                       6:30 AM - 8:00 PM
                     </span>
                   </div>
-                  <div
-                    className="flex justify-between items-center p-4 rounded-xl border"
-                    style={{
-                      background: "linear-gradient(to right, #FAF3E0, #F5F5DC)",
-                      borderColor: "#F5F5DC",
-                    }}
-                  >
+                  <div className="flex justify-between items-center p-4 rounded-xl border bg-gradient-to-r from-[#FAF3E0] to-[#F5F5DC] dark:from-[#18181c] dark:to-[#232326] border-[#F5F5DC] dark:border-[#333]">
                     <div className="flex items-center gap-3">
-                      <Clock className="h-5 w-5" style={{ color: "#6F4E37" }} />
-                      <span
-                        className="font-medium"
-                        style={{ color: "#4B2E2B" }}
-                      >
+                      <Clock className="h-5 w-5 text-[#6F4E37] dark:text-[#e6b800]" />
+                      <span className="font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
                         Saturday
                       </span>
                     </div>
-                    <span
-                      className="font-semibold"
-                      style={{ color: "#4B2E2B" }}
-                    >
+                    <span className="font-semibold text-[#4B2E2B] dark:text-[#e6e6e6]">
                       7:00 AM - 9:00 PM
                     </span>
                   </div>
-                  <div
-                    className="flex justify-between items-center p-4 rounded-xl border"
-                    style={{
-                      background: "linear-gradient(to right, #FAF3E0, #F5F5DC)",
-                      borderColor: "#F5F5DC",
-                    }}
-                  >
+                  <div className="flex justify-between items-center p-4 rounded-xl border bg-gradient-to-r from-[#FAF3E0] to-[#F5F5DC] dark:from-[#18181c] dark:to-[#232326] border-[#F5F5DC] dark:border-[#333]">
                     <div className="flex items-center gap-3">
-                      <Clock className="h-5 w-5" style={{ color: "#6F4E37" }} />
-                      <span
-                        className="font-medium"
-                        style={{ color: "#4B2E2B" }}
-                      >
+                      <Clock className="h-5 w-5 text-[#6F4E37] dark:text-[#e6b800]" />
+                      <span className="font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
                         Sunday
                       </span>
                     </div>
-                    <span
-                      className="font-semibold"
-                      style={{ color: "#4B2E2B" }}
-                    >
+                    <span className="font-semibold text-[#4B2E2B] dark:text-[#e6e6e6]">
                       8:00 AM - 7:00 PM
                     </span>
                   </div>
@@ -239,33 +182,10 @@ export default function ContactPage() {
 
               {/* Quick Actions */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  className="text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border-0"
-                  style={{ backgroundColor: "#6F4E37" }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.backgroundColor = "#4B2E2B")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.backgroundColor = "#6F4E37")
-                  }
-                >
+                <Button className="bg-[#6F4E37] text-white px-6 py-3 rounded-lg font-semibold shadow-md transition-colors duration-200 hover:bg-[#4B2E2B] dark:bg-[#222] dark:text-[#e6b800] dark:hover:bg-[#333] border-0">
                   Get Directions
                 </Button>
-                <Button
-                  variant="outline"
-                  className="px-6 py-3 rounded-full shadow-md hover:shadow-lg transition-all bg-transparent"
-                  style={{
-                    borderColor: "#F5F5DC",
-                    color: "#4B2E2B",
-                    backgroundColor: "#FFF8F0",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.target.style.backgroundColor = "#F5F5DC")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.target.style.backgroundColor = "#FFF8F0")
-                  }
-                >
+                <Button className="bg-[#FFF8F0] text-[#4B2E2B] px-6 py-3 rounded-lg font-semibold shadow-md transition-colors duration-200 hover:bg-[#F5F5DC] dark:bg-[#222] dark:text-[#e6e6e6] dark:hover:bg-[#333] border-0">
                   Call Now
                 </Button>
               </div>
@@ -273,20 +193,11 @@ export default function ContactPage() {
 
             {/* Contact Form */}
             <div>
-              <Card
-                className="border-2 shadow-xl rounded-2xl"
-                style={{ borderColor: "#F5F5DC", backgroundColor: "#FFF8F0" }}
-              >
+              <Card className="border-2 shadow-xl rounded-2xl border-[#F5F5DC] dark:border-[#333] bg-[#FFF8F0] dark:bg-[#222]">
                 <CardContent className="p-8">
                   <div className="flex items-center gap-3 mb-6">
-                    <MessageCircle
-                      className="h-6 w-6"
-                      style={{ color: "#6F4E37" }}
-                    />
-                    <h3
-                      className="text-2xl font-bold"
-                      style={{ color: "#4B2E2B" }}
-                    >
+                    <MessageCircle className="h-6 w-6 text-[#6F4E37] dark:text-[#e6b800]" />
+                    <h3 className="text-2xl font-bold text-[#4B2E2B] dark:text-[#e6e6e6]">
                       Send us a Message
                     </h3>
                   </div>
@@ -296,8 +207,7 @@ export default function ContactPage() {
                       <div>
                         <label
                           htmlFor="name"
-                          className="block text-sm font-medium mb-2"
-                          style={{ color: "#4B2E2B" }}
+                          className="block text-sm font-medium mb-2 text-[#4B2E2B] dark:text-[#e6e6e6]"
                         >
                           Your Name
                         </label>
@@ -307,14 +217,7 @@ export default function ContactPage() {
                           name="name"
                           value={formData.name}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border rounded-xl transition-colors focus:outline-none focus:ring-2 focus:border-transparent"
-                          style={
-                            {
-                              borderColor: "#F5F5DC",
-                              backgroundColor: "#FFF8F0",
-                              "--tw-ring-color": "#6F4E37",
-                            } as React.CSSProperties
-                          }
+                          className="w-full px-4 py-3 border rounded-xl transition-colors focus:outline-none focus:ring-2 focus:border-transparent border-[#F5F5DC] bg-[#FFF8F0] dark:border-[#333] dark:bg-[#18181c] text-[#4B2E2B] dark:text-[#e6e6e6] focus:ring-[#6F4E37] dark:focus:ring-[#e6b800]"
                           placeholder="Enter your name"
                           required
                         />
@@ -322,8 +225,7 @@ export default function ContactPage() {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-sm font-medium mb-2"
-                          style={{ color: "#4B2E2B" }}
+                          className="block text-sm font-medium mb-2 text-[#4B2E2B] dark:text-[#e6e6e6]"
                         >
                           Email Address
                         </label>
@@ -333,14 +235,7 @@ export default function ContactPage() {
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 border rounded-xl transition-colors focus:outline-none focus:ring-2 focus:border-transparent"
-                          style={
-                            {
-                              borderColor: "#F5F5DC",
-                              backgroundColor: "#FFF8F0",
-                              "--tw-ring-color": "#6F4E37",
-                            } as React.CSSProperties
-                          }
+                          className="w-full px-4 py-3 border rounded-xl transition-colors focus:outline-none focus:ring-2 focus:border-transparent border-[#F5F5DC] bg-[#FFF8F0] dark:border-[#333] dark:bg-[#18181c] text-[#4B2E2B] dark:text-[#e6e6e6] focus:ring-[#6F4E37] dark:focus:ring-[#e6b800]"
                           placeholder="Enter your email"
                           required
                         />
@@ -350,8 +245,7 @@ export default function ContactPage() {
                     <div>
                       <label
                         htmlFor="subject"
-                        className="block text-sm font-medium mb-2"
-                        style={{ color: "#4B2E2B" }}
+                        className="block text-sm font-medium mb-2 text-[#4B2E2B] dark:text-[#e6e6e6]"
                       >
                         Subject
                       </label>
@@ -361,14 +255,7 @@ export default function ContactPage() {
                         name="subject"
                         value={formData.subject}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border rounded-xl transition-colors focus:outline-none focus:ring-2 focus:border-transparent"
-                        style={
-                          {
-                            borderColor: "#F5F5DC",
-                            backgroundColor: "#FFF8F0",
-                            "--tw-ring-color": "#6F4E37",
-                          } as React.CSSProperties
-                        }
+                        className="w-full px-4 py-3 border rounded-xl transition-colors focus:outline-none focus:ring-2 focus:border-transparent border-[#F5F5DC] bg-[#FFF8F0] dark:border-[#333] dark:bg-[#18181c] text-[#4B2E2B] dark:text-[#e6e6e6] focus:ring-[#6F4E37] dark:focus:ring-[#e6b800]"
                         placeholder="What's this about?"
                         required
                       />
@@ -377,8 +264,7 @@ export default function ContactPage() {
                     <div>
                       <label
                         htmlFor="message"
-                        className="block text-sm font-medium mb-2"
-                        style={{ color: "#4B2E2B" }}
+                        className="block text-sm font-medium mb-2 text-[#4B2E2B] dark:text-[#e6e6e6]"
                       >
                         Message
                       </label>
@@ -388,14 +274,7 @@ export default function ContactPage() {
                         value={formData.message}
                         onChange={handleInputChange}
                         rows={5}
-                        className="w-full px-4 py-3 border rounded-xl transition-colors resize-none focus:outline-none focus:ring-2 focus:border-transparent"
-                        style={
-                          {
-                            borderColor: "#F5F5DC",
-                            backgroundColor: "#FFF8F0",
-                            "--tw-ring-color": "#6F4E37",
-                          } as React.CSSProperties
-                        }
+                        className="w-full px-4 py-3 border rounded-xl transition-colors resize-none focus:outline-none focus:ring-2 focus:border-transparent border-[#F5F5DC] bg-[#FFF8F0] dark:border-[#333] dark:bg-[#18181c] text-[#4B2E2B] dark:text-[#e6e6e6] focus:ring-[#6F4E37] dark:focus:ring-[#e6b800]"
                         placeholder="Tell us what's on your mind..."
                         required
                       />
@@ -403,14 +282,7 @@ export default function ContactPage() {
 
                     <Button
                       type="submit"
-                      className="w-full text-white py-4 rounded-xl shadow-lg hover:shadow-xl transition-all group border-0"
-                      style={{ backgroundColor: "#6F4E37" }}
-                      onMouseEnter={(e) =>
-                        (e.target.style.backgroundColor = "#4B2E2B")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.target.style.backgroundColor = "#6F4E37")
-                      }
+                      className="bg-[#6F4E37] text-white w-full py-4 rounded-xl shadow-lg hover:shadow-xl transition-all group border-0 font-semibold transition-colors duration-200 hover:bg-[#4B2E2B] dark:bg-[#222] dark:text-[#e6b800] dark:hover:bg-[#333]"
                     >
                       Send Message
                       <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -424,27 +296,12 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section
-        className="py-20"
-        style={{
-          background: "linear-gradient(to bottom right, #FAF3E0, #F5F5DC)",
-        }}
-      >
+      <section className="py-20 bg-gradient-to-br from-[#FAF3E0] to-[#F5F5DC] dark:from-[#18181c] dark:to-[#232326]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2
-              className="text-4xl font-bold mb-6"
-              style={{ color: "#4B2E2B" }}
-            >
-              Find <span style={{ color: "#6F4E37" }}>Us</span>
+            <h2 className="text-4xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+              Find Us On The Map
             </h2>
-            <p
-              className="text-xl max-w-2xl mx-auto"
-              style={{ color: "#4B2E2B" }}
-            >
-              Located in the heart of downtown, we're easy to find and even
-              easier to love.
-            </p>
           </div>
 
           <div

@@ -48,7 +48,7 @@ export function CartButton() {
             isAnimating ? "animate-bounce-in" : ""
           }`}
           style={{
-            backgroundColor: "#F5F5DC",
+            backgroundColor: "#e6e6e6",
             color: "#4B2E2B",
           }}
         >

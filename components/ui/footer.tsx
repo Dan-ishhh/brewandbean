@@ -5,7 +5,7 @@ import React from "react";
 
 export function Footer() {
   return (
-    <footer className="text-white py-16" style={{ backgroundColor: "#4B2E2B" }}>
+    <footer className="py-16 bg-[#4B2E2B] text-white dark:bg-[#18181c] dark:text-[#e6e6e6]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="col-span-2">
@@ -25,12 +25,11 @@ export function Footer() {
                   className="w-10 h-10"
                 />
               </div>
-              <span className="text-2xl font-bold">Brew & Bean</span>
+              <span className="text-2xl font-bold text-[#FAF3E0] dark:text-[#e6b800]">
+                Brew & Bean
+              </span>
             </Link>
-            <p
-              className="mb-6 leading-relaxed max-w-md"
-              style={{ color: "#FAF3E0" }}
-            >
+            <p className="mb-6 leading-relaxed max-w-md text-[#FAF3E0] dark:text-[#e6e6e6]">
               Your neighborhood cafe where quality meets comfort. Join us for
               exceptional coffee, warm hospitality, and a welcoming community
               atmosphere.
@@ -38,10 +37,10 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold mb-6" style={{ color: "#FAF3E0" }}>
+            <h4 className="font-bold mb-6 text-[#FAF3E0] dark:text-[#e6b800]">
               Quick Links
             </h4>
-            <div className="space-y-3" style={{ color: "#FAF3E0" }}>
+            <div className="space-y-3 text-[#FAF3E0] dark:text-[#e6e6e6]">
               <p>
                 <Link
                   href="/menu"
@@ -70,10 +69,10 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-bold mb-6" style={{ color: "#F5F5DC" }}>
+            <h4 className="font-bold mb-6 text-[#F5F5DC] dark:text-[#e6b800]">
               Contact Info
             </h4>
-            <div className="space-y-3" style={{ color: "#FAF3E0" }}>
+            <div className="space-y-3 text-[#FAF3E0] dark:text-[#e6e6e6]">
               <p>123 Coffee Street</p>
               <p>Downtown District</p>
               <p>(555) 123-BREW</p>
@@ -82,10 +81,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div
-          className="border-t mt-12 pt-8 text-center"
-          style={{ borderColor: "#6F4E37", color: "#FAF3E0" }}
-        >
+        <div className="border-t mt-12 pt-8 text-center border-[#6F4E37] dark:border-[#333] text-[#FAF3E0] dark:text-[#e6e6e6]">
           <p>
             &copy; 2025 Brew & Bean. All rights reserved. Made with ❤️ for
             coffee lovers.

@@ -142,12 +142,13 @@ export function CartSidebar() {
                   return (
                     <Card
                       key={`${item.id}-${index}`}
-                      className={`border transform hover:scale-[1.02]`}
+                      // className={`border transform hover:scale-[1.02]`}
                       style={{
                         borderColor: "#F5F5DC",
                         backgroundColor: "#FFF8F0",
                         animationDelay: `${index * 100}ms`,
                       }}
+                      className={`border transform hover:scale-[1.02] border-[#F5F5DC] dark:border-[#333] bg-[#FFF8F0] dark:bg-[#18181c]`}
                     >
                       {/* transition-all duration-300 animate-slide-in-right-staggered */}
                       <CardContent className="p-4">

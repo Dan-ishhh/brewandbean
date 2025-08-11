@@ -4,9 +4,12 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { CartButton } from "@/components/cart/cart-button";
+import { useTheme } from "next-themes";
+import { Sun, Moon } from "lucide-react";
 import Image from "next/image";
 
 export function TopbarMenu() {
+  const { theme, setTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -19,10 +22,7 @@ export function TopbarMenu() {
 
   return (
     <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-7xl px-4">
-      <div
-        className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-xl border"
-        style={{ borderColor: "#F5F5DC" }}
-      >
+      <div className="backdrop-blur-lg rounded-2xl shadow-xl border transition-colors duration-300 bg-white/95 dark:bg-[#18181b] border-[#F5F5DC] dark:border-[#222]">
         <div className="px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center gap-2">
@@ -36,27 +36,15 @@ export function TopbarMenu() {
                     className="w-10 h-10"
                   />
                 </div>
-                <div
-                  className="absolute -top-1 -right-1 w-3 h-3 rounded-full animate-pulse"
-                  style={{ backgroundColor: "#F5F5DC" }}
-                ></div>
+                <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full animate-pulse bg-[#F5F5DC] dark:bg-[#6F4E37]"></div>
               </div>
-              <span className="text-xl font-bold" style={{ color: "#4B2E2B" }}>
-                <span
-                  className="hidden md:inline text-xl font-bold"
-                  style={{ color: "#4B2E2B" }}
-                >
+              <span className="text-xl font-bold text-[#4B2E2B] dark:text-[#e6e6e6]">
+                <span className="hidden md:inline text-xl font-bold text-[#4B2E2B] dark:text-[#e6e6e6]">
                   Brew & Bean
                 </span>
               </span>
-              <span
-                className="inline md:hidden text-xl font-bold"
-                style={{ color: "#4B2E2B" }}
-              >
-                <span
-                  className="inline md:hidden text-xl font-bold"
-                  style={{ color: "#4B2E2B" }}
-                ></span>
+              <span className="inline md:hidden text-xl font-bold text-[#4B2E2B] dark:text-[#F5F5DC]">
+                <span className="inline md:hidden text-xl font-bold text-[#4B2E2B] dark:text-[#F5F5DC]"></span>
               </span>
             </Link>
 
@@ -69,8 +57,12 @@ export function TopbarMenu() {
                     key={link.href}
                     href={link.href}
                     className={`px-4 py-2 rounded-xl font-medium transition-all duration-200
-                      ${isActive ? "bg-[#6F4E37] text-white" : "text-[#4B2E2B]"}
-                      hover:bg-[#F5F5DC] hover:text-[#4B2E2B]`}
+                      ${
+                        isActive
+                          ? "bg-[#6F4E37] text-white dark:bg-[#e6e6e6] dark:text-[#18181b]"
+                          : "text-[#4B2E2B] dark:text-[#e6e6e6]"
+                      }
+                      hover:bg-[#F5F5DC] hover:text-[#4B2E2B] dark:hover:bg-[#222] dark:hover:text-[#e6e6e6]`}
                   >
                     {link.label}
                   </Link>
@@ -80,6 +72,25 @@ export function TopbarMenu() {
 
             <div className="flex items-center gap-4">
               <CartButton />
+
+              {/* Theme Switch - Desktop & Mobile */}
+              <button
+                aria-label={
+                  theme === "dark"
+                    ? "Switch to light mode"
+                    : "Switch to dark mode"
+                }
+                className="relative flex items-center justify-center w-10 h-10 rounded-full border-2 border-[#F5F5DC] bg-[#FFF8F0] dark:bg-[#222] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#6F4E37]"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              >
+                <span className="absolute inset-0 flex items-center justify-center">
+                  {theme === "dark" ? (
+                    <Sun className="h-6 w-6 text-yellow-400 transition-transform duration-300 rotate-0" />
+                  ) : (
+                    <Moon className="h-6 w-6 text-[#6F4E37] transition-transform duration-300 rotate-0" />
+                  )}
+                </span>
+              </button>
 
               {/* Mobile Menu Button */}
               <button
@@ -101,7 +112,7 @@ export function TopbarMenu() {
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="md:hidden border-t py-4 border-[#F5F5DC]">
+            <div className="md:hidden border-t py-4 border-[#F5F5DC] dark:border-[#222] bg-white/95 dark:bg-[#18181b]">
               <div className="space-y-2">
                 {navLinks.map((link) => {
                   const isActive = pathname === link.href;
@@ -112,10 +123,10 @@ export function TopbarMenu() {
                       className={`block px-4 py-3 rounded-xl font-medium transition-all duration-200
                         ${
                           isActive
-                            ? "bg-[#6F4E37] text-white"
-                            : "text-[#4B2E2B]"
+                            ? "bg-[#6F4E37] text-white dark:bg-[#F5F5DC] dark:text-[#18181b]"
+                            : "text-[#4B2E2B] dark:text-[#F5F5DC]"
                         }
-                        hover:bg-[#F5F5DC] hover:text-[#4B2E2B]`}
+                        hover:bg-[#F5F5DC] hover:text-[#4B2E2B] dark:hover:bg-[#222] dark:hover:text-[#F5F5DC]`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {link.label}

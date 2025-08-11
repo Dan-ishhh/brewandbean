@@ -17,6 +17,9 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Dark Mode in Cart Sidebar
+  // Dark Mode in Thank you page
+  // Integrate language toggle for (English and Hindi)
   // Change from Redux to Zustand
 
   const pizzaItems = [
@@ -144,22 +147,12 @@ export default function HomePage() {
     },
   ];
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#FFF8F0" }}>
+    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       {/* Hero Section */}
       <section className="pt-24 min-h-screen flex items-center relative overflow-hidden">
         {/* Background Pattern */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom right, #FFF8F0, #FAF3E0, #F5F5DC)",
-          }}
-        >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8F0] to-[#FAF3E0] dark:from-[#18181c] dark:to-[#232326]">
           <div className="absolute inset-0 opacity-30">
-            {/* <div
-              className="absolute top-10 left-10 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse"
-              style={{ backgroundColor: "#6F4E37" }}
-            ></div> */}
             <div
               className="absolute top-40 right-40 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"
               style={{ backgroundColor: "#6F4E37" }}
@@ -174,23 +167,17 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10 py-20">
           <div className="space-y-8">
             <div className="space-y-6">
-              <Badge
-                className="px-4 py-2 rounded-full text-sm font-medium border-#E6B800"
-                style={{ backgroundColor: "#FFF8F0", color: "#4B2E2B" }}
-              >
+              <Badge className="px-4 py-2 rounded-full text-sm font-medium border-#E6B800 bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6]">
                 ☕ Freshly Roasted Daily
               </Badge>
-              <h1
-                className="text-5xl lg:text-6xl font-bold leading-tight"
-                style={{ color: "#4B2E2B" }}
-              >
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-[#4B2E2B] dark:text-[#e6e6e6]">
                 Your Cozy Corner for a
-                <span style={{ color: "#6F4E37" }}> Coffee</span>
+                <span className="text-[#6F4E37] dark:text-[#e6b800]">
+                  {" "}
+                  Coffee
+                </span>
               </h1>
-              <p
-                className="text-xl leading-relaxed max-w-lg"
-                style={{ color: "#4B2E2B" }}
-              >
+              <p className="text-xl leading-relaxed max-w-lg text-[#4B2E2B] dark:text-[#e6e6e6]">
                 Step into warmth, savor exceptional coffee, and become part of
                 our welcoming community where every visit feels like coming
                 home.
@@ -201,16 +188,16 @@ export default function HomePage() {
               <Link href="/menu">
                 <Button
                   size="lg"
-                  className="text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto border-0"
-                  style={{ backgroundColor: "#6F4E37" }}
-                  onMouseEnter={(e) => {
-                    const target = e.currentTarget as HTMLElement;
-                    target.style.backgroundColor = "#4B2E2B";
-                  }}
-                  onMouseLeave={(e) => {
-                    const target = e.currentTarget as HTMLElement;
-                    target.style.backgroundColor = "#6F4E37";
-                  }}
+                  className="bg-[#4B2E2B] text-[#FFF8F0] hover:bg-[#4B2E2B] hover:text-white dark:bg-[#222] dark:text-[#e6e6e6] dark:hover:bg-[#333] dark:hover:text-[#e6b800] text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto border-0"
+                  // style={{ backgroundColor: "#6F4E37" }}
+                  // onMouseEnter={(e) => {
+                  //   const target = e.currentTarget as HTMLElement;
+                  //   target.style.backgroundColor = "#4B2E2B";
+                  // }}
+                  // onMouseLeave={(e) => {
+                  //   const target = e.currentTarget as HTMLElement;
+                  //   target.style.backgroundColor = "#6F4E37";
+                  // }}
                 >
                   Explore Our Menu
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -220,16 +207,16 @@ export default function HomePage() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="bg-white/80 px-8 py-4 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto"
-                  style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
-                  onMouseEnter={(e) => {
-                    const target = e.currentTarget as HTMLElement;
-                    target.style.backgroundColor = "#FFF8F0";
-                  }}
-                  onMouseLeave={(e) => {
-                    const target = e.currentTarget as HTMLElement;
-                    target.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-                  }}
+                  className="text-[#4B2E2B] dark:bg-[#222] dark:border-[#e6b800] dark:text-[#e6b800] dark:hover:bg-[#333] dark:hover:text-[#e6b800] bg-white/80 px-8 py-4 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto"
+                  // style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
+                  // onMouseEnter={(e) => {
+                  //   const target = e.currentTarget as HTMLElement;
+                  //   target.style.backgroundColor = "#FFF8F0";
+                  // }}
+                  // onMouseLeave={(e) => {
+                  //   const target = e.currentTarget as HTMLElement;
+                  //   target.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
+                  // }}
                 >
                   Find Us
                 </Button>
@@ -246,13 +233,13 @@ export default function HomePage() {
                     />
                   ))}
                 </div>
-                <span className="font-medium" style={{ color: "#4B2E2B" }}>
+                <span className="text-[#4B2E2B] dark:text-[#e6e6e6] font-medium">
                   4.9/5 Rating
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <Heart className="h-5 w-5" style={{ color: "#6F4E37" }} />
-                <span className="font-medium" style={{ color: "#4B2E2B" }}>
+                <Heart className="text-[#6F4E37] dark:text-[#e6e6e6] h-5 w-5" />
+                <span className="text-[#4B2E2B] dark:text-[#e6e6e6] font-medium">
                   2000+ Happy Customers
                 </span>
               </div>
@@ -270,49 +257,46 @@ export default function HomePage() {
 
             {/* Floating Elements */}
             <div
-              className="absolute top-8 -right-4 bg-white p-4 rounded-2xl shadow-lg z-20"
-              style={{ borderColor: "#F5F5DC", borderWidth: "1px" }}
+              className="dark:bg-[#222] absolute top-8 -right-4 bg-white p-4 rounded-2xl shadow-lg z-20"
+              // style={{ borderColor: "#F5F5DC", borderWidth: "1px" }}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 text-[#4B2E2B] dark:text-[#e6e6e6]">
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: "#FFF8F0" }}
+                  className="bg-[#FFF8F0] dark:bg-[#18181c] w-10 h-10 rounded-xl flex items-center justify-center"
+                  // style={{ backgroundColor: "#FFF8F0" }}
                 >
-                  <Coffee className="h-5 w-5" style={{ color: "#6F4E37" }} />
+                  <Coffee
+                    className=" text-[#6F4E37] dark:text-[#e6b800] h-5 w-5"
+                    // style={{ color: "#6F4E37" }}
+                  />
                 </div>
                 <div>
                   <p
-                    className="font-semibold text-sm"
-                    style={{ color: "#4B2E2B" }}
+                    className="font-semibold text-sm text-[#4B2E2B] dark:text-[#e6e6e6]"
+                    // style={{ color: "#4B2E2B" }}
                   >
                     Premium Coffee
                   </p>
-                  <p className="text-xs" style={{ color: "#6F4E37" }}>
+                  <p
+                    className="text-xs text-[#6F4E37] dark:text-[#e6b800]"
+                    // style={{ color: "#6F4E37" }}
+                  >
                     Ethically Sourced
                   </p>
                 </div>
               </div>
             </div>
 
-            <div
-              className="absolute bottom-8 -left-4 bg-white p-4 rounded-2xl shadow-lg z-20"
-              style={{ borderColor: "#F5F5DC", borderWidth: "1px" }}
-            >
+            <div className="absolute bottom-8 -left-4 bg-white dark:bg-[#222] p-4 rounded-2xl shadow-lg z-20 border border-[#F5F5DC] dark:border-[#333]">
               <div className="flex items-center gap-3">
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: "#FFF8F0" }}
-                >
-                  <Wifi className="h-5 w-5" style={{ color: "#6F4E37" }} />
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-[#FFF8F0] dark:bg-[#18181c]">
+                  <Wifi className="h-5 w-5 text-[#6F4E37] dark:text-[#e6b800]" />
                 </div>
                 <div>
-                  <p
-                    className="font-semibold text-sm"
-                    style={{ color: "#4B2E2B" }}
-                  >
+                  <p className="font-semibold text-sm text-[#4B2E2B] dark:text-[#e6e6e6]">
                     Free WiFi
                   </p>
-                  <p className="text-xs" style={{ color: "#6F4E37" }}>
+                  <p className="text-xs text-[#6F4E37] dark:text-[#e6b800]">
                     Work Friendly
                   </p>
                 </div>
@@ -323,44 +307,29 @@ export default function HomePage() {
       </section>
 
       {/* Quick About Preview */}
-      <section className="py-24" style={{ backgroundColor: "#FFF8F0" }}>
+      <section className="py-24 bg-[#FFF8F0] dark:bg-[#18181c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <Badge
-              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
-              style={{ backgroundColor: "#FAF3E0", color: "#4B2E2B" }}
-            >
+            <Badge className="px-4 py-2 rounded-full text-sm font-medium mb-6 bg-[#FAF3E0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none">
               Our Story
             </Badge>
-            <h2
-              className="text-4xl lg:text-5xl font-bold mb-6"
-              style={{ color: "#4B2E2B" }}
-            >
-              Crafted with <span style={{ color: "#6F4E37" }}>Passion</span>,
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+              Crafted with{" "}
+              <span className="text-[#6F4E37] dark:text-[#e6b800]">
+                Passion
+              </span>
+              ,
               <br className="hidden sm:block" />
-              Served with <span style={{ color: "#6F4E37" }}>Love</span>
+              Served with{" "}
+              <span className="text-[#6F4E37] dark:text-[#e6b800]">Love</span>
             </h2>
-            <p
-              className="text-xl max-w-3xl mx-auto leading-relaxed mb-8"
-              style={{ color: "#4B2E2B" }}
-            >
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed mb-8 text-[#4B2E2B] dark:text-[#e6e6e6]">
               Since 2018, Brew & Bean has been the heart of our community,
               creating a warm space where neighbors become friends and great
               ideas are born over exceptional coffee.
             </p>
             <Link href="/about">
-              <Button
-                className="text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border-0"
-                style={{ backgroundColor: "#6F4E37" }}
-                onMouseEnter={(e) => {
-                  const target = e.currentTarget as HTMLElement;
-                  target.style.backgroundColor = "#4B2E2B";
-                }}
-                onMouseLeave={(e) => {
-                  const target = e.currentTarget as HTMLElement;
-                  target.style.backgroundColor = "#6F4E37";
-                }}
-              >
+              <Button className="text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border-0 bg-[#6F4E37] hover:bg-[#4B2E2B] dark:bg-[#222] dark:text-[#e6b800] dark:hover:bg-[#333]">
                 Learn More About Us
               </Button>
             </Link>
@@ -369,30 +338,19 @@ export default function HomePage() {
       </section>
 
       {/* Menu Preview */}
-      <section
-        className="py-24"
-        style={{
-          background: "linear-gradient(to bottom right, #FAF3E0, #F5F5DC)",
-        }}
-      >
+      <section className="py-24 bg-gradient-to-br from-[#FAF3E0] to-[#F5F5DC] dark:from-[#18181c] dark:to-[#232326]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <Badge
-              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
-              style={{ backgroundColor: "#FFF8F0", color: "#4B2E2B" }}
-            >
+            <Badge className="px-4 py-2 rounded-full text-sm font-medium mb-6 bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none">
               Our Menu
             </Badge>
-            <h2
-              className="text-4xl lg:text-5xl font-bold mb-6"
-              style={{ color: "#4B2E2B" }}
-            >
-              <span style={{ color: "#6F4E37" }}>Signature</span> Favorites
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+              <span className="text-[#6F4E37] dark:text-[#e6b800]">
+                Signature
+              </span>{" "}
+              Favorites
             </h2>
-            <p
-              className="text-xl max-w-3xl mx-auto leading-relaxed"
-              style={{ color: "#4B2E2B" }}
-            >
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed text-[#4B2E2B] dark:text-[#e6e6e6]">
               From classic espresso drinks to innovative seasonal creations,
               each item is crafted with care to bring you the perfect taste
               experience.
@@ -431,26 +389,16 @@ export default function HomePage() {
 
           {/* Pizza Section */}
           <div className="text-center mb-12">
-            <Badge
-              className="px-4 py-2 rounded-full text-sm font-medium mb-6 border-#E6B800"
-              style={{
-                backgroundColor: "#FFF8F0",
-                color: "#4B2E2B",
-                // border: "1px solid red",
-              }}
-            >
+            <Badge className="px-4 py-2 rounded-full text-sm font-medium mb-6 bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none">
               Pizzas
             </Badge>
-            <h2
-              className="text-3xl lg:text-4xl font-bold mb-6"
-              style={{ color: "#4B2E2B" }}
-            >
-              <span style={{ color: "#6F4E37" }}>Delicious</span> Pizzas
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+              <span className="text-[#6F4E37] dark:text-[#e6b800]">
+                Delicious
+              </span>{" "}
+              Pizzas
             </h2>
-            <p
-              className="text-lg max-w-2xl mx-auto leading-relaxed"
-              style={{ color: "#4B2E2B" }}
-            >
+            <p className="text-lg max-w-2xl mx-auto leading-relaxed text-[#4B2E2B] dark:text-[#e6e6e6]">
               Try our new range of pizzas, baked to perfection with fresh
               ingredients and love.
             </p>
@@ -469,16 +417,7 @@ export default function HomePage() {
             <Link href="/menu">
               <Button
                 size="lg"
-                className="text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0"
-                style={{ backgroundColor: "#6F4E37" }}
-                onMouseEnter={(e) => {
-                  const target = e.currentTarget as HTMLElement;
-                  target.style.backgroundColor = "#4B2E2B";
-                }}
-                onMouseLeave={(e) => {
-                  const target = e.currentTarget as HTMLElement;
-                  target.style.backgroundColor = "#6F4E37";
-                }}
+                className="text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0 bg-[#6F4E37] hover:bg-[#4B2E2B] dark:bg-[#222] dark:text-[#e6b800] dark:hover:bg-[#333]"
               >
                 View Full Menu
               </Button>
@@ -488,12 +427,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section
-        className="py-20 text-white"
-        style={{
-          background: "linear-gradient(to bottom right, #6F4E37, #4B2E2B)",
-        }}
-      >
+      <section className="py-20 text-white bg-gradient-to-br from-[#6F4E37] to-[#4B2E2B] dark:from-[#18181c] dark:to-[#232326]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Order?</h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
@@ -504,7 +438,7 @@ export default function HomePage() {
             <Link href="/menu">
               <Button
                 size="lg"
-                className="px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0 bg-[#FFF8F0] text-[#4B2E2B] hover:bg-[#4B2E2B] hover:text-white"
+                className="px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0 bg-[#FFF8F0] text-[#4B2E2B] hover:bg-[#4B2E2B] hover:text-white dark:bg-[#222] dark:text-[#e6e6e6] dark:hover:bg-[#333] dark:hover:text-[#e6b800]"
               >
                 Order Online
               </Button>
@@ -513,7 +447,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-[#4B2E2B] px-8 py-4 rounded-full bg-transparent"
+                className="border-2 border-white text-white hover:bg-white hover:text-[#4B2E2B] px-8 py-4 rounded-full bg-transparent dark:border-[#e6b800] dark:text-[#e6b800] dark:hover:bg-[#333] dark:hover:text-[#e6b800]"
               >
                 Visit Our Store
               </Button>
