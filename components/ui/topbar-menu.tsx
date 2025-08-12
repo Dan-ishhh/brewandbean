@@ -30,7 +30,7 @@ export function TopbarMenu() {
         style={{
           boxShadow:
             theme === "dark"
-              ? "0 6px 32px 0 rgba(230, 184, 0, 0.18), 0 1.5px 8px 0 rgba(111, 78, 55, 0.22)"
+              ? "0 6px 32px 0 rgba(111, 78, 55, 0.18), 0 1.5px 8px 0 rgba(111, 78, 55, 0.22)"
               : undefined,
         }}
       >

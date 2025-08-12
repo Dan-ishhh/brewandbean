@@ -186,8 +186,8 @@ export default function HomePage() {
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8F0] to-[#FAF3E0] dark:from-[#18181c] dark:to-[#232326]">
           <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-40 right-40 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000 bg-[#6F4E37] dark:bg-[#e6b800]"></div>
-            <div className="absolute bottom-10 left-80 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000 bg-[#6F4E37] dark:bg-[#e6b800]"></div>
+            <div className="absolute top-40 right-40 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000 bg-[#6F4E37]"></div>
+            <div className="absolute bottom-10 left-80 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000 bg-[#6F4E37]"></div>
           </div>
         </div>
 
