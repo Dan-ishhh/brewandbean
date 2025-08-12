@@ -166,20 +166,14 @@ export default function CheckoutPage() {
     // Automatically download invoice PDF after order is placed
     // Use a hidden PDFDownloadLink and trigger click when autoDownload is true
     return (
-      <div
-        className="min-h-screen flex flex-col items-center justify-center"
-        style={{ backgroundColor: "#FFF8F0" }}
-      >
-        <Card className="max-w-md w-full shadow-xl border-0 rounded-2xl">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FFF8F0] dark:bg-[#18181c]">
+        <Card className="max-w-md w-full shadow-xl border-0 rounded-2xl bg-[#FFF8F0] dark:bg-[#222]">
           <CardContent className="p-8 text-center">
             <CheckCircle className="mx-auto mb-4 h-12 w-12 text-green-600 animate-bounce" />
-            <h2
-              className="text-2xl font-bold mb-2"
-              style={{ color: "#4B2E2B" }}
-            >
+            <h2 className="text-2xl font-bold mb-2 text-[#4B2E2B] dark:text-[#e6e6e6]">
               {paid ? "Payment Successful!" : "Order Confirmed!"}
             </h2>
-            <p className="mb-6" style={{ color: "#6F4E37" }}>
+            <p className="mb-6 text-[#6F4E37] dark:text-[#e6b800]">
               {paid
                 ? "Thank you for your payment. Your order is confirmed."
                 : "Your order is confirmed. Please pay at the restaurant."}
@@ -212,10 +206,7 @@ export default function CheckoutPage() {
               }}
             </PDFDownloadLink>
             <Link href="/menu" className="block mt-6">
-              <Button
-                className="w-full py-3 rounded-full shadow-md bg-transparent border-0 hover:bg-[#F5F5DC] hover:text-[#4B2E2B]"
-                style={{ color: "#4B2E2B", backgroundColor: "#FFF8F0" }}
-              >
+              <Button className="w-full py-3 rounded-full shadow-md bg-transparent border-0 hover:bg-[#F5F5DC] hover:text-[#4B2E2B] dark:hover:bg-[#222] dark:hover:text-[#e6b800] text-[#4B2E2B] dark:text-[#e6e6e6] bg-[#FFF8F0] dark:bg-[#18181c]">
                 Back to Menu
               </Button>
             </Link>
@@ -226,45 +217,30 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#FFF8F0" }}>
+    <div className="min-h-screen bg-[#FFF8F0] dark:bg-[#18181c]">
       <section className="pt-24 pb-12">
         <div className="max-w-3xl mx-auto px-4">
           <div className="flex items-center justify-between gap-3 mb-8 mt-4">
             <Link href="/menu">
               <Button
                 size="sm"
-                className="text-white px-4 py-4 rounded-full shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto border-0"
-                style={{ backgroundColor: "#6F4E37" }}
-                onMouseEnter={(e) => {
-                  const target = e.currentTarget as HTMLElement;
-                  target.style.backgroundColor = "#4B2E2B";
-                }}
-                onMouseLeave={(e) => {
-                  const target = e.currentTarget as HTMLElement;
-                  target.style.backgroundColor = "#6F4E37";
-                }}
+                className="text-white px-4 py-4 rounded-full shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto border-0 bg-[#6F4E37] dark:bg-[#222] dark:text-[#e6b800] dark:hover:bg-[#333]"
               >
                 <ArrowLeft className="h-5 w-5" /> Back to Menu
               </Button>
             </Link>
           </div>
-          <h1
-            className="text-4xl font-bold text-center mb-8"
-            style={{ color: "#4B2E2B" }}
-          >
+          <h1 className="text-4xl font-bold text-center mb-8 text-[#4B2E2B] dark:text-[#e6e6e6]">
             Checkout
           </h1>
 
-          <Card className="shadow-xl border-0 rounded-2xl mb-8">
+          <Card className="shadow-xl border-0 rounded-2xl mb-8 bg-[#FFF8F0] dark:bg-[#222]">
             <CardContent className="p-6">
-              <h2
-                className="text-xl font-bold mb-4"
-                style={{ color: "#4B2E2B" }}
-              >
+              <h2 className="text-xl font-bold mb-4 text-[#4B2E2B] dark:text-[#e6e6e6]">
                 Your Items
               </h2>
               {state.items.length === 0 ? (
-                <p className="text-center text-lg" style={{ color: "#6F4E37" }}>
+                <p className="text-center text-lg text-[#6F4E37] dark:text-[#e6b800]">
                   Your cart is empty.
                 </p>
               ) : (
@@ -272,7 +248,7 @@ export default function CheckoutPage() {
                   {state.items.map((item, idx) => (
                     <Card
                       key={`${item.id}-${idx}`}
-                      className="border rounded-xl shadow-sm"
+                      className="border rounded-xl shadow-sm bg-[#FFF8F0] dark:bg-[#18181c] border-[#F5F5DC] dark:border-[#333]"
                     >
                       <CardContent className="p-4 flex gap-4 items-center">
                         <img
@@ -288,20 +264,14 @@ export default function CheckoutPage() {
                           }}
                         />
                         <div className="flex-1">
-                          <h3
-                            className="font-semibold mb-1"
-                            style={{ color: "#4B2E2B" }}
-                          >
+                          <h3 className="font-semibold mb-1 text-[#4B2E2B] dark:text-[#e6e6e6]">
                             {item.name}
                           </h3>
-                          <p
-                            className="text-sm mb-1"
-                            style={{ color: "#6F4E37" }}
-                          >
+                          <p className="text-sm mb-1 text-[#6F4E37] dark:text-[#e6b800]">
                             ${item.price.toFixed(2)} each x{item.quantity}
                           </p>
                           {item.options && (
-                            <div className="mb-1 text-xs text-[#6F4E37] space-y-1">
+                            <div className="mb-1 text-xs text-[#6F4E37] dark:text-[#e6b800] space-y-1">
                               {Object.entries(item.options)
                                 .filter(
                                   ([k, v]) => v && k !== "customizationKey"
@@ -314,22 +284,16 @@ export default function CheckoutPage() {
                             </div>
                           )}
                         </div>
-                        {/* <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleDelete(item.id)}
-                          className="h-8 w-8 p-0 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-full"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button> */}
                       </CardContent>
                     </Card>
                   ))}
                 </div>
               )}
               <div className="flex justify-between items-center mt-6 text-lg font-bold">
-                <span style={{ color: "#4B2E2B" }}>Total:</span>
-                <span style={{ color: "#6F4E37" }}>
+                <span className="text-[#4B2E2B] dark:text-[#e6e6e6]">
+                  Total:
+                </span>
+                <span className="text-[#6F4E37] dark:text-[#e6b800]">
                   ${state.total.toFixed(2)}
                 </span>
               </div>
@@ -337,24 +301,22 @@ export default function CheckoutPage() {
           </Card>
 
           {/* Payment Options as radio buttons */}
-          <Card className="shadow-xl border-0 rounded-2xl">
+          <Card className="shadow-xl border-0 rounded-2xl bg-[#FFF8F0] dark:bg-[#222]">
             <CardContent className="p-6">
-              <h2
-                className="text-xl font-bold mb-4"
-                style={{ color: "#4B2E2B" }}
-              >
+              <h2 className="text-xl font-bold mb-4 text-[#4B2E2B] dark:text-[#e6e6e6]">
                 Payment Options
               </h2>
               <div className="flex flex-col sm:flex-row gap-4">
                 <label
                   className={`flex items-center gap-3 px-4 py-3 rounded-full cursor-pointer border transition-all duration-200 ${
                     payment === "restaurant"
-                      ? "border-[#6F4E37] bg-[#FAF3E0]"
-                      : "border-[#F5F5DC] bg-[#FFF8F0]"
+                      ? "border-[#6F4E37] bg-[#FAF3E0] dark:bg-[#222] dark:border-[#e6b800]"
+                      : "border-[#F5F5DC] bg-[#FFF8F0] dark:bg-[#18181c] dark:border-[#333]"
+                  } ${
+                    payment === "restaurant"
+                      ? "text-[#4B2E2B] dark:text-[#e6b800]"
+                      : "text-[#6F4E37] dark:text-[#e6e6e6]"
                   }`}
-                  style={{
-                    color: payment === "restaurant" ? "#4B2E2B" : "#6F4E37",
-                  }}
                 >
                   <input
                     type="radio"
@@ -369,12 +331,13 @@ export default function CheckoutPage() {
                 <label
                   className={`flex items-center gap-3 px-4 py-3 rounded-full cursor-pointer border transition-all duration-200 ${
                     payment === "online"
-                      ? "border-[#6F4E37] bg-[#FAF3E0]"
-                      : "border-[#F5F5DC] bg-[#FFF8F0]"
+                      ? "border-[#6F4E37] bg-[#FAF3E0] dark:bg-[#222] dark:border-[#e6b800]"
+                      : "border-[#F5F5DC] bg-[#FFF8F0] dark:bg-[#18181c] dark:border-[#333]"
+                  } ${
+                    payment === "online"
+                      ? "text-[#4B2E2B] dark:text-[#e6b800]"
+                      : "text-[#6F4E37] dark:text-[#e6e6e6]"
                   }`}
-                  style={{
-                    color: payment === "online" ? "#4B2E2B" : "#6F4E37",
-                  }}
                 >
                   <input
                     type="radio"
@@ -402,7 +365,7 @@ export default function CheckoutPage() {
                           placeholder="Name on Card"
                           value={cardForm.name}
                           onChange={handleCardInput}
-                          className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F4E37]"
+                          className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F4E37] bg-[#FFF8F0] dark:bg-[#18181c] text-[#4B2E2B] dark:text-[#e6e6e6]"
                           required
                         />
                         <input
@@ -412,7 +375,7 @@ export default function CheckoutPage() {
                           value={cardForm.number}
                           onChange={handleCardInput}
                           maxLength={19}
-                          className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F4E37]"
+                          className="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F4E37] bg-[#FFF8F0] dark:bg-[#18181c] text-[#4B2E2B] dark:text-[#e6e6e6]"
                           required
                         />
                         <div className="flex gap-2">
@@ -423,7 +386,7 @@ export default function CheckoutPage() {
                             value={cardForm.expiry}
                             onChange={handleCardInput}
                             maxLength={5}
-                            className="border rounded-lg px-4 py-2 w-1/2 focus:outline-none focus:ring-2 focus:ring-[#6F4E37]"
+                            className="border rounded-lg px-4 py-2 w-1/2 focus:outline-none focus:ring-2 focus:ring-[#6F4E37] bg-[#FFF8F0] dark:bg-[#18181c] text-[#4B2E2B] dark:text-[#e6e6e6]"
                             required
                           />
                           <input
@@ -433,7 +396,7 @@ export default function CheckoutPage() {
                             value={cardForm.cvv}
                             onChange={handleCardInput}
                             maxLength={4}
-                            className="border rounded-lg px-4 py-2 w-1/2 focus:outline-none focus:ring-2 focus:ring-[#6F4E37]"
+                            className="border rounded-lg px-4 py-2 w-1/2 focus:outline-none focus:ring-2 focus:ring-[#6F4E37] bg-[#FFF8F0] dark:bg-[#18181c] text-[#4B2E2B] dark:text-[#e6e6e6]"
                             required
                           />
                         </div>
@@ -443,16 +406,14 @@ export default function CheckoutPage() {
                       )}
                       <Button
                         type="submit"
-                        className="w-full py-3 rounded-full shadow-lg border-0 text-white"
-                        style={{ backgroundColor: "#6F4E37" }}
+                        className="w-full py-3 rounded-full shadow-lg border-0 text-white bg-[#6F4E37] dark:bg-[#222] dark:text-[#e6b800] dark:hover:bg-[#333]"
                       >
                         Pay
                       </Button>
                     </form>
                   ) : (
                     <Button
-                      className="w-full py-3 rounded-full shadow-lg border-0 text-white"
-                      style={{ backgroundColor: "#6F4E37" }}
+                      className="w-full py-3 rounded-full shadow-lg border-0 text-white bg-[#6F4E37] dark:bg-[#222] dark:text-[#e6b800] dark:hover:bg-[#333]"
                       onClick={handlePayAtRestaurant}
                     >
                       Confirm Order

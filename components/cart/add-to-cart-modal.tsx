@@ -252,15 +252,9 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
               {/* Coffee Customization */}
               {isCoffeeCustom && (
                 <div className="space-y-4 animate-fade-in-up">
-                  {/* <h4
-                      className="font-semibold mb-2"
-                      style={{ color: "#4B2E2B" }}
-                    >
-                      Customize Your Coffee
-                    </h4> */}
                   <div className="mb-2">
                     <label className="block mb-1 font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
-                      Milk
+                      Milk <span className="text-red-500">*</span>
                     </label>
                     <div className="flex gap-2 flex-wrap">
                       {milkOptions.map((milk) => (
@@ -281,7 +275,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                   </div>
                   <div className="mb-2">
                     <label className="block mb-1 font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
-                      Coffee Type
+                      Coffee Type <span className="text-red-500">*</span>
                     </label>
                     <div className="flex gap-2 flex-wrap">
                       {coffeeTypeOptions.map((type) => (
@@ -302,7 +296,7 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                   </div>
                   <div className="mb-2">
                     <label className="block mb-1 font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
-                      Sugar Level
+                      Sugar Level <span className="text-red-500">*</span>
                     </label>
                     <div className="flex gap-2 flex-wrap">
                       {sugarLevelOptions.map((level) => (
@@ -326,12 +320,27 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
               {/* Pizza Customization */}
               {isPizzaCustom && (
                 <div className="space-y-4 animate-fade-in-up">
-                  {/* <h4
-                      className="font-semibold mb-2"
-                      style={{ color: "#4B2E2B" }}
-                    >
-                      Customize Your Pizza
-                    </h4> */}
+                  <div className="mb-2">
+                    <label className="block mb-1 font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
+                      Crust <span className="text-red-500">*</span>
+                    </label>
+                    <div className="flex gap-2 flex-wrap">
+                      {item.crustOptions?.map((crust) => (
+                        <Button
+                          key={crust}
+                          size="sm"
+                          className={`rounded-full px-4 py-2 border-2 hover:text-white transition-colors duration-200 ${
+                            selectedCrust === crust
+                              ? "border-[#6F4E37] bg-[#FAF3E0] text-[#6F4E37] dark:bg-[#222] dark:text-[#e6b800] dark:border-[#e6b800]"
+                              : "border-[#F5F5DC] bg-[#FAF3E0] text-[#4B2E2B] dark:bg-[#18181c] dark:text-[#e6e6e6] dark:border-[#333]"
+                          }`}
+                          onClick={() => setSelectedCrust(crust)}
+                        >
+                          {crust}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
                   <div className="mb-2">
                     <label className="block mb-1 font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
                       Extra Cheese
@@ -349,27 +358,6 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
                           onClick={() => setSelectedCheese(cheese)}
                         >
                           {cheese}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="mb-2">
-                    <label className="block mb-1 font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
-                      Crust
-                    </label>
-                    <div className="flex gap-2 flex-wrap">
-                      {item.crustOptions?.map((crust) => (
-                        <Button
-                          key={crust}
-                          size="sm"
-                          className={`rounded-full px-4 py-2 border-2 hover:text-white transition-colors duration-200 ${
-                            selectedCrust === crust
-                              ? "border-[#6F4E37] bg-[#FAF3E0] text-[#6F4E37] dark:bg-[#222] dark:text-[#e6b800] dark:border-[#e6b800]"
-                              : "border-[#F5F5DC] bg-[#FAF3E0] text-[#4B2E2B] dark:bg-[#18181c] dark:text-[#e6e6e6] dark:border-[#333]"
-                          }`}
-                          onClick={() => setSelectedCrust(crust)}
-                        >
-                          {crust}
                         </Button>
                       ))}
                     </div>
@@ -408,8 +396,8 @@ export function AddToCartModal({ item, isOpen, onClose }: AddToCartModalProps) {
             {/* Temperature */}
             {hasTemperatureOptions && (
               <>
-                <h4 className="font-semibold mb-3 text-[#4B2E2B] dark:text-[#e6e6e6]">
-                  Choose Temperature
+                <h4 className="block mb-3 text-[#4B2E2B] dark:text-[#e6e6e6]">
+                  Choose Temperature <span className="text-red-500"> *</span>
                 </h4>
                 <div className="grid grid-cols-2 gap-3">
                   <button

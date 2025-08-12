@@ -44,18 +44,7 @@ export default function ContactPage() {
       {/* Banner Section - Home Style */}
       <section className="pt-24 min-h-[40vh] flex items-center relative overflow-hidden">
         {/* Background Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8F0] to-[#FAF3E0] dark:from-[#18181c] dark:to-[#232326]">
-          {/* <div className="absolute inset-0 opacity-30">
-            <div
-              className="absolute top-20 right-40 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"
-              style={{ backgroundColor: "#6F4E37" }}
-            ></div>
-            <div
-              className="absolute bottom-10 left-80 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"
-              style={{ backgroundColor: "#6F4E37" }}
-            ></div>
-          </div> */}
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8F0] to-[#FAF3E0] dark:from-[#18181c] dark:to-[#232326]"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-16">
           <div className="text-center mb-10">

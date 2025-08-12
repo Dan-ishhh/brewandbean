@@ -230,7 +230,7 @@ export default function AboutPage() {
             <Link href="/menu">
               <Button
                 size="lg"
-                className="px-8 py-4 rounded-full shadow-lg bg-[#FFF8F0] hover-bg-[#6F4E37] text-[#4B2E2B] hover-text-[#FAF3E0] transition-all border-0 dark:bg-[#222] dark:text-[#e6e6e6]"
+                className="px-8 py-4 border-1 rounded-full shadow-lg bg-[#FFF8F0] text-[#4B2E2B] transition-all dark:bg-[#222] dark:text-[#e6e6e6] dark:border-[#e6b800] hover:bg-[#FAF3E0] hover:text-[#6F4E37] dark:bg-[#333] dark:text-[#e6b800]"
               >
                 Explore Our Menu
               </Button>

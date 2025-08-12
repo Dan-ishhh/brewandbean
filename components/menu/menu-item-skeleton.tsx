@@ -3,10 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function MenuItemSkeleton() {
   return (
-    <Card
-      className="bg-[#FFF8F0] dark:bg-[#222] border-0 overflow-hidden rounded-2xl animate-fade-in-scale"
-      // style={{ backgroundColor: "#FFF8F0" }}
-    >
+    <Card className="bg-[#FFF8F0] dark:bg-[#222] border-0 overflow-hidden rounded-2xl animate-fade-in-scale">
       <CardContent className="p-0">
         <div className="relative">
           <Skeleton

@@ -17,8 +17,6 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Dark Mode in Cart Sidebar
-  // Dark Mode in Thank you page
   // Integrate language toggle for (English and Hindi)
   // Change from Redux to Zustand
 
@@ -189,15 +187,6 @@ export default function HomePage() {
                 <Button
                   size="lg"
                   className="bg-[#4B2E2B] text-[#FFF8F0] hover:bg-[#4B2E2B] hover:text-white dark:bg-[#222] dark:text-[#e6e6e6] dark:hover:bg-[#333] dark:hover:text-[#e6b800] text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all group w-full sm:w-auto border-0"
-                  // style={{ backgroundColor: "#6F4E37" }}
-                  // onMouseEnter={(e) => {
-                  //   const target = e.currentTarget as HTMLElement;
-                  //   target.style.backgroundColor = "#4B2E2B";
-                  // }}
-                  // onMouseLeave={(e) => {
-                  //   const target = e.currentTarget as HTMLElement;
-                  //   target.style.backgroundColor = "#6F4E37";
-                  // }}
                 >
                   Explore Our Menu
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -208,15 +197,6 @@ export default function HomePage() {
                   size="lg"
                   variant="outline"
                   className="text-[#4B2E2B] dark:bg-[#222] dark:border-[#e6b800] dark:text-[#e6b800] dark:hover:bg-[#333] dark:hover:text-[#e6b800] bg-white/80 px-8 py-4 rounded-full shadow-md hover:shadow-lg transition-all w-full sm:w-auto"
-                  // style={{ borderColor: "#F5F5DC", color: "#4B2E2B" }}
-                  // onMouseEnter={(e) => {
-                  //   const target = e.currentTarget as HTMLElement;
-                  //   target.style.backgroundColor = "#FFF8F0";
-                  // }}
-                  // onMouseLeave={(e) => {
-                  //   const target = e.currentTarget as HTMLElement;
-                  //   target.style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-                  // }}
                 >
                   Find Us
                 </Button>
@@ -256,31 +236,16 @@ export default function HomePage() {
             </div>
 
             {/* Floating Elements */}
-            <div
-              className="dark:bg-[#222] absolute top-8 -right-4 bg-white p-4 rounded-2xl shadow-lg z-20"
-              // style={{ borderColor: "#F5F5DC", borderWidth: "1px" }}
-            >
+            <div className="dark:bg-[#222] absolute top-8 -right-4 bg-white p-4 rounded-2xl shadow-lg z-20">
               <div className="flex items-center gap-3 text-[#4B2E2B] dark:text-[#e6e6e6]">
-                <div
-                  className="bg-[#FFF8F0] dark:bg-[#18181c] w-10 h-10 rounded-xl flex items-center justify-center"
-                  // style={{ backgroundColor: "#FFF8F0" }}
-                >
-                  <Coffee
-                    className=" text-[#6F4E37] dark:text-[#e6b800] h-5 w-5"
-                    // style={{ color: "#6F4E37" }}
-                  />
+                <div className="bg-[#FFF8F0] dark:bg-[#18181c] w-10 h-10 rounded-xl flex items-center justify-center">
+                  <Coffee className=" text-[#6F4E37] dark:text-[#e6b800] h-5 w-5" />
                 </div>
                 <div>
-                  <p
-                    className="font-semibold text-sm text-[#4B2E2B] dark:text-[#e6e6e6]"
-                    // style={{ color: "#4B2E2B" }}
-                  >
+                  <p className="font-semibold text-sm text-[#4B2E2B] dark:text-[#e6e6e6]">
                     Premium Coffee
                   </p>
-                  <p
-                    className="text-xs text-[#6F4E37] dark:text-[#e6b800]"
-                    // style={{ color: "#6F4E37" }}
-                  >
+                  <p className="text-xs text-[#6F4E37] dark:text-[#e6b800]">
                     Ethically Sourced
                   </p>
                 </div>
@@ -366,26 +331,6 @@ export default function HomePage() {
                   <MenuItemCard key={item.id} item={item} />
                 ))}
           </div>
-
-          {/* <div className="text-center">
-            <Link href="/menu">
-              <Button
-                size="lg"
-                className="text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0"
-                style={{ backgroundColor: "#6F4E37" }}
-                onMouseEnter={(e) => {
-                  const target = e.currentTarget as HTMLElement;
-                  target.style.backgroundColor = "#4B2E2B";
-                }}
-                onMouseLeave={(e) => {
-                  const target = e.currentTarget as HTMLElement;
-                  target.style.backgroundColor = "#6F4E37";
-                }}
-              >
-                View Full Menu
-              </Button>
-            </Link>
-          </div> */}
 
           {/* Pizza Section */}
           <div className="text-center mb-12">
