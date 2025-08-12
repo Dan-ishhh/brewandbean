@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import LocomotiveScroll from "locomotive-scroll";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
@@ -7,8 +8,27 @@ import Link from "next/link";
 import { Coffee, Users, Heart, Award, Leaf, Clock } from "lucide-react";
 
 export default function AboutPage() {
+  // Locomotive Scroll integration
+  useEffect(() => {
+    let scrollInstance: LocomotiveScroll | undefined;
+    if (typeof window !== "undefined") {
+      scrollInstance = new LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]") as HTMLElement,
+        smooth: true,
+        lerp: 0.08,
+        multiplier: 1,
+        class: "is-reveal",
+      });
+    }
+    return () => {
+      if (scrollInstance) scrollInstance.destroy();
+    };
+  }, []);
   return (
-    <div className="min-h-screen bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#18181b] dark:text-[#e6e6e6]">
+    <div
+      data-scroll-container
+      className="min-h-screen bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#18181b] dark:text-[#e6e6e6]"
+    >
       {/* Our Story */}
       <section className="py-20 bg-[#FFF8F0] dark:bg-[#18181b]">
         <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">

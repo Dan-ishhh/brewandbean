@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import LocomotiveScroll from "locomotive-scroll";
 import type React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,6 +18,22 @@ import {
 import { GoogleMapLocations } from "@/components/ui/google-map";
 
 export default function ContactPage() {
+  // Locomotive Scroll integration
+  useEffect(() => {
+    let scrollInstance: LocomotiveScroll | undefined;
+    if (typeof window !== "undefined") {
+      scrollInstance = new LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]") as HTMLElement,
+        smooth: true,
+        lerp: 0.08,
+        multiplier: 1,
+        class: "is-reveal",
+      });
+    }
+    return () => {
+      if (scrollInstance) scrollInstance.destroy();
+    };
+  }, []);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -40,7 +57,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#18181b] dark:text-[#e6e6e6]">
+    <div
+      data-scroll-container
+      className="min-h-screen bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#18181b] dark:text-[#e6e6e6]"
+    >
       {/* Banner Section - Home Style */}
       <section className="pt-24 min-h-[40vh] flex items-center relative overflow-hidden">
         {/* Background Pattern */}

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import LocomotiveScroll from "locomotive-scroll";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
@@ -30,6 +31,10 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Dish nutritional info
+  // Add a search bar
+  // Table Reservation flow (realtime wait time for tables)
+  // Reviews Component
   // Change from Redux to Zustand
 
   const pizzaItems = [
@@ -156,21 +161,33 @@ export default function HomePage() {
       iced: false,
     },
   ];
+  useEffect(() => {
+    let scrollInstance: LocomotiveScroll | undefined;
+    if (typeof window !== "undefined") {
+      scrollInstance = new LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]") as HTMLElement,
+        smooth: true,
+        lerp: 0.08,
+        multiplier: 1,
+        class: "is-reveal",
+      });
+    }
+    return () => {
+      if (scrollInstance) scrollInstance.destroy();
+    };
+  }, []);
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+    <div
+      data-scroll-container
+      className="min-h-screen bg-background text-foreground transition-colors duration-300"
+    >
       {/* Hero Section */}
       <section className="pt-24 min-h-screen flex items-center relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8F0] to-[#FAF3E0] dark:from-[#18181c] dark:to-[#232326]">
           <div className="absolute inset-0 opacity-30">
-            <div
-              className="absolute top-40 right-40 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"
-              style={{ backgroundColor: "#6F4E37" }}
-            ></div>
-            <div
-              className="absolute bottom-10 left-80 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"
-              style={{ backgroundColor: "#6F4E37" }}
-            ></div>
+            <div className="absolute top-40 right-40 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000 bg-[#6F4E37] dark:bg-[#e6b800]"></div>
+            <div className="absolute bottom-10 left-80 w-64 h-64 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000 bg-[#6F4E37] dark:bg-[#e6b800]"></div>
           </div>
         </div>
 

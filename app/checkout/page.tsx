@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/contexts/cart-context";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,6 +14,7 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
+import LocomotiveScroll from "locomotive-scroll";
 
 const styles = StyleSheet.create({
   page: {
@@ -162,6 +163,22 @@ export default function CheckoutPage() {
     setAutoDownload(true);
   };
 
+  useEffect(() => {
+    let scrollInstance: LocomotiveScroll | undefined;
+    if (typeof window !== "undefined") {
+      scrollInstance = new LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]") as HTMLElement,
+        smooth: true,
+        lerp: 0.08,
+        multiplier: 1,
+        class: "is-reveal",
+      });
+    }
+    return () => {
+      if (scrollInstance) scrollInstance.destroy();
+    };
+  }, []);
+
   if (showSuccess) {
     // Automatically download invoice PDF after order is placed
     // Use a hidden PDFDownloadLink and trigger click when autoDownload is true
@@ -217,7 +234,10 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FFF8F0] dark:bg-[#18181c]">
+    <div
+      data-scroll-container
+      className="min-h-screen flex flex-col items-center justify-center bg-[#FFF8F0] dark:bg-[#18181c]"
+    >
       <section className="pt-24 pb-12">
         <div className="max-w-3xl mx-auto px-4">
           <div className="flex items-center justify-between gap-3 mb-8 mt-4">

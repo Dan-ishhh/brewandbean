@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { MenuItemCard } from "@/components/menu/menu-item-card";
 import { MenuItemSkeleton } from "@/components/menu/menu-item-skeleton";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
+import LocomotiveScroll from "locomotive-scroll";
 
 export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -13,6 +14,22 @@ export default function MenuPage() {
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1500);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    let scrollInstance: LocomotiveScroll | undefined;
+    if (typeof window !== "undefined") {
+      scrollInstance = new LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]") as HTMLElement,
+        smooth: true,
+        lerp: 0.08,
+        multiplier: 1,
+        class: "is-reveal",
+      });
+    }
+    return () => {
+      if (scrollInstance) scrollInstance.destroy();
+    };
   }, []);
 
   const menuItems = [
@@ -434,7 +451,10 @@ export default function MenuPage() {
       : menuItems.filter((item) => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
+    <div
+      data-scroll-container
+      className="min-h-screen bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#18181b] dark:text-[#e6e6e6]"
+    >
       {/* Banner Section - Home Style */}
       <section className="pt-24 min-h-[40vh] flex items-center relative overflow-hidden">
         {/* Background Pattern */}
