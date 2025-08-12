@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
@@ -6,7 +7,7 @@ import Link from "next/link";
 import { ArrowRight, Coffee, Heart, Star, Wifi } from "lucide-react";
 import { MenuItemCard } from "@/components/menu/menu-item-card";
 import { MenuItemSkeleton } from "@/components/menu/menu-item-skeleton";
-import { useEffect, useState } from "react";
+import { useTranslation } from "@/contexts/translation-context";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +22,7 @@ export default function HomePage() {
     checkoutPage,
     thankYouPage,
     footer,
-  } = require("@/contexts/translation-context").useTranslation();
+  } = useTranslation();
 
   // Simulate loading
   useEffect(() => {
@@ -29,7 +30,6 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Integrate language toggle for (English and Hindi)
   // Change from Redux to Zustand
 
   const pizzaItems = [
