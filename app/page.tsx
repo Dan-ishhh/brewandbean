@@ -10,6 +10,18 @@ import { useEffect, useState } from "react";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
+  const {
+    home,
+    menu,
+    about,
+    contact,
+    topbar,
+    addToCartModal,
+    cartSidebar,
+    checkoutPage,
+    thankYouPage,
+    footer,
+  } = require("@/contexts/translation-context").useTranslation();
 
   // Simulate loading
   useEffect(() => {

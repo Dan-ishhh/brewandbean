@@ -1,4 +1,6 @@
 import type React from "react";
+import { LanguageProvider } from "@/contexts/language-context";
+import { TranslationProvider } from "@/contexts/translation-context";
 import { TopbarMenu } from "@/components/ui/topbar-menu";
 import { Footer } from "@/components/ui/footer";
 import "./globals.css";
@@ -29,21 +31,27 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <div
-            className="min-h-screen flex flex-col"
-            style={{
-              backgroundColor: "#FFF8F0",
-              fontFamily: "Chewy, sans-serif",
-            }}
-          >
-            <TopbarMenu />
-            <main className="flex-1">
-              {children}
-              <Analytics />
-              <SpeedInsights />
-            </main>
-            <Footer />
-          </div>
+          <LanguageProvider>
+            <TranslationProvider>
+              <div
+                className="min-h-screen flex flex-col"
+                style={{
+                  backgroundColor: "#FFF8F0",
+                  fontFamily: '"Dancing Script", cursive',
+                  // fontFamily:
+                  //   '"Avenir Next Rounded", "Avenir Rounded", "Segoe UI", sans-serif',
+                }}
+              >
+                <TopbarMenu />
+                <main className="flex-1">
+                  {children}
+                  <Analytics />
+                  <SpeedInsights />
+                </main>
+                <Footer />
+              </div>
+            </TranslationProvider>
+          </LanguageProvider>
         </Providers>
       </body>
     </html>

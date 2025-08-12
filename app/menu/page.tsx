@@ -481,9 +481,9 @@ export default function MenuPage() {
           </div>
         </div>
       </section>
-
+      {/* dark:bg-[#222] */}
       {/* Legend */}
-      <section className="py-4 dark:bg-[#222] rounded-3xl mx-auto w-full max-w-xs mt-4">
+      <section className="py-4  rounded-3xl mx-auto w-full max-w-xs mt-4">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex justify-between items-center gap-2 text-sm text-[#4B2E2B] dark:text-[#e6e6e6]">
             <div className="flex items-center gap-2">

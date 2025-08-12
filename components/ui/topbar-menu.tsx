@@ -7,6 +7,8 @@ import { CartButton } from "@/components/cart/cart-button";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/contexts/language-context";
+import Select from "react-select";
 
 export function TopbarMenu() {
   const { theme, setTheme } = useTheme();
@@ -20,9 +22,18 @@ export function TopbarMenu() {
     { href: "/contact", label: "Contact" },
   ];
 
+  const { language, setLanguage } = useLanguage();
   return (
     <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-7xl px-4">
-      <div className="backdrop-blur-lg rounded-2xl shadow-xl border transition-colors duration-300 bg-white/95 dark:bg-[#18181b] border-[#F5F5DC] dark:border-[#222]">
+      <div
+        className="backdrop-blur-lg rounded-2xl shadow-xl border transition-colors duration-300 bg-white/95 dark:bg-[#18181b] border-[#F5F5DC] dark:border-[#222]"
+        style={{
+          boxShadow:
+            theme === "dark"
+              ? "0 6px 32px 0 rgba(230, 184, 0, 0.18), 0 1.5px 8px 0 rgba(111, 78, 55, 0.22)"
+              : undefined,
+        }}
+      >
         <div className="px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center gap-2">
@@ -71,6 +82,84 @@ export function TopbarMenu() {
             </div>
 
             <div className="flex items-center gap-4">
+              {/* Language Selector Desktop */}
+              <div className="hidden md:flex w-[90px] min-w-[90px] max-w-[140px]">
+                <Select
+                  value={{
+                    value: language,
+                    label: language === "en" ? "English" : "हिन्दी",
+                  }}
+                  onChange={(option) => {
+                    if (option) setLanguage(option.value);
+                  }}
+                  options={[
+                    { value: "en", label: "English" },
+                    { value: "hi", label: "हिन्दी" },
+                  ]}
+                  isSearchable={false}
+                  classNamePrefix="langselect"
+                  components={{
+                    DropdownIndicator: () => null,
+                    IndicatorSeparator: () => null,
+                  }}
+                  styles={{
+                    control: (base, state) => ({
+                      ...base,
+                      backgroundColor: state.isFocused
+                        ? theme === "dark"
+                          ? "#333"
+                          : "#FAF3E0"
+                        : theme === "dark"
+                        ? "#222"
+                        : "#FFF8F0",
+                      borderColor: "#e6b800",
+                      boxShadow: "0 2px 12px 0 rgba(111, 78, 55, 0.10)",
+                      borderRadius: 16,
+                      minHeight: 38,
+                      paddingLeft: 4,
+                      paddingRight: 4,
+                      width: "100%",
+                      minWidth: "90px",
+                      maxWidth: "140px",
+                    }),
+                    singleValue: (base) => ({
+                      ...base,
+                      color: theme === "dark" ? "#e6b800" : "#4B2E2B",
+                      fontWeight: "bold",
+                      fontSize: "1rem",
+                    }),
+                    menu: (base) => ({
+                      ...base,
+                      backgroundColor: theme === "dark" ? "#222" : "#FFF8F0",
+                      borderRadius: 16,
+                      boxShadow: "0 4px 24px 0 rgba(111, 78, 55, 0.15)",
+                      marginTop: 2,
+                    }),
+                    option: (base, state) => ({
+                      ...base,
+                      backgroundColor: state.isSelected
+                        ? "#e6b800"
+                        : state.isFocused
+                        ? theme === "dark"
+                          ? "#333"
+                          : "#FAF3E0"
+                        : theme === "dark"
+                        ? "#222"
+                        : "#FFF8F0",
+                      color: state.isSelected
+                        ? "#222"
+                        : theme === "dark"
+                        ? "#e6b800"
+                        : "#4B2E2B",
+                      fontWeight: state.isSelected ? "bold" : "normal",
+                      fontSize: "1rem",
+                      borderRadius: 12,
+                      paddingLeft: 10,
+                      paddingRight: 10,
+                    }),
+                  }}
+                />
+              </div>
               <CartButton />
 
               {/* Theme Switch - Desktop & Mobile */}
@@ -104,7 +193,7 @@ export function TopbarMenu() {
                 {isMobileMenuOpen ? (
                   <X className="h-6 w-6" />
                 ) : (
-                  <Menu className="h-6 w-6" />
+                  <Menu className="h-6 w-6 dark:text-[#F5F5DC]" />
                 )}
               </button>
             </div>
@@ -133,6 +222,88 @@ export function TopbarMenu() {
                     </Link>
                   );
                 })}
+                {/* Language Selector Mobile */}
+                <div className="w-[110px] min-w-[90px] max-w-[140px]">
+                  <Select
+                    value={{
+                      value: language,
+                      label: language === "en" ? "English" : "हिन्दी",
+                    }}
+                    onChange={(option) => {
+                      if (option) setLanguage(option.value);
+                    }}
+                    options={[
+                      { value: "en", label: "English" },
+                      { value: "hi", label: "हिन्दी" },
+                    ]}
+                    isSearchable={false}
+                    classNamePrefix="langselect"
+                    components={{
+                      DropdownIndicator: () => null,
+                      IndicatorSeparator: () => null,
+                    }}
+                    styles={{
+                      control: (base, state) => ({
+                        ...base,
+                        backgroundColor: state.isFocused
+                          ? theme === "dark"
+                            ? "#333"
+                            : "#FAF3E0"
+                          : theme === "dark"
+                          ? "#222"
+                          : "#FFF8F0",
+                        borderColor: "#e6b800",
+                        boxShadow: "0 2px 12px 0 rgba(111, 78, 55, 0.10)",
+                        borderRadius: 16,
+                        minHeight: 38,
+                        paddingLeft: 4,
+                        paddingRight: 4,
+                        width: "100%",
+                        minWidth: "90px",
+                        maxWidth: "140px",
+                      }),
+                      singleValue: (base) => ({
+                        ...base,
+                        color: theme === "dark" ? "#e6b800" : "#4B2E2B",
+                        fontWeight: "bold",
+                        fontSize: "1rem",
+                      }),
+                      menu: (base) => ({
+                        ...base,
+                        backgroundColor: theme === "dark" ? "#222" : "#FFF8F0",
+                        borderRadius: 16,
+                        boxShadow: "0 4px 24px 0 rgba(111, 78, 55, 0.15)",
+                        marginTop: 2,
+                        width: base.width || "100%",
+                        minWidth: base.minWidth || "90px",
+                        maxWidth: base.maxWidth || "140px",
+                        left: "0",
+                      }),
+                      option: (base, state) => ({
+                        ...base,
+                        backgroundColor: state.isSelected
+                          ? "#e6b800"
+                          : state.isFocused
+                          ? theme === "dark"
+                            ? "#333"
+                            : "#FAF3E0"
+                          : theme === "dark"
+                          ? "#222"
+                          : "#FFF8F0",
+                        color: state.isSelected
+                          ? "#222"
+                          : theme === "dark"
+                          ? "#e6b800"
+                          : "#4B2E2B",
+                        fontWeight: state.isSelected ? "bold" : "normal",
+                        fontSize: "1rem",
+                        borderRadius: 12,
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                      }),
+                    }}
+                  />
+                </div>
               </div>
             </div>
           )}
