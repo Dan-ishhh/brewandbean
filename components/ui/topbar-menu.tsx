@@ -112,7 +112,7 @@ export function TopbarMenu() {
                         : theme === "dark"
                         ? "#222"
                         : "#FFF8F0",
-                      borderColor: "#e6b800",
+                      borderColor: "#4B2E2B",
                       boxShadow: "0 2px 12px 0 rgba(111, 78, 55, 0.10)",
                       borderRadius: 16,
                       minHeight: 38,
@@ -252,7 +252,7 @@ export function TopbarMenu() {
                           : theme === "dark"
                           ? "#222"
                           : "#FFF8F0",
-                        borderColor: "#e6b800",
+                        borderColor: "#4B2E2B",
                         boxShadow: "0 2px 12px 0 rgba(111, 78, 55, 0.10)",
                         borderRadius: 16,
                         minHeight: 38,
