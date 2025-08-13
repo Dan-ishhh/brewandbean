@@ -31,10 +31,10 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Reviews Component
   // Dish nutritional info
   // Add a search bar
   // Table Reservation flow (realtime wait time for tables)
-  // Reviews Component
   // Change from Redux to Zustand
 
   const pizzaItems = [

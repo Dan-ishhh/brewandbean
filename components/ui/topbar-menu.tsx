@@ -50,8 +50,13 @@ export function TopbarMenu() {
                 <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full animate-pulse bg-[#F5F5DC] dark:bg-[#6F4E37]"></div>
               </div>
               <span className="text-xl font-bold text-[#4B2E2B] dark:text-[#e6e6e6]">
-                <span className="hidden md:inline text-xl font-bold text-[#4B2E2B] dark:text-[#e6e6e6]">
+                {/* Brew & Bean: visible lg and up */}
+                <span className="hidden lg:inline text-xl font-bold text-[#4B2E2B] dark:text-[#e6e6e6]">
                   Brew & Bean
+                </span>
+                {/* B & B: visible md to lg only */}
+                <span className="hidden md:inline lg:hidden text-xl font-bold text-[#4B2E2B] dark:text-[#e6e6e6]">
+                  B & B
                 </span>
               </span>
               <span className="inline md:hidden text-xl font-bold text-[#4B2E2B] dark:text-[#F5F5DC]">
@@ -160,7 +165,6 @@ export function TopbarMenu() {
                   }}
                 />
               </div>
-              <CartButton />
 
               {/* Theme Switch - Desktop & Mobile */}
               <button
@@ -169,7 +173,7 @@ export function TopbarMenu() {
                     ? "Switch to light mode"
                     : "Switch to dark mode"
                 }
-                className="relative flex items-center justify-center w-10 h-10 rounded-full border-2 border-[#F5F5DC] bg-[#FFF8F0] dark:bg-[#222] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#6F4E37]"
+                className="relative flex items-center justify-center w-10 h-10 rounded-full border-0 border-[#F5F5DC] bg-[#FFF8F0] dark:bg-[#222] dark:border-[#4B2E2B]transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#6F4E37]"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               >
                 <span className="absolute inset-0 flex items-center justify-center">
@@ -180,6 +184,7 @@ export function TopbarMenu() {
                   )}
                 </span>
               </button>
+              <CartButton />
 
               {/* Mobile Menu Button */}
               <button
