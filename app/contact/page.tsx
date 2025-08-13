@@ -19,21 +19,7 @@ import { GoogleMapLocations } from "@/components/ui/google-map";
 
 export default function ContactPage() {
   // Locomotive Scroll integration
-  useEffect(() => {
-    let scrollInstance: LocomotiveScroll | undefined;
-    if (typeof window !== "undefined") {
-      scrollInstance = new LocomotiveScroll({
-        el: document.querySelector("[data-scroll-container]") as HTMLElement,
-        smooth: true,
-        lerp: 0.08,
-        multiplier: 1,
-        class: "is-reveal",
-      });
-    }
-    return () => {
-      if (scrollInstance) scrollInstance.destroy();
-    };
-  }, []);
+  // ...existing code...
   const [formData, setFormData] = useState({
     name: "",
     email: "",

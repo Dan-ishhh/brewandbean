@@ -9,6 +9,13 @@ import LocomotiveScroll from "locomotive-scroll";
 export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  // Switch to All Items tab when searching
+  useEffect(() => {
+    if (searchTerm && selectedCategory !== "all") {
+      setSelectedCategory("all");
+    }
+  }, [searchTerm]);
 
   // Simulate loading
   useEffect(() => {
@@ -16,21 +23,7 @@ export default function MenuPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    let scrollInstance: LocomotiveScroll | undefined;
-    if (typeof window !== "undefined") {
-      scrollInstance = new LocomotiveScroll({
-        el: document.querySelector("[data-scroll-container]") as HTMLElement,
-        smooth: true,
-        lerp: 0.08,
-        multiplier: 1,
-        class: "is-reveal",
-      });
-    }
-    return () => {
-      if (scrollInstance) scrollInstance.destroy();
-    };
-  }, []);
+  // ...existing code...
 
   const menuItems = [
     // Coffee
@@ -49,6 +42,7 @@ export default function MenuPage() {
       milkOptions: ["Whole", "Skim", "Soy", "Oat"],
       coffeeTypeOptions: ["Espresso", "Latte", "Cappuccino"],
       sugarLevelOptions: ["No Sugar", "Less Sugar", "Regular", "Extra"],
+      nutrition: { calories: 180, protein: 8, fat: 6, carbs: 22 },
     },
     {
       id: 2,
@@ -66,6 +60,7 @@ export default function MenuPage() {
       milkOptions: ["Whole", "Skim", "Soy", "Oat"],
       coffeeTypeOptions: ["Espresso", "Latte", "Cappuccino"],
       sugarLevelOptions: ["No Sugar", "Less Sugar", "Regular", "Extra"],
+      nutrition: { calories: 120, protein: 6, fat: 4, carbs: 12 },
     },
     {
       id: 3,
@@ -82,6 +77,7 @@ export default function MenuPage() {
       milkOptions: ["Whole", "Skim", "Soy", "Oat"],
       coffeeTypeOptions: ["Cold Brew", "Latte", "Cappuccino"],
       sugarLevelOptions: ["No Sugar", "Less Sugar", "Regular", "Extra"],
+      nutrition: { calories: 15, protein: 1, fat: 0, carbs: 3 },
     },
     {
       id: 4,
@@ -95,6 +91,7 @@ export default function MenuPage() {
       hot: true,
       iced: false,
       customizable: true,
+      nutrition: { calories: 5, protein: 0, fat: 0, carbs: 1 },
     },
     {
       id: 5,
@@ -108,6 +105,7 @@ export default function MenuPage() {
       hot: true,
       iced: true,
       customizable: true,
+      nutrition: { calories: 10, protein: 0, fat: 0, carbs: 2 },
     },
     {
       id: 6,
@@ -122,6 +120,7 @@ export default function MenuPage() {
       hot: true,
       iced: true,
       customizable: true,
+      nutrition: { calories: 220, protein: 7, fat: 8, carbs: 32 },
     },
     {
       id: 7,
@@ -135,6 +134,7 @@ export default function MenuPage() {
       hot: true,
       iced: true,
       customizable: true,
+      nutrition: { calories: 30, protein: 1, fat: 1, carbs: 4 },
     },
     {
       id: 8,
@@ -148,6 +148,7 @@ export default function MenuPage() {
       hot: true,
       iced: false,
       customizable: true,
+      nutrition: { calories: 140, protein: 6, fat: 5, carbs: 16 },
     },
 
     // Tea & Others
@@ -162,6 +163,7 @@ export default function MenuPage() {
       badgeColor: "bg-purple-100 text-purple-700",
       hot: true,
       iced: true,
+      nutrition: { calories: 0, protein: 0, fat: 0, carbs: 0 },
     },
     {
       id: 10,
@@ -174,6 +176,7 @@ export default function MenuPage() {
       badgeColor: "bg-green-100 text-green-700",
       hot: true,
       iced: true,
+      nutrition: { calories: 90, protein: 4, fat: 2, carbs: 14 },
     },
     {
       id: 11,
@@ -186,6 +189,7 @@ export default function MenuPage() {
       badgeColor: "bg-orange-100 text-orange-700",
       hot: true,
       iced: true,
+      nutrition: { calories: 110, protein: 3, fat: 2, carbs: 18 },
     },
     {
       id: 12,
@@ -198,6 +202,7 @@ export default function MenuPage() {
       badgeColor: "bg-amber-100 text-amber-700",
       hot: true,
       iced: false,
+      nutrition: { calories: 200, protein: 5, fat: 7, carbs: 28 },
     },
     {
       id: 13,
@@ -210,6 +215,7 @@ export default function MenuPage() {
       badgeColor: "bg-green-100 text-green-700",
       hot: true,
       iced: true,
+      nutrition: { calories: 0, protein: 0, fat: 0, carbs: 0 },
     },
     {
       id: 14,
@@ -222,6 +228,7 @@ export default function MenuPage() {
       badgeColor: "bg-yellow-100 text-yellow-700",
       hot: false,
       iced: true,
+      nutrition: { calories: 120, protein: 2, fat: 0, carbs: 28 },
     },
 
     // Pastries
@@ -236,6 +243,7 @@ export default function MenuPage() {
       badgeColor: "bg-yellow-100 text-yellow-700",
       hot: true,
       iced: false,
+      nutrition: { calories: 230, protein: 5, fat: 12, carbs: 26 },
     },
     {
       id: 16,
@@ -248,6 +256,7 @@ export default function MenuPage() {
       badgeColor: "bg-blue-100 text-blue-700",
       hot: true,
       iced: false,
+      nutrition: { calories: 210, protein: 4, fat: 7, carbs: 32 },
     },
     {
       id: 17,
@@ -260,6 +269,7 @@ export default function MenuPage() {
       badgeColor: "bg-amber-100 text-amber-700",
       hot: true,
       iced: false,
+      nutrition: { calories: 160, protein: 2, fat: 8, carbs: 22 },
     },
     {
       id: 18,
@@ -272,6 +282,7 @@ export default function MenuPage() {
       badgeColor: "bg-pink-100 text-pink-700",
       hot: false,
       iced: true,
+      nutrition: { calories: 250, protein: 5, fat: 13, carbs: 29 },
     },
     {
       id: 19,
@@ -284,6 +295,7 @@ export default function MenuPage() {
       badgeColor: "bg-orange-100 text-orange-700",
       hot: true,
       iced: false,
+      nutrition: { calories: 320, protein: 6, fat: 14, carbs: 42 },
     },
 
     // Food
@@ -298,6 +310,7 @@ export default function MenuPage() {
       badgeColor: "bg-green-100 text-green-700",
       hot: true,
       iced: false,
+      nutrition: { calories: 280, protein: 7, fat: 14, carbs: 32 },
     },
     {
       id: 21,
@@ -311,6 +324,7 @@ export default function MenuPage() {
       badgeColor: "bg-yellow-100 text-yellow-700",
       hot: true,
       iced: false,
+      nutrition: { calories: 350, protein: 15, fat: 18, carbs: 32 },
     },
     {
       id: 22,
@@ -324,6 +338,7 @@ export default function MenuPage() {
       badgeColor: "bg-orange-100 text-orange-700",
       hot: true,
       iced: false,
+      nutrition: { calories: 400, protein: 20, fat: 16, carbs: 38 },
     },
     {
       id: 23,
@@ -336,6 +351,7 @@ export default function MenuPage() {
       badgeColor: "bg-red-100 text-red-700",
       hot: true,
       iced: false,
+      nutrition: { calories: 180, protein: 6, fat: 4, carbs: 28 },
     },
     {
       id: 24,
@@ -348,6 +364,7 @@ export default function MenuPage() {
       badgeColor: "bg-purple-100 text-purple-700",
       hot: false,
       iced: true,
+      nutrition: { calories: 220, protein: 12, fat: 4, carbs: 28 },
     },
     // Pizzas
     {
@@ -365,6 +382,7 @@ export default function MenuPage() {
       cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
       crustOptions: ["Thin", "Thick", "Stuffed"],
       toppingsOptions: ["Basil", "Olives", "Mushrooms", "Onions"],
+      nutrition: { calories: 320, protein: 14, fat: 10, carbs: 38 },
     },
     {
       id: 102,
@@ -381,6 +399,7 @@ export default function MenuPage() {
       cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
       crustOptions: ["Thin", "Thick", "Stuffed"],
       toppingsOptions: ["Pepperoni", "Olives", "Mushrooms", "Onions"],
+      nutrition: { calories: 380, protein: 16, fat: 16, carbs: 40 },
     },
     {
       id: 103,
@@ -397,6 +416,7 @@ export default function MenuPage() {
       cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
       crustOptions: ["Thin", "Thick", "Stuffed"],
       toppingsOptions: ["Bell Peppers", "Olives", "Mushrooms", "Onions"],
+      nutrition: { calories: 300, protein: 12, fat: 8, carbs: 36 },
     },
     {
       id: 104,
@@ -413,6 +433,7 @@ export default function MenuPage() {
       cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
       crustOptions: ["Thin", "Thick", "Stuffed"],
       toppingsOptions: ["Olives", "Onions", "Mushrooms", "Peppers"],
+      nutrition: { calories: 420, protein: 18, fat: 18, carbs: 44 },
     },
   ];
 
@@ -445,10 +466,15 @@ export default function MenuPage() {
     },
   ];
 
-  const filteredItems =
+  const filteredItems = (
     selectedCategory === "all"
       ? menuItems
-      : menuItems.filter((item) => item.category === selectedCategory);
+      : menuItems.filter((item) => item.category === selectedCategory)
+  ).filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div
@@ -475,6 +501,43 @@ export default function MenuPage() {
               From expertly crafted coffee to fresh pastries and hearty meals,
               discover your new favorites from our carefully curated menu.
             </p>
+          </div>
+          {/* Search Bar */}
+          <div className="flex justify-center items-center mb-8 w-full">
+            <div className="relative w-full max-w-md">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search menu items..."
+                className="w-full px-6 py-3 rounded-full border border-[#e6e6e6] dark:border-[#333] bg-[#FAF3E0] dark:bg-[#222] text-[#4B2E2B] dark:text-[#e6e6e6] focus:outline-none focus:ring-2 focus:ring-[#6F4E37] dark:focus:ring-[#e6b800] transition-all text-base sm:text-lg shadow-sm pr-12"
+                style={{ minWidth: "0" }}
+              />
+              {searchTerm && (
+                <button
+                  type="button"
+                  aria-label="Clear search"
+                  onClick={() => setSearchTerm("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4B2E2B] dark:text-[#e6e6e6] bg-transparent hover:bg-[#e6e6e6] dark:hover:bg-[#333] rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-[#6F4E37] dark:focus:ring-[#e6b800]"
+                  style={{ lineHeight: 0 }}
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 6L14 14M14 6L6 14"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -526,13 +589,19 @@ export default function MenuPage() {
       <section className="py-10 text-[#4B2E2B] dark:text-[#e6e6e6] transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {isLoading
-              ? Array.from({ length: 8 }).map((_, index) => (
-                  <MenuItemSkeleton key={index} />
-                ))
-              : filteredItems.map((item) => (
-                  <MenuItemCard key={item.id} item={item} />
-                ))}
+            {isLoading ? (
+              Array.from({ length: 8 }).map((_, index) => (
+                <MenuItemSkeleton key={index} />
+              ))
+            ) : filteredItems.length > 0 ? (
+              filteredItems.map((item) => (
+                <MenuItemCard key={item.id} item={item} />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-16 text-lg text-[#4B2E2B] dark:text-[#e6e6e6]">
+                No menu items found for "{searchTerm}".
+              </div>
+            )}
           </div>
         </div>
       </section>

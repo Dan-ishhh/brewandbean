@@ -9,6 +9,7 @@ import { ArrowRight, Coffee, Heart, Star, Wifi } from "lucide-react";
 import { MenuItemCard } from "@/components/menu/menu-item-card";
 import { MenuItemSkeleton } from "@/components/menu/menu-item-skeleton";
 import { useTranslation } from "@/contexts/translation-context";
+import { ReviewsSlider } from "@/components/ui/reviews-slider";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,8 +32,6 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Reviews Component
-  // Dish nutritional info
   // Add a search bar
   // Table Reservation flow (realtime wait time for tables)
   // Change from Redux to Zustand
@@ -53,6 +52,7 @@ export default function HomePage() {
       cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
       crustOptions: ["Thin", "Thick", "Stuffed"],
       toppingsOptions: ["Basil", "Olives", "Mushrooms", "Onions"],
+      nutrition: { calories: 270, protein: 12, fat: 8, carbs: 36 },
     },
     {
       id: 102,
@@ -69,6 +69,7 @@ export default function HomePage() {
       cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
       crustOptions: ["Thin", "Thick", "Stuffed"],
       toppingsOptions: ["Pepperoni", "Olives", "Mushrooms", "Onions"],
+      nutrition: { calories: 320, protein: 15, fat: 14, carbs: 34 },
     },
     {
       id: 103,
@@ -85,6 +86,7 @@ export default function HomePage() {
       cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
       crustOptions: ["Thin", "Thick", "Stuffed"],
       toppingsOptions: ["Bell Peppers", "Olives", "Mushrooms", "Onions"],
+      nutrition: { calories: 250, protein: 10, fat: 7, carbs: 38 },
     },
     {
       id: 104,
@@ -101,6 +103,7 @@ export default function HomePage() {
       cheeseOptions: ["Mozzarella", "Cheddar", "Parmesan"],
       crustOptions: ["Thin", "Thick", "Stuffed"],
       toppingsOptions: ["BBQ Chicken", "Onions", "Mushrooms", "Peppers"],
+      nutrition: { calories: 340, protein: 18, fat: 16, carbs: 35 },
     },
   ];
   const homeItems = [
@@ -119,6 +122,7 @@ export default function HomePage() {
       milkOptions: ["Whole", "Skim", "Soy", "Oat"],
       coffeeTypeOptions: ["Espresso", "Latte", "Cappuccino"],
       sugarLevelOptions: ["No Sugar", "Less Sugar", "Regular", "Extra"],
+      nutrition: { calories: 180, protein: 8, fat: 6, carbs: 22 },
     },
     {
       id: 15,
@@ -131,6 +135,7 @@ export default function HomePage() {
       category: "pastries",
       hot: true,
       iced: false,
+      nutrition: { calories: 210, protein: 4, fat: 12, carbs: 24 },
     },
     {
       id: 3,
@@ -147,6 +152,7 @@ export default function HomePage() {
       milkOptions: ["Whole", "Skim", "Soy", "Oat"],
       coffeeTypeOptions: ["Cold Brew", "Latte", "Cappuccino"],
       sugarLevelOptions: ["No Sugar", "Less Sugar", "Regular", "Extra"],
+      nutrition: { calories: 15, protein: 1, fat: 0, carbs: 3 },
     },
     {
       id: 20,
@@ -159,23 +165,10 @@ export default function HomePage() {
       category: "food",
       hot: true,
       iced: false,
+      nutrition: { calories: 260, protein: 6, fat: 10, carbs: 32 },
     },
   ];
-  useEffect(() => {
-    let scrollInstance: LocomotiveScroll | undefined;
-    if (typeof window !== "undefined") {
-      scrollInstance = new LocomotiveScroll({
-        el: document.querySelector("[data-scroll-container]") as HTMLElement,
-        smooth: true,
-        lerp: 0.08,
-        multiplier: 1,
-        class: "is-reveal",
-      });
-    }
-    return () => {
-      if (scrollInstance) scrollInstance.destroy();
-    };
-  }, []);
+  // ...existing code...
   return (
     <div
       data-scroll-container
@@ -396,6 +389,30 @@ export default function HomePage() {
                 View Full Menu
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="text-center py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <Badge className="px-4 py-2 rounded-full text-sm font-medium bg-[#FAF3E0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none hover:bg-[#FAF3E0">
+              Reviews
+            </Badge>
+          </div>
+          <h2 className="mt-6 text-3xl lg:text-4xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+            What our{" "}
+            <span className="text-[#6F4E37] dark:text-[#e6b800]">clients</span>{" "}
+            say?
+          </h2>
+          <p className="text-lg max-w-2xl mx-auto leading-relaxed text-[#4B2E2B] dark:text-[#e6e6e6]">
+            We serve food but also an experience to our clients. Here's what
+            they have to say.
+          </p>
+          <div>
+            {/* Self sliding reviews slider */}
+            <ReviewsSlider />
           </div>
         </div>
       </section>

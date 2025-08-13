@@ -17,12 +17,19 @@ interface MenuItemCardProps {
     badgeColor: string;
     hot?: boolean;
     iced?: boolean;
+    nutrition?: {
+      calories?: number;
+      protein?: number;
+      fat?: number;
+      carbs?: number;
+    };
   };
 }
 
 export function MenuItemCard({ item }: MenuItemCardProps) {
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
   const { openModal } = useGlobalModal();
 
   return (
@@ -94,12 +101,52 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
             </span>
           </div>
           <p
-            className={`text-[#4B2E2B] dark:text-[#e6e6e6] text-sm leading-relaxed mb-4 transition-all duration-300 ${
+            className={`text-[#4B2E2B] dark:text-[#e6e6e6] text-sm leading-relaxed mb-2 transition-all duration-300 ${
               isHovered ? "text-opacity-80" : ""
             }`}
           >
             {item.description}
           </p>
+          {item.nutrition && (
+            <div className="relative inline-block mb-4">
+              <button
+                className="text-xs text-[#6F4E37] dark:text-[#e6b800] underline underline-offset-2 bg-[#FAF3E0] dark:bg-[#18181c] rounded px-2 py-1 border border-[#F5F5DC] dark:border-[#333] cursor-pointer"
+                tabIndex={0}
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+                onFocus={() => setShowTooltip(true)}
+                onBlur={() => setShowTooltip(false)}
+              >
+                Nutritional Info
+              </button>
+              {showTooltip && (
+                <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-50 bg-[#FFF8F0] dark:bg-[#222] text-[#4B2E2B] dark:text-[#e6e6e6] border border-[#F5F5DC] dark:border-[#333] rounded shadow-md px-3 py-2 text-xs min-w-[140px]">
+                  <div className="flex flex-col gap-1">
+                    {item.nutrition.calories !== undefined && (
+                      <span>
+                        Calories: <b>{item.nutrition.calories}</b>
+                      </span>
+                    )}
+                    {item.nutrition.protein !== undefined && (
+                      <span>
+                        Protein: <b>{item.nutrition.protein}g</b>
+                      </span>
+                    )}
+                    {item.nutrition.fat !== undefined && (
+                      <span>
+                        Fat: <b>{item.nutrition.fat}g</b>
+                      </span>
+                    )}
+                    {item.nutrition.carbs !== undefined && (
+                      <span>
+                        Carbs: <b>{item.nutrition.carbs}g</b>
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
           <div
             className={`transition-all duration-300 transform ${
               isHovered

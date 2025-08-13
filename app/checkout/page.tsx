@@ -163,21 +163,7 @@ export default function CheckoutPage() {
     setAutoDownload(true);
   };
 
-  useEffect(() => {
-    let scrollInstance: LocomotiveScroll | undefined;
-    if (typeof window !== "undefined") {
-      scrollInstance = new LocomotiveScroll({
-        el: document.querySelector("[data-scroll-container]") as HTMLElement,
-        smooth: true,
-        lerp: 0.08,
-        multiplier: 1,
-        class: "is-reveal",
-      });
-    }
-    return () => {
-      if (scrollInstance) scrollInstance.destroy();
-    };
-  }, []);
+  // ...existing code...
 
   if (showSuccess) {
     // Automatically download invoice PDF after order is placed
