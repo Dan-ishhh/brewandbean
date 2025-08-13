@@ -237,9 +237,25 @@ export default function CheckoutPage() {
     <div
       data-scroll-container
       className="min-h-screen flex flex-col items-center justify-center bg-[#FFF8F0] dark:bg-[#18181c]"
+      style={{ width: "100%" }}
     >
-      <section className="pt-24 pb-12">
-        <div className="max-w-3xl mx-auto px-4">
+      <section className="pt-24 pb-12 w-full">
+        <div
+          className="px-4 max-w-3xl mx-auto w-full checkout-fullwidth"
+          style={{ width: "100%" }}
+        >
+          <style>{`
+            @media (max-width: 700px) {
+              .checkout-fullwidth {
+                max-width: 100vw !important;
+                width: 100vw !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+              }
+            }
+          `}</style>
           <div className="flex items-center justify-between gap-3 mb-8 mt-4">
             <Link href="/menu">
               <Button
