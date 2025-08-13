@@ -32,7 +32,6 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Add a search bar
   // Table Reservation flow (realtime wait time for tables)
   // Change from Redux to Zustand
 
@@ -168,11 +167,11 @@ export default function HomePage() {
       nutrition: { calories: 260, protein: 6, fat: 10, carbs: 32 },
     },
   ];
-  // ...existing code...
+
   return (
     <div
       data-scroll-container
-      className="min-h-screen bg-background text-foreground transition-colors duration-300"
+      className="min-h-screen bg-background text-foreground transition-colors duration-300 overflow-x-hidden"
     >
       {/* Hero Section */}
       <section className="pt-24 min-h-screen flex items-center relative overflow-hidden">
