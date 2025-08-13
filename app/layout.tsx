@@ -18,12 +18,12 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/png" href="/coffee-cup.png" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Lobster&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Lobster&family=Mozilla+Headline:wght@200..700&display=swap"
           rel="stylesheet"
         />
         <style>{`
           html {
-            font-family: "Dancing Script", cursive;
+            font-family:  "Mozilla Headline", sans-serif;
             font-weight: 400;
             font-style: normal;
           }
@@ -37,7 +37,7 @@ export default function RootLayout({
                 className="min-h-screen flex flex-col"
                 style={{
                   backgroundColor: "#FFF8F0",
-                  fontFamily: '"Dancing Script", cursive',
+                  fontFamily: `"Mozilla Headline", sans-serif;`,
                   // fontFamily:
                   //   '"Avenir Next Rounded", "Avenir Rounded", "Segoe UI", sans-serif',
                 }}
