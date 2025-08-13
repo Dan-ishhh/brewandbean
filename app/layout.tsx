@@ -18,12 +18,12 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/png" href="/coffee-cup.png" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Chewy&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Lobster&display=swap"
           rel="stylesheet"
         />
         <style>{`
           html {
-            font-family: 'Chewy', sans-serif;
+            font-family: "Dancing Script", cursive;
             font-weight: 400;
             font-style: normal;
           }
