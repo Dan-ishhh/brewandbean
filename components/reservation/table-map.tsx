@@ -195,7 +195,6 @@ export function TableMap() {
         >
           Close Map
         </Button>
-        {/* Keep Make Reservation button commented out if user prefers */}
       </div>
     </div>
   );

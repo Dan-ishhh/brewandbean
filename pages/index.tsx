@@ -1,18 +1,41 @@
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CartSidebar } from "@/components/cart/cart-sidebar";
+const CartSidebar = dynamic(
+  () => import("@/components/cart/cart-sidebar").then((m) => m.CartSidebar),
+  { ssr: false }
+);
 import Link from "next/link";
 import { ArrowRight, Coffee, Heart, Star, Wifi } from "lucide-react";
 import { MenuItemCard } from "@/components/menu/menu-item-card";
 import { MenuItemSkeleton } from "@/components/menu/menu-item-skeleton";
 import { useTranslation } from "@/contexts/translation-context";
-import { ReviewsSlider } from "@/components/ui/reviews-slider";
+const ReviewsSlider = dynamic(
+  () => import("@/components/ui/reviews-slider").then((m) => m.ReviewsSlider),
+  { ssr: false, loading: () => <div className="h-48" /> }
+);
 import { TableAvailabilitySummary } from "@/components/reservation/table-availability-summary";
-import { TableMap } from "@/components/reservation/table-map";
-import { ReservationModal } from "@/components/reservation/reservation-modal";
+const TableMap = dynamic(
+  () => import("@/components/reservation/table-map").then((m) => m.TableMap),
+  { ssr: false }
+);
+const ReservationModal = dynamic(
+  () =>
+    import("@/components/reservation/reservation-modal").then(
+      (m) => m.ReservationModal
+    ),
+  { ssr: false }
+);
 import { useReservation } from "@/contexts/reservation-context";
-import { ReservationConfirmationModal } from "@/components/reservation/confirmation-modal";
+const ReservationConfirmationModal = dynamic(
+  () =>
+    import("@/components/reservation/confirmation-modal").then(
+      (m) => m.ReservationConfirmationModal
+    ),
+  { ssr: false }
+);
 import { ReserveFab } from "@/components/reservation/reserve-fab";
 
 export default function HomePage() {
@@ -249,9 +272,13 @@ export default function HomePage() {
 
           <div className="relative">
             <div className="relative z-10">
-              <img
+              <Image
                 src="/images/cafe-interior.jpg"
                 alt="Cozy cafe interior"
+                width={1200}
+                height={600}
+                priority
+                sizes="(max-width: 1024px) 100vw, 1200px"
                 className="rounded-3xl shadow-2xl w-full h-[600px] object-cover"
               />
             </div>
@@ -413,7 +440,7 @@ export default function HomePage() {
       <TableAvailabilitySummary />
 
       {/* Reservation Components */}
-      <div id="reservation" />
+      <div id="reservation" className="scroll-mt-24 md:scroll-mt-28" />
       {state.showTableMap && <TableMap />}
       <ReservationModal />
       <ReservationConfirmationModal />
@@ -449,6 +476,7 @@ export default function HomePage() {
       </section>
 
       <CartSidebar />
+      <ReserveFab />
     </div>
   );
 }

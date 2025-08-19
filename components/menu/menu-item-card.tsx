@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AddToCartButton } from "@/components/cart/add-to-cart-button";
@@ -32,6 +33,8 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
   const [showTooltip, setShowTooltip] = useState(false);
   const { openModal } = useGlobalModal();
 
+  const imageSrc = imageError ? "/placeholder.jpg" : item.image;
+
   return (
     <Card
       className="bg-[#FFF8F0] dark:bg-[#222] border-0 hover:shadow-2xl transition-all duration-500 group overflow-hidden rounded-2xl transform hover:scale-[1.02] hover:-translate-y-2 animate-fade-in-up"
@@ -40,15 +43,17 @@ export function MenuItemCard({ item }: MenuItemCardProps) {
     >
       <CardContent className="p-0">
         <div className="relative overflow-hidden">
-          <img
-            src={
-              imageError ? "/placeholder.svg?height=240&width=320" : item.image
-            }
-            alt={item.name}
-            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-            onError={() => setImageError(true)}
-            loading="lazy"
-          />
+          <div className="relative w-full h-48">
+            <Image
+              src={imageSrc}
+              alt={item.name}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+              className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+              onError={() => setImageError(true)}
+              loading="lazy"
+            />
+          </div>
           {/* Overlay gradient on hover */}
           <div
             className={`absolute inset-0 bg-gradient-to-t from-black/20 to-transparent transition-opacity duration-300 ${

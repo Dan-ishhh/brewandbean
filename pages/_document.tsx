@@ -6,6 +6,12 @@ class MyDocument extends Document {
       <Html lang="en" suppressHydrationWarning>
         <Head>
           <link rel="icon" type="image/png" href="/coffee-cup.png" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
           <link
             href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Lobster&family=Mozilla+Headline:wght@200..700&display=swap"
             rel="stylesheet"

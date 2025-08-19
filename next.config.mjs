@@ -7,8 +7,13 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    // Use Next.js Image Optimization for better performance
+    unoptimized: false,
   },
-}
+  experimental: {
+    // Prefer tree-shakeable ESM where possible
+    optimizePackageImports: ["lucide-react"],
+  },
+};
 
-export default nextConfig
+export default nextConfig;

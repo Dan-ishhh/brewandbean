@@ -134,17 +134,6 @@ export function TableAvailabilitySummary() {
               <MapPin className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
               View Table Map
             </Button>
-            {/* <Button
-              onClick={() => {
-                dispatch({ type: "SET_SHOW_TABLE_MAP", payload: true });
-              }}
-              size="lg"
-              variant="outline"
-              className="text-[#4B2E2B] dark:bg-[#222] dark:border-[#e6b800] dark:text-[#e6b800] dark:hover:bg-[#333] bg-white/80 px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-md hover:shadow-lg transition-all border-2 border-[#6F4E37] dark:border-[#e6b800] text-sm sm:text-base"
-            >
-              <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-              Book Now
-            </Button> */}
           </div>
         </div>
       </div>

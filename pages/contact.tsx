@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type React from "react";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -14,10 +15,28 @@ import {
   Users,
   Calendar,
 } from "lucide-react";
-import { GoogleMapLocations } from "@/components/ui/google-map";
-import { TableMap } from "@/components/reservation/table-map";
-import { ReservationModal } from "@/components/reservation/reservation-modal";
-import { ReservationConfirmationModal } from "@/components/reservation/confirmation-modal";
+const GoogleMapLocations = dynamic(
+  () => import("@/components/ui/google-map").then((m) => m.GoogleMapLocations),
+  { ssr: false, loading: () => <div className="h-96" /> }
+);
+const TableMap = dynamic(
+  () => import("@/components/reservation/table-map").then((m) => m.TableMap),
+  { ssr: false }
+);
+const ReservationModal = dynamic(
+  () =>
+    import("@/components/reservation/reservation-modal").then(
+      (m) => m.ReservationModal
+    ),
+  { ssr: false }
+);
+const ReservationConfirmationModal = dynamic(
+  () =>
+    import("@/components/reservation/confirmation-modal").then(
+      (m) => m.ReservationConfirmationModal
+    ),
+  { ssr: false }
+);
 import { ReserveFab } from "@/components/reservation/reserve-fab";
 import { useReservation } from "@/contexts/reservation-context";
 
@@ -297,10 +316,9 @@ export default function ContactPage() {
       </section>
 
       {/* Table Reservation Section */}
-      <div id="reservation" />
       <section
         id="reservation"
-        className="py-20 bg-[#FFF8F0] dark:bg-[#18181c]"
+        className="py-20 bg-[#FFF8F0] dark:bg-[#18181c] scroll-mt-24 md:scroll-mt-28"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">

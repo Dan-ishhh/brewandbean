@@ -21,7 +21,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             className="min-h-screen flex flex-col"
             style={{
               backgroundColor: "#FFF8F0",
-              fontFamily: '"Mozilla Headline", sans-serif;',
+              fontFamily: '"Mozilla Headline", sans-serif',
             }}
           >
             <TopbarMenu />
