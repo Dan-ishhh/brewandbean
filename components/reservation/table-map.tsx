@@ -24,7 +24,37 @@ export function TableMap() {
   }, []);
 
   const BASE_SIZE = 500; // baseline design width/height for coordinates
-  const scale = Math.max(0.5, Math.min(mapWidth / BASE_SIZE, 1.6));
+  const outerScale = Math.max(0.5, Math.min(mapWidth / BASE_SIZE, 1.6));
+  const PADDING = Math.max(16, Math.round(mapWidth * 0.06));
+  const LABEL_BAND = Math.max(44, Math.round(mapWidth * 0.12)); // reserved space at bottom for labels
+
+  // Compute content bounding box from table positions and their base sizes
+  const getBaseSize = (capacity: number) =>
+    capacity <= 2 ? 60 : capacity <= 4 ? 80 : 100;
+  const positions = state.tables.map((t) => ({
+    x: t.position.x,
+    y: t.position.y,
+    s: getBaseSize(t.capacity),
+  }));
+  const minX = Math.min(...positions.map((p) => p.x));
+  const minY = Math.min(...positions.map((p) => p.y));
+  const maxX = Math.max(...positions.map((p) => p.x + p.s));
+  const maxY = Math.max(...positions.map((p) => p.y + p.s));
+  const contentW = Math.max(1, maxX - minX);
+  const contentH = Math.max(1, maxY - minY);
+
+  const innerW = Math.max(1, mapWidth - 2 * PADDING);
+  const innerH = Math.max(1, mapWidth - 2 * PADDING - LABEL_BAND);
+  const fitScale = Math.max(
+    0.4,
+    Math.min(innerW / contentW, innerH / contentH, 2)
+  );
+
+  // Compute top-left origin so content is centered within inner area
+  const originX =
+    PADDING + (innerW - contentW * fitScale) / 2 - minX * fitScale;
+  const originY =
+    PADDING + (innerH - contentH * fitScale) / 2 - minY * fitScale;
 
   const handleTableClick = (table: any) => {
     if (table.isBooked) {
@@ -53,8 +83,8 @@ export function TableMap() {
   };
 
   const getTableSize = (capacity: number) => {
-    const base = capacity <= 2 ? 60 : capacity <= 4 ? 80 : 100;
-    const size = Math.round(base * scale);
+    const base = getBaseSize(capacity);
+    const size = Math.round(base * fitScale);
     return Math.max(32, size); // enforce minimum touch size
   };
 
@@ -125,10 +155,11 @@ export function TableMap() {
             className="relative w-full max-w-[800px] md:max-w-[640px] lg:max-w-[720px] xl:max-w-[800px] mx-auto"
             style={{ height: mapWidth }}
           >
+            {/* Padded play area (visual guidance, no render) */}
             {state.tables.map((table) => {
               const size = getTableSize(table.capacity);
-              const left = Math.round(table.position.x * scale);
-              const top = Math.round(table.position.y * scale);
+              const left = Math.round(originX + table.position.x * fitScale);
+              const top = Math.round(originY + table.position.y * fitScale);
               return (
                 <div
                   key={table.id}
@@ -154,7 +185,13 @@ export function TableMap() {
             })}
 
             {/* Decorative elements */}
-            <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-white dark:bg-[#222] px-2 sm:px-3 py-1 sm:py-2 rounded-lg shadow-md border border-[#F5F5DC] dark:border-[#333]">
+            <div
+              className="absolute bg-white dark:bg-[#222] px-2 sm:px-3 py-1 sm:py-2 rounded-lg shadow-md border border-[#F5F5DC] dark:border-[#333] pointer-events-none select-none"
+              style={{
+                left: Math.max(8, PADDING),
+                bottom: Math.max(8, PADDING / 2),
+              }}
+            >
               <div className="flex items-center gap-1 sm:gap-2">
                 <span className="text-sm sm:text-lg">🚪</span>
                 <span className="text-xs sm:text-sm font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
@@ -162,7 +199,13 @@ export function TableMap() {
                 </span>
               </div>
             </div>
-            <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-white dark:bg-[#222] px-2 sm:px-3 py-1 sm:py-2 rounded-lg shadow-md border border-[#F5F5DC] dark:border-[#333]">
+            <div
+              className="absolute bg-white dark:bg-[#222] px-2 sm:px-3 py-1 sm:py-2 rounded-lg shadow-md border border-[#F5F5DC] dark:border-[#333] pointer-events-none select-none"
+              style={{
+                right: Math.max(8, PADDING),
+                bottom: Math.max(8, PADDING / 2),
+              }}
+            >
               <div className="flex items-center gap-1 sm:gap-2">
                 <span className="text-sm sm:text-lg">☕</span>
                 <span className="text-xs sm:text-sm font-medium text-[#4B2E2B] dark:text-[#e6e6e6]">
