@@ -1,9 +1,8 @@
-"use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useCart } from "@/contexts/cart-context";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Trash2, CheckCircle, ArrowRight, ArrowLeft } from "lucide-react";
+import { CheckCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import {
   PDFDownloadLink,
@@ -14,7 +13,6 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
-import LocomotiveScroll from "locomotive-scroll";
 
 const styles = StyleSheet.create({
   page: {
@@ -32,16 +30,8 @@ const styles = StyleSheet.create({
     borderBottomColor: "#F5F5DC",
     paddingBottom: 8,
   },
-  logo: {
-    width: 30,
-    height: 32,
-    marginRight: 16,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#6F4E37",
-  },
+  logo: { width: 30, height: 32, marginRight: 16 },
+  title: { fontSize: 22, fontWeight: "bold", color: "#6F4E37" },
   section: { marginBottom: 14 },
   item: { marginBottom: 6 },
   itemName: { fontWeight: "bold", color: "#4B2E2B" },
@@ -112,15 +102,22 @@ export default function CheckoutPage() {
     cvv: "",
   });
   const [cardError, setCardError] = useState("");
+  const { state, dispatch } = useCart();
+  const [payment, setPayment] = useState<"restaurant" | "online" | null>(null);
+  const [paid, setPaid] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [autoDownload, setAutoDownload] = useState(false);
+  const [invoiceData, setInvoiceData] = useState<{
+    items: any[];
+    total: number;
+  } | null>(null);
 
   const handleCardInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCardForm((prev) => ({ ...prev, [name]: value }));
   };
-
   const handleCardPay = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple dummy validation
     if (
       !cardForm.name ||
       !cardForm.number ||
@@ -132,19 +129,6 @@ export default function CheckoutPage() {
     }
     setCardError("");
     handlePayOnline();
-  };
-  const { state, dispatch } = useCart();
-  const [payment, setPayment] = useState<"restaurant" | "online" | null>(null);
-  const [paid, setPaid] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [autoDownload, setAutoDownload] = useState(false);
-  const [invoiceData, setInvoiceData] = useState<{
-    items: any[];
-    total: number;
-  } | null>(null);
-
-  const handleDelete = (id: any) => {
-    dispatch({ type: "REMOVE_ITEM", payload: { id } });
   };
 
   const handlePayOnline = () => {
@@ -163,11 +147,7 @@ export default function CheckoutPage() {
     setAutoDownload(true);
   };
 
-  // ...existing code...
-
   if (showSuccess) {
-    // Automatically download invoice PDF after order is placed
-    // Use a hidden PDFDownloadLink and trigger click when autoDownload is true
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#FFF8F0] dark:bg-[#18181c]">
         <Card className="max-w-md w-full shadow-xl border-0 rounded-2xl bg-[#FFF8F0] dark:bg-[#222]">
@@ -181,7 +161,6 @@ export default function CheckoutPage() {
                 ? "Thank you for your payment. Your order is confirmed."
                 : "Your order is confirmed. Please pay at the restaurant."}
             </p>
-            {/* Hidden PDFDownloadLink for auto download */}
             <PDFDownloadLink
               document={
                 <InvoicePDF
@@ -193,9 +172,8 @@ export default function CheckoutPage() {
               fileName="invoice.pdf"
               style={{ display: "none" }}
             >
-              {({ url, loading }) => {
+              {({ url }) => {
                 if (autoDownload && url && typeof window !== "undefined") {
-                  // Trigger download
                   setTimeout(() => {
                     const a = document.createElement("a");
                     a.href = url;
@@ -230,18 +208,7 @@ export default function CheckoutPage() {
           className="px-4 max-w-3xl mx-auto w-full checkout-fullwidth"
           style={{ width: "100%" }}
         >
-          <style>{`
-            @media (max-width: 700px) {
-              .checkout-fullwidth {
-                max-width: 100vw !important;
-                width: 100vw !important;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-                padding-left: 16px !important;
-                padding-right: 16px !important;
-              }
-            }
-          `}</style>
+          <style>{`@media (max-width: 700px) {.checkout-fullwidth {max-width: 100vw !important;width: 100vw !important;margin-left: 0 !important;margin-right: 0 !important;padding-left: 16px !important;padding-right: 16px !important;}}`}</style>
           <div className="flex items-center justify-between gap-3 mb-8 mt-4">
             <Link href="/menu">
               <Button
@@ -322,7 +289,6 @@ export default function CheckoutPage() {
             </CardContent>
           </Card>
 
-          {/* Payment Options as radio buttons */}
           <Card className="shadow-xl border-0 rounded-2xl bg-[#FFF8F0] dark:bg-[#222]">
             <CardContent className="p-6">
               <h2 className="text-xl font-bold mb-4 text-[#4B2E2B] dark:text-[#e6e6e6]">

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import { CartButton } from "@/components/cart/cart-button";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
@@ -13,7 +13,8 @@ import Select from "react-select";
 export function TopbarMenu() {
   const { theme, setTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const { asPath } = useRouter();
+  const pathname = asPath.split("?")[0];
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -90,6 +91,7 @@ export function TopbarMenu() {
               {/* Language Selector Desktop */}
               <div className="hidden md:flex w-[90px] min-w-[90px] max-w-[140px]">
                 <Select
+                  instanceId="language-select"
                   value={{
                     value: language,
                     label: language === "en" ? "English" : "हिन्दी",
@@ -230,6 +232,7 @@ export function TopbarMenu() {
                 {/* Language Selector Mobile */}
                 <div className="w-[110px] min-w-[90px] max-w-[140px]">
                   <Select
+                    instanceId="language-select-mobile"
                     value={{
                       value: language,
                       label: language === "en" ? "English" : "हिन्दी",

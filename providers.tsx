@@ -7,7 +7,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <CartProvider>
       <GlobalModalProvider>
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+        >
           {children}
         </ThemeProvider>
       </GlobalModalProvider>

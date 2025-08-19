@@ -96,7 +96,7 @@ export function ReviewsSlider() {
               </div>
             ))}
           </div>
-          <div className="flex justify-center gap-2 mt-8">
+          {/* <div className="flex justify-center gap-2 mt-8">
             {reviews.map((_, idx) => (
               <button
                 key={idx}
@@ -110,7 +110,7 @@ export function ReviewsSlider() {
                 onClick={() => setCurrent(idx)}
               />
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
