@@ -8,9 +8,16 @@ import { MenuItemCard } from "@/components/menu/menu-item-card";
 import { MenuItemSkeleton } from "@/components/menu/menu-item-skeleton";
 import { useTranslation } from "@/contexts/translation-context";
 import { ReviewsSlider } from "@/components/ui/reviews-slider";
+import { TableAvailabilitySummary } from "@/components/reservation/table-availability-summary";
+import { TableMap } from "@/components/reservation/table-map";
+import { ReservationModal } from "@/components/reservation/reservation-modal";
+import { useReservation } from "@/contexts/reservation-context";
+import { ReservationConfirmationModal } from "@/components/reservation/confirmation-modal";
+import { ReserveFab } from "@/components/reservation/reserve-fab";
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
+  const { state } = useReservation();
   const {
     home,
     menu,
@@ -402,6 +409,15 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <TableAvailabilitySummary />
+
+      {/* Reservation Components */}
+      <div id="reservation" />
+      {state.showTableMap && <TableMap />}
+      <ReservationModal />
+      <ReservationConfirmationModal />
+      <ReserveFab />
 
       <section className="py-20 text-white bg-gradient-to-br from-[#6F4E37] to-[#4B2E2B] dark:from-[#18181c] dark:to-[#232326]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

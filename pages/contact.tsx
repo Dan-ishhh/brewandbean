@@ -4,8 +4,22 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CartSidebar } from "@/components/cart/cart-sidebar";
-import { Clock, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
+import {
+  Clock,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Send,
+  Users,
+  Calendar,
+} from "lucide-react";
 import { GoogleMapLocations } from "@/components/ui/google-map";
+import { TableMap } from "@/components/reservation/table-map";
+import { ReservationModal } from "@/components/reservation/reservation-modal";
+import { ReservationConfirmationModal } from "@/components/reservation/confirmation-modal";
+import { ReserveFab } from "@/components/reservation/reserve-fab";
+import { useReservation } from "@/contexts/reservation-context";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -14,6 +28,7 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
+  const { state, dispatch } = useReservation();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -281,7 +296,65 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* Table Reservation Section */}
+      <div id="reservation" />
+      <section
+        id="reservation"
+        className="py-20 bg-[#FFF8F0] dark:bg-[#18181c]"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <Badge className="px-4 py-2 rounded-full text-sm font-medium mb-6 bg-[#FAF3E0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none">
+              Table Reservations
+            </Badge>
+            <h2 className="text-4xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
+              Reserve Your{" "}
+              <span className="text-[#6F4E37] dark:text-[#e6b800]">Table</span>
+            </h2>
+            <p className="text-xl max-w-3xl mx-auto text-[#4B2E2B] dark:text-[#e6e6e6]">
+              Check table availability and make reservations for your visit. Our
+              interactive floor plan shows you exactly where you'll be seated.
+            </p>
+          </div>
+
+          {state.showTableMap ? (
+            <TableMap />
+          ) : (
+            <div className="text-center">
+              <div className="max-w-2xl mx-auto">
+                <div className="mb-8 p-8 bg-white dark:bg-[#222] rounded-2xl shadow-lg border border-[#F5F5DC] dark:border-[#333]">
+                  <div className="w-20 h-20 bg-[#6F4E37] dark:bg-[#e6b800] rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Users className="h-10 w-10 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-[#4B2E2B] dark:text-[#e6e6e6]">
+                    Interactive Table Map
+                  </h3>
+                  <p className="text-[#6F4E37] dark:text-[#e6b800] mb-6">
+                    See our floor plan, check table availability, and make
+                    instant reservations.
+                  </p>
+                  <Button
+                    onClick={() =>
+                      dispatch({ type: "SET_SHOW_TABLE_MAP", payload: true })
+                    }
+                    className="bg-[#6F4E37] text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border-0 hover:bg-[#4B2E2B] dark:bg-[#222] dark:text-[#e6b800] dark:hover:bg-[#333]"
+                  >
+                    <Calendar className="mr-2 h-5 w-5" />
+                    View Table Map
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
       <CartSidebar />
+
+      {/* Reservation Components */}
+      <ReservationModal />
+      <ReservationConfirmationModal />
+      <ReserveFab />
     </div>
   );
 }
