@@ -178,8 +178,8 @@ export function TableMap() {
       {!state.selectedTable && (
         <div className="mt-3 sm:mt-4 text-center px-4">
           <p className="text-xs sm:text-sm text-[#6F4E37] dark:text-[#e6b800]">
-            💡 Click on any available table (green) to select it, then click
-            "Make Reservation"
+            💡 Click on any available table (green) to select it, then make a
+            Reservation.
           </p>
         </div>
       )}

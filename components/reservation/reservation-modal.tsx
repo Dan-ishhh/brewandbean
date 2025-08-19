@@ -166,7 +166,7 @@ export function ReservationModal() {
               htmlFor="customerName"
               className="text-sm sm:text-base text-[#4B2E2B] dark:text-[#e6e6e6]"
             >
-              Full Name *
+              Full Name <span className="text-red-500">*</span>
             </Label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#6F4E37] dark:text-[#e6b800]" />
@@ -187,7 +187,7 @@ export function ReservationModal() {
               htmlFor="customerPhone"
               className="text-sm sm:text-base text-[#4B2E2B] dark:text-[#e6e6e6]"
             >
-              Phone Number *
+              Phone Number <span className="text-red-500">*</span>
             </Label>
             <div className="relative">
               <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#6F4E37] dark:text-[#e6b800]" />
@@ -230,7 +230,7 @@ export function ReservationModal() {
               htmlFor="partySize"
               className="text-sm sm:text-base text-[#4B2E2B] dark:text-[#e6e6e6]"
             >
-              Party Size *
+              Party Size <span className="text-red-500">*</span>
             </Label>
             <Select
               value={formData.partySize}
@@ -258,7 +258,7 @@ export function ReservationModal() {
                 htmlFor="bookingDate"
                 className="text-sm sm:text-base text-[#4B2E2B] dark:text-[#e6e6e6]"
               >
-                Date *
+                Date <span className="text-red-500">*</span>
               </Label>
               <div className="relative">
                 <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#6F4E37] dark:text-[#e6b800]" />
@@ -280,7 +280,7 @@ export function ReservationModal() {
                 htmlFor="bookingTime"
                 className="text-sm sm:text-base text-[#4B2E2B] dark:text-[#e6e6e6]"
               >
-                Time *
+                Time <span className="text-red-500">*</span>
               </Label>
               <div className="relative">
                 <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#6F4E37] dark:text-[#e6b800] z-10" />
