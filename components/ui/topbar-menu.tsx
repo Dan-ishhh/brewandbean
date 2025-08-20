@@ -9,18 +9,20 @@ import { Sun, Moon } from "lucide-react";
 import Image from "next/image";
 import { useLanguage } from "@/contexts/language-context";
 import Select from "react-select";
+import { useTranslation } from "@/contexts/translation-context";
 
 export function TopbarMenu() {
   const { theme, setTheme } = useTheme();
+  const { menu } = useTranslation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { asPath } = useRouter();
   const pathname = asPath.split("?")[0];
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/menu", label: "Menu" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: menu.home },
+    { href: "/about", label: menu.about },
+    { href: "/menu", label: menu.menu },
+    { href: "/contact", label: menu.contact },
   ];
 
   const { language, setLanguage } = useLanguage();

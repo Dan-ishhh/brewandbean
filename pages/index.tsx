@@ -43,9 +43,6 @@ export default function HomePage() {
   const { state } = useReservation();
   const {
     home,
-    menu,
-    about,
-    contact,
     topbar,
     addToCartModal,
     cartSidebar,
@@ -210,7 +207,7 @@ export default function HomePage() {
           <div className="space-y-8">
             <div className="space-y-6">
               <Badge className="px-4 py-2 rounded-full text-sm font-medium border-#E6B800 bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6]">
-                ☕ Freshly Roasted Daily
+                ☕ {home.freshlyRoastedDaily}
               </Badge>
               <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-[#4B2E2B] dark:text-[#e6e6e6]">
                 Your Cozy Corner for a
@@ -220,9 +217,7 @@ export default function HomePage() {
                 </span>
               </h1>
               <p className="text-xl leading-relaxed max-w-lg text-[#4B2E2B] dark:text-[#e6e6e6]">
-                Step into warmth, savor exceptional coffee, and become part of
-                our welcoming community where every visit feels like coming
-                home.
+                {home.welcomeText}
               </p>
             </div>
 
@@ -258,13 +253,13 @@ export default function HomePage() {
                   ))}
                 </div>
                 <span className="text-[#4B2E2B] dark:text-[#e6e6e6] font-medium">
-                  4.9/5 Rating
+                  4.9/5 {home.rating}
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <Heart className="text-[#6F4E37] dark:text-[#e6e6e6] h-5 w-5" />
                 <span className="text-[#4B2E2B] dark:text-[#e6e6e6] font-medium">
-                  2000+ Happy Customers
+                  2000+ {home.happyCustomers}
                 </span>
               </div>
             </div>
@@ -290,10 +285,10 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="font-semibold text-sm text-[#4B2E2B] dark:text-[#e6e6e6]">
-                    Premium Coffee
+                    {home.premiumCoffee}
                   </p>
                   <p className="text-xs text-[#6F4E37] dark:text-[#e6b800]">
-                    Ethically Sourced
+                    {home.ethicallySourced}
                   </p>
                 </div>
               </div>
@@ -306,10 +301,10 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="font-semibold text-sm text-[#4B2E2B] dark:text-[#e6e6e6]">
-                    Free WiFi
+                    {home.freeWifi}
                   </p>
                   <p className="text-xs text-[#6F4E37] dark:text-[#e6b800]">
-                    Work Friendly
+                    {home.workFriendly}
                   </p>
                 </div>
               </div>
@@ -322,7 +317,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <Badge className="px-4 py-2 rounded-full text-sm font-medium mb-6 bg-[#FAF3E0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none">
-              Our Story
+              {home.ourStory}
             </Badge>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
               Crafted with{" "}
@@ -335,13 +330,11 @@ export default function HomePage() {
               <span className="text-[#6F4E37] dark:text-[#e6b800]">Love</span>
             </h2>
             <p className="text-xl max-w-3xl mx-auto leading-relaxed mb-8 text-[#4B2E2B] dark:text-[#e6e6e6]">
-              Since 2018, Brew & Bean has been the heart of our community,
-              creating a warm space where neighbors become friends and great
-              ideas are born over exceptional coffee.
+              {home.since2018}
             </p>
             <Link href="/about">
               <Button className="text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all border-0 bg-[#6F4E37] hover:bg-[#4B2E2B] dark:bg-[#222] dark:text-[#e6b800] dark:hover:bg-[#333]">
-                Learn More About Us
+                {home.learnMore}
               </Button>
             </Link>
           </div>
@@ -352,7 +345,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <Badge className="px-4 py-2 rounded-full text-sm font-medium mb-6 bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none">
-              Our Menu
+              {home.ourMenu}
             </Badge>
             <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
               <span className="text-[#6F4E37] dark:text-[#e6b800]">
@@ -361,9 +354,7 @@ export default function HomePage() {
               Favorites
             </h2>
             <p className="text-xl max-w-3xl mx-auto leading-relaxed text-[#4B2E2B] dark:text-[#e6e6e6]">
-              From classic espresso drinks to innovative seasonal creations,
-              each item is crafted with care to bring you the perfect taste
-              experience.
+              {home.signatureDesc}
             </p>
           </div>
 
@@ -379,7 +370,7 @@ export default function HomePage() {
 
           <div className="text-center mb-12">
             <Badge className="px-4 py-2 rounded-full text-sm font-medium mb-6 bg-[#FFF8F0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none">
-              Pizzas
+              {home.pizzas}
             </Badge>
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
               <span className="text-[#6F4E37] dark:text-[#e6b800]">
@@ -388,8 +379,7 @@ export default function HomePage() {
               Pizzas
             </h2>
             <p className="text-lg max-w-2xl mx-auto leading-relaxed text-[#4B2E2B] dark:text-[#e6e6e6]">
-              Try our new range of pizzas, baked to perfection with fresh
-              ingredients and love.
+              {home.pizzaDesc}
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
@@ -408,7 +398,7 @@ export default function HomePage() {
                 size="lg"
                 className="text-white px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0 bg-[#6F4E37] hover:bg-[#4B2E2B] dark:bg-[#222] dark:text-[#e6b800] dark:hover:bg-[#333]"
               >
-                View Full Menu
+                {home.viewFullMenu} <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
           </div>
@@ -419,7 +409,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <Badge className="px-4 py-2 rounded-full text-sm font-medium bg-[#FAF3E0] text-[#4B2E2B] dark:bg-[#222] dark:text-[#e6e6e6] border-none hover:bg-[#FAF3E0]">
-              Reviews
+              {home.reviews}
             </Badge>
           </div>
           <h2 className="mt-6 text-3xl lg:text-4xl font-bold mb-6 text-[#4B2E2B] dark:text-[#e6e6e6]">
@@ -428,8 +418,7 @@ export default function HomePage() {
             say?
           </h2>
           <p className="text-lg max-w-2xl mx-auto leading-relaxed text-[#4B2E2B] dark:text-[#e6e6e6]">
-            We serve food but also an experience to our clients. Here's what
-            they have to say.
+            {home.clientsSayDesc}
           </p>
           <div>
             <ReviewsSlider />
@@ -448,10 +437,9 @@ export default function HomePage() {
 
       <section className="py-20 text-white bg-gradient-to-br from-[#6F4E37] to-[#4B2E2B] dark:from-[#18181c] dark:to-[#232326]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Order?</h2>
+          <h2 className="text-4xl font-bold mb-6">{home.readyToOrder}</h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Visit us in-store or place your order online for pickup. We can't
-            wait to serve you!
+            {home.orderText}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/menu">
@@ -459,7 +447,7 @@ export default function HomePage() {
                 size="lg"
                 className="px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all border-0 bg-[#FFF8F0] text-[#4B2E2B] hover:bg-[#4B2E2B] hover:text-white dark:bg-[#222] dark:text-[#e6e6e6] dark:hover:bg-[#333] dark:hover:text-[#e6b800]"
               >
-                Order Online
+                {home.orderOnline} <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <Link href="/contact">
@@ -468,7 +456,7 @@ export default function HomePage() {
                 variant="outline"
                 className="border-2 border-white text-white hover:bg-white hover:text-[#4B2E2B] px-8 py-4 rounded-full bg-transparent dark:border-[#e6b800] dark:text-[#e6b800] dark:hover:bg-[#333] dark:hover:text-[#e6b800]"
               >
-                Visit Our Store
+                {home.visitStore}
               </Button>
             </Link>
           </div>
