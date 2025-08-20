@@ -90,7 +90,7 @@ export function ReviewsSlider() {
                     </svg>
                   ))}
                 </span>
-                <p className="text-base text-[#4B2E2B] dark:text-[#e6e6e6] mt-2">
+                <p className="text-left text-[#4B2E2B] dark:text-[#e6e6e6] mt-2">
                   {review.text}
                 </p>
               </div>

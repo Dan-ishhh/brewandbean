@@ -41,15 +41,7 @@ import { ReserveFab } from "@/components/reservation/reserve-fab";
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const { state } = useReservation();
-  const {
-    home,
-    topbar,
-    addToCartModal,
-    cartSidebar,
-    checkoutPage,
-    thankYouPage,
-    footer,
-  } = useTranslation();
+  const { home } = useTranslation();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1500);
