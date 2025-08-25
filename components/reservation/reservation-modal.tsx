@@ -138,7 +138,10 @@ export function ReservationModal() {
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4"
       onClick={handleClose}
     >
-      <div className="bg-white dark:bg-[#222] rounded-xl sm:rounded-2xl shadow-2xl max-w-sm sm:max-w-md w-full max-h-[90vh] overflow-y-auto">
+      <div
+        className="bg-white dark:bg-[#222] rounded-xl sm:rounded-2xl shadow-2xl max-w-sm sm:max-w-md w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b border-[#F5F5DC] dark:border-[#333]">
           <h2 className="text-xl sm:text-2xl font-bold text-[#4B2E2B] dark:text-[#e6e6e6]">
