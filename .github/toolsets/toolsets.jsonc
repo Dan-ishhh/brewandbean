@@ -1,0 +1,20 @@
+{
+  "toolsets": {
+    "workspace": {
+      "enabled": true,
+      "description": "Allows Copilot to read and analyze project files"
+    },
+    "terminal": {
+      "enabled": true,
+      "description": "Allows Copilot to suggest and explain terminal commands"
+    },
+    "docs": {
+      "enabled": false,
+      "description": "Access to project documentation"
+    },
+    "stripe": {
+      "enabled": false,
+      "description": "Example MCP server for Stripe payments API"
+    }
+  }
+}
