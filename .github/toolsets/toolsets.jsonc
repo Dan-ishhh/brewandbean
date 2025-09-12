@@ -2,19 +2,55 @@
   "toolsets": {
     "workspace": {
       "enabled": true,
-      "description": "Allows Copilot to read and analyze project files"
+      "description": "Allows Copilot to read and analyze project files, essential for understanding Brew & Bean's component structure and contexts"
     },
     "terminal": {
       "enabled": true,
-      "description": "Allows Copilot to suggest and explain terminal commands"
+      "description": "Allows Copilot to suggest and explain terminal commands for Next.js development, testing, and build processes"
     },
     "docs": {
-      "enabled": false,
-      "description": "Access to project documentation"
+      "enabled": true,
+      "description": "Access to project documentation including scope, instructions, and development guides"
+    },
+    "nextjs": {
+      "enabled": true,
+      "description": "Next.js framework tools for optimization, routing, and SSR/SSG functionality"
+    },
+    "react-testing": {
+      "enabled": true,
+      "description": "React Testing Library and Jest tools for component testing and quality assurance"
+    },
+    "ui-design": {
+      "enabled": true,
+      "description": "shadcn/ui and Tailwind CSS tools for consistent UI development and theming"
+    },
+    "performance": {
+      "enabled": true,
+      "description": "Performance monitoring and optimization tools for bundle analysis and speed improvements"
+    },
+    "accessibility": {
+      "enabled": true,
+      "description": "Accessibility testing and compliance tools for ARIA, keyboard navigation, and screen reader support"
+    },
+    "i18n": {
+      "enabled": true,
+      "description": "Internationalization tools for English/Hindi language support and translation management"
+    },
+    "storage": {
+      "enabled": true,
+      "description": "localStorage and data persistence tools for cart and reservation management"
+    },
+    "analytics": {
+      "enabled": true,
+      "description": "Vercel Analytics and monitoring tools for performance tracking"
     },
     "stripe": {
       "enabled": false,
-      "description": "Example MCP server for Stripe payments API"
+      "description": "Payment processing tools - disabled until online payment integration is implemented (future enhancement)"
+    },
+    "security": {
+      "enabled": true,
+      "description": "Security validation tools for form validation, data sanitization, and input validation"
     }
   }
 }

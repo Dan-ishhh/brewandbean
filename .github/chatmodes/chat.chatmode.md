@@ -4,73 +4,155 @@ You are a helpful assistant who's deeply familiar with the Brew & Bean coffee sh
 
 ---
 
-name: teaching
-description: Explain concepts step by step with best practices
-applyTo: "\*\*"
+name: menu-development
+description: Focus on menu management, item display, and customization features
+applyTo: "components/menu/\*\*,pages/menu.tsx,types/menu.ts"
 toolsets: [workspace]
 
 ---
 
-# Teaching Mode
+# Menu Development Mode
 
 When active:
 
-1. Always explain code using the context of actual project files.
-2. Add inline comments to examples.
-3. Highlight best practices and performance considerations.
-4. Provide alternative approaches if relevant.
+1. Prioritize menu-related components and functionality
+2. Focus on item customization options (temperature, size, milk type, extras)
+3. Address search, filter, and categorization features
+4. Consider nutritional information and item badges
+5. Reference menu context and state management patterns
 
 ---
 
-name: quickfix
-description: Provide fast bug fixes with minimal explanation
-applyTo: "\*\*"
+name: cart-commerce
+description: Handle shopping cart, checkout, and e-commerce functionality
+applyTo: "components/cart/\*\*,contexts/cart-context.tsx,pages/checkout.tsx"
 toolsets: [workspace]
 
 ---
 
-# Quick Fix Mode
+# Cart & Commerce Mode
 
 When active:
 
-1. Read the relevant file(s) in the workspace to apply fixes.
-2. Give only corrected code snippets, no long explanations.
-3. Optimize for speed and correctness.
+1. Focus on cart operations (add, remove, modify quantities)
+2. Handle item customizations and cart persistence
+3. Address checkout flow and total calculations
+4. Work with cart sidebar and modal components
+5. Ensure localStorage persistence ("brewbean-cart")
 
 ---
 
-name: testing
-description: Write and explain tests for features
-applyTo: "\*\*"
+name: reservation-system
+description: Manage table bookings, availability, and reservation features
+applyTo: "components/reservation/\*\*,contexts/reservation-context.tsx"
 toolsets: [workspace]
 
 ---
 
-# Testing Mode
+# Reservation System Mode
 
 When active:
 
-1. Generate Jest and RTL tests based on existing project components.
-2. Cover happy paths and edge cases.
-3. Use workspace context for imports and component structure.
+1. Focus on table map visualization and interactions
+2. Handle booking forms and customer details
+3. Manage availability tracking and capacity (2-8 people)
+4. Work with time slots (9:00-20:30 in 30-minute intervals)
+5. Ensure reservation persistence ("tableReservations")
 
 ---
 
-name: refactor
-description: Improve code structure and maintainability
+name: ui-theming
+description: Handle UI components, themes, and responsive design
+applyTo: "components/ui/**,components/theme-provider.tsx,styles/**"
+toolsets: [workspace]
+
+---
+
+# UI & Theming Mode
+
+When active:
+
+1. Focus on shadcn/ui component implementation
+2. Handle light/dark theme switching and persistence
+3. Ensure responsive design (mobile-first, sm: breakpoint)
+4. Work with color schemes: #6F4E37 (coffee brown), #F5F5DC (beige), #222/#e6b800 (dark)
+5. Address accessibility and semantic HTML
+
+---
+
+name: i18n-localization
+description: Manage multi-language support and translations
+applyTo: "contexts/language-context.tsx,contexts/translation-context.tsx,lib/lang-\*.ts"
+toolsets: [workspace]
+
+---
+
+# Internationalization Mode
+
+When active:
+
+1. Focus on language switching functionality
+2. Manage translation contexts and providers
+3. Handle English and Hindi language support
+4. Ensure proper translation key management
+5. Address language persistence and context hierarchy
+
+---
+
+name: performance-optimization
+description: Optimize loading, performance, and code splitting
+applyTo: "pages/\*\*,next.config.mjs,package.json"
+toolsets: [workspace, terminal]
+
+---
+
+# Performance Optimization Mode
+
+When active:
+
+1. Focus on dynamic imports and code splitting
+2. Optimize images and asset loading
+3. Address bundle size and tree shaking
+4. Handle loading states and skeleton components
+5. Ensure proper Next.js optimization features
+
+---
+
+name: testing-quality
+description: Write tests and ensure code quality
+applyTo: "**tests**/\*_,jest.config.js,_.test.\*"
+toolsets: [workspace, terminal]
+
+---
+
+# Testing & Quality Mode
+
+When active:
+
+1. Generate Jest and React Testing Library tests
+2. Focus on critical features: cart, reservations, menu
+3. Cover user interactions and state management
+4. Test context providers and localStorage persistence
+5. Ensure accessibility and responsive behavior testing
+
+---
+
+name: debug-troubleshoot
+description: Quick debugging and problem resolution
 applyTo: "\*\*"
 toolsets: [workspace, terminal]
 
 ---
 
-# Refactor Mode
+# Debug & Troubleshoot Mode
 
 When active:
 
-1. Suggest code improvements using actual project files.
-2. Follow coding standards from `general.instructions.md`.
-3. If terminal access is relevant, suggest migration or linting commands.
-4. Highlight why changes improve readability, performance, or maintainability.
+1. Quickly identify issues in context providers hierarchy
+2. Check localStorage persistence problems
+3. Debug modal/sidebar state issues
+4. Resolve theme and language switching problems
+5. Address event propagation and state update issues
 
 ## Project Understanding
 
